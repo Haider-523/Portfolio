@@ -9,7 +9,12 @@ const nextConfig: NextConfig = {
     // only allows quality 75 by default, so 70 must be listed here
     // or the optimiser returns 400.
     qualities: [70, 75],
+    // AVIF first: ~30–40% smaller than the JPEG the optimiser
+    // served before (hero 95KB JPEG → ~60KB AVIF), WebP fallback.
+    formats: ["image/avif", "image/webp"],
   },
+  // No "x-powered-by: Next.js" header — standard hygiene.
+  poweredByHeader: false,
   /**
    * Security headers (audit 2026-11-17: the site shipped none).
    * CSP is deliberately Next-compatible: 'unsafe-inline' for scripts

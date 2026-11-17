@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
-import { availabilityNote, heroIntro, profile, stats } from "@/data/portfolio";
+import { availabilityNote, heroIntro, profile } from "@/data/portfolio";
+import { StatsGrid } from "@/components/sections/stats";
 import { Button } from "@/components/ui/button";
 
 /**
@@ -125,22 +126,7 @@ export function Hero() {
 
       <div className="mt-14 overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
         <span aria-hidden="true" className="block h-1 w-full bg-accent" />
-        <dl className="grid grid-cols-2 gap-6 px-6 py-7 sm:grid-cols-4 sm:px-8">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="transition-transform duration-200 hover:-translate-y-0.5"
-            >
-              <dt className="sr-only">{stat.label}</dt>
-              <dd className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-                {stat.value}
-              </dd>
-              <dd className="mt-1 text-sm font-medium text-muted">
-                {stat.label}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <StatsGrid />
       </div>
     </section>
   );

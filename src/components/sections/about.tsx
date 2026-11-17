@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
-import { aboutParagraphs, profile, stats } from "@/data/portfolio";
+import { aboutParagraphs, profile } from "@/data/portfolio";
+import { StatsList } from "@/components/sections/stats";
 
 export function About() {
   return (
@@ -43,20 +44,7 @@ export function About() {
             {profile.name} · {profile.location}
           </p>
           <div className="mt-6 rounded-xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md">
-            <dl className="space-y-5">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="transition-transform duration-200 hover:-translate-y-0.5"
-                >
-                  <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-3xl font-bold tracking-tight text-navy">
-                    {stat.value}
-                  </dd>
-                  <dd className="mt-1 text-sm text-muted">{stat.label}</dd>
-                </div>
-              ))}
-            </dl>
+            <StatsList />
           </div>
         </Reveal>
       </div>

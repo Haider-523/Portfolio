@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
 /**
  * Subtle 3D tilt — Haider asked for 3D tilt on the Projects,
@@ -83,7 +82,7 @@ export function Tilt({
         transformStyle: "preserve-3d",
         transition: "transform 0.2s ease-out",
       }}
-      className={cn("tilt", className)}
+      className={className}
     >
       {children}
     </div>
