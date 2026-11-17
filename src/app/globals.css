@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Palette — specified exactly by Haider (2026-11-17). This supersedes
+ * the earlier navy/teal palette and the bright blue accent before it. Use exactly these colours.
+ *
+ *   Background:       #FFFFFF
+ *   Text:             #111827
+ *   Headings:         #1F2937
+ *   Buttons & links:  #047857 (emerald)
+ *
+ * Roles: `--navy` is for headings and key elements; `--accent` is
+ * ONLY for buttons, links and interactive hover states. Muted text and
+ * borders are neutral greys derived from the body text. `--surface`
+ * (#F9FAFB) is only the alternating section-band colour on an
+ * otherwise white page, so the visual rhythm survives on white.
+ *
+ * The old token names `--navy` / `--accent` are kept so the existing
+ * `text-navy` / `bg-accent` classes keep working — their VALUES are
+ * the new palette, not navy/teal. Dark theme adapts the same roles:
+ * dark background #111827, light text, headings near-white, and the
+ * emerald lightened (#34D399) so links stay readable on dark.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-navy: var(--navy);
+  --color-navy-hover: var(--navy-hover);
+  --color-on-navy: var(--on-navy);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+  --muted: #4b5563;
+  --border: #e5e7eb;
+  --surface: #f9fafb;
+  --navy: #1f2937;
+  --navy-hover: #111827;
+  --on-navy: #ffffff;
+  --accent: #047857;
+  --accent-hover: #065f46;
+  --on-accent: #ffffff;
+}
+
+.dark {
+  --background: #111827;
+  --foreground: #f9fafb;
+  --muted: #9ca3af;
+  --border: #374151;
+  --surface: #1f2937;
+  --navy: #f9fafb;
+  --navy-hover: #ffffff;
+  --on-navy: #111827;
+  --accent: #34d399;
+  --accent-hover: #6ee7b7;
+  --on-accent: #052e16;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  /*
+   * Background: subtle flat 2D dot grid only, painted as the body
+   * background so it always sits behind the content. Static, no
+   * animation, no parallax, no gradient wash, no glassmorphism.
+   * Light theme: body-text dots at 6% opacity on #FFFFFF; dark theme:
+   * light dots at 7% opacity on #111827. 24px grid, 1px dots.
+   */
+  background-image: radial-gradient(
+    circle,
+    rgba(17, 24, 39, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+.dark body {
+  background-image: radial-gradient(
+    circle,
+    rgba(249, 250, 251, 0.07) 1px,
+    transparent 1px
+  );
+}
+
+::selection {
+  background: #047857;
+  color: #ffffff;
+}
+
+.dark ::selection {
+  background: #34d399;
+  color: #052e16;
+}
+
+:focus-visible {
+  outline: 2px solid #047857;
+  outline-offset: 2px;
+}
+
+.dark :focus-visible {
+  outline-color: #34d399;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/*
+ * Nav links: underline slides in from the left on hover and for the
+ * active (current-page) link. The bar is the accent colour; the link
+ * text turns accent at the same time (see site-header.tsx).
+ */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease-out;
+}
+
+.nav-link:hover::after,
+.nav-link[aria-current="true"]::after {
+  transform: scaleX(1);
+}
+
+/*
+ * Scroll reveal (see components/motion/reveal.tsx): content is
+ * visible by default in the server HTML; the hidden state is only
+ * ever applied after mount to below-the-fold content, and the
+ * reveal is a short 0.3s transition. Reduced motion collapses it
+ * via the global rule above.
+ */
+.reveal {
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
+}
+
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/*
+ * Route progress bar (see layout/site-header.tsx): thin teal bar
+ * that runs while a navigation is in flight, so a click feels
+ * instant even before the next page arrives.
+ */
+@keyframes route-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 82%;
+  }
+}
+
+.route-progress-loading {
+  animation: route-progress 0.9s ease-out forwards;
+}
+
+.route-progress-done {
+  width: 100%;
+  opacity: 0;
+  transition:
+    width 0.15s ease-out,
+    opacity 0.25s ease-out 0.1s;
+}
