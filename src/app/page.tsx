@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 
 /**
  * Home page — multi-page model. Hero + featured projects preview +
- * CTA only. About, Skills, Education, Journey, GitHub, Contact,
- * Experience and Certifications each have their own page; nothing
- * here is an anchor section.
+ * CTA only. About (with Skills, Education, Certifications folded
+ * in), Projects, Experience (with Journey milestones) and Contact
+ * each have their own page; nothing here is an anchor section.
  */
 export default function Home() {
   return (

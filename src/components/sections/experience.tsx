@@ -1,10 +1,11 @@
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
-import { experience } from "@/data/portfolio";
+import { competitions, experience, journey } from "@/data/portfolio";
 
 /**
- * Experience page — verified roles only: instructor (2024–Present),
- * CodeAlpha junior .NET intern (Aug–Sep 2026), and ICPC team lead.
- * No other employment claims. The instructor role is listed as
+ * Experience page — exactly LinkedIn's 3 entries (re-audited
+ * 2026-11-17): instructor (2024–Present), CodeAlpha .NET Developer
+ * internship (Aug–Sep 2026), and Hussain Dental Surgery assistant
+ * (Jun 2024 – Feb 2025). The instructor role is listed as
  * "Independent" on Haider's resume and under Maktab e Qulaab on
  * LinkedIn — both are stated here rather than silently picking one.
  */
@@ -14,7 +15,7 @@ export function Experience() {
       <SectionHeading
         eyebrow="Experience"
         title="Experience"
-        description="Three verified roles — teaching, a .NET internship, and leading a competitive programming team."
+        description="Three verified roles — teaching, a .NET internship, and a part-time assistant role."
       />
       <ol className="relative mt-10 space-y-8 border-l-2 border-border pl-8">
         {experience.map((item, i) => (
@@ -43,6 +44,51 @@ export function Experience() {
           Programming Fundamentals, OOP, Data Structures and basic Python to 20+
           students — is the same in both.
         </p>
+      </Reveal>
+
+      <h2 className="mt-16 text-xl font-semibold tracking-tight text-navy">
+        Milestones
+      </h2>
+      <ol className="relative mt-8 space-y-8 border-l-2 border-navy/25 pl-8">
+        {journey.map((item, i) => (
+          <li key={item.title} className="relative">
+            <Reveal delay={Math.min(i * 0.05, 0.2)}>
+              <span
+                aria-hidden="true"
+                className="absolute -left-10 top-1.5 size-4 rounded-full border-[3px] border-surface bg-accent shadow-sm transition-transform duration-200 hover:scale-125"
+              />
+              <p className="inline-block rounded-full bg-navy/10 px-3 py-1 text-xs font-semibold tracking-wide text-navy">
+                {item.period}
+              </p>
+              <h3 className="mt-2 text-xl font-semibold tracking-tight text-navy">
+                {item.title}
+              </h3>
+              <p className="mt-1 max-w-2xl leading-relaxed text-muted">
+                {item.detail}
+              </p>
+            </Reveal>
+          </li>
+        ))}
+      </ol>
+      <Reveal delay={0.1}>
+        <div className="mt-12 rounded-xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md">
+          <h3 className="text-lg font-semibold tracking-tight text-navy">
+            Competitions
+          </h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted">
+            Contests named in my resume — nothing added.
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {competitions.map((name) => (
+              <li
+                key={name}
+                className="rounded-md border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-on-accent dark:hover:border-accent dark:hover:bg-accent dark:hover:text-on-accent"
+              >
+                {name}
+              </li>
+            ))}
+          </ul>
+        </div>
       </Reveal>
     </Section>
   );

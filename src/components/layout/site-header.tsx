@@ -78,7 +78,7 @@ export function SiteHeader() {
             setMenuOpen(false);
             if (pathname !== "/") setProgress("loading");
           }}
-          className="group flex shrink-0 items-center gap-2.5 text-base font-semibold tracking-tight text-foreground transition-colors hover:text-accent"
+          className="group flex shrink-0 items-center gap-2.5 text-lg font-semibold tracking-tight text-foreground transition-colors hover:text-accent"
           aria-label="Haider Zaman — home"
         >
           <Image
@@ -92,7 +92,7 @@ export function SiteHeader() {
         </Link>
 
         <nav
-          className="hidden items-center gap-0.5 xl:flex"
+          className="hidden items-center gap-0.5 lg:flex"
           aria-label="Primary"
         >
           {navLinks.map((link) => {
@@ -106,7 +106,7 @@ export function SiteHeader() {
                   if (!active) setProgress("loading");
                 }}
                 className={cn(
-                  "nav-link rounded-md px-2 py-2 text-[13px] font-medium transition-colors duration-200",
+                  "nav-link rounded-md px-3 py-2 text-[15px] font-medium transition-colors duration-200",
                   active ? "text-accent" : "text-muted hover:text-accent",
                 )}
               >
@@ -158,7 +158,7 @@ export function SiteHeader() {
           <Button
             variant="ghost"
             size="icon"
-            className="xl:hidden"
+            className="lg:hidden"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -172,7 +172,7 @@ export function SiteHeader() {
       <div
         id="mobile-menu"
         className={cn(
-          "border-t border-border xl:hidden",
+          "border-t border-border lg:hidden",
           menuOpen ? "block" : "hidden",
         )}
       >
@@ -192,7 +192,7 @@ export function SiteHeader() {
                   if (!active) setProgress("loading");
                 }}
                 className={cn(
-                  "rounded-md px-3 py-2.5 text-sm font-medium transition-colors duration-200",
+                  "rounded-md px-3 py-2.5 text-base font-medium transition-colors duration-200",
                   active
                     ? "text-accent"
                     : "text-muted hover:bg-background hover:text-accent",

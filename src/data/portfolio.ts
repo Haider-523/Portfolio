@@ -35,8 +35,14 @@ export const profile = {
   },
 } as const;
 
+/**
+ * Home hero intro — deliberately DIFFERENT from the About page text
+ * and more detailed: this is the recruiter's first read, so it names
+ * the actual systems, the stack and what Haider is looking for. The
+ * About page keeps the personal story (degree, teaching, contests).
+ */
 export const heroIntro =
-  "A salon management system for a real client (64/64 tests passing), a social media platform, and a university guidance platform. C#, ASP.NET Core, Entity Framework Core, SQL Server and REST APIs.";
+  "ASP.NET Core backend developer from Multan, building real systems end to end: a salon management system for a real client — appointments, billing, inventory and reports, with 64/64 tests passing; a social platform with Identity and SQL Server; and a university guidance platform presented at SOFTEC '26. I work in C#, ASP.NET Core, Entity Framework Core and SQL Server, and I am looking for junior .NET backend roles where I can ship production code.";
 
 /** Availability line — confirmed by Haider on 2026-11-17: keep as-is. */
 export const availabilityNote =
@@ -300,24 +306,24 @@ export const githubRepos = [
   },
 ] as const;
 
+/** Nav — exactly 5 items (decided 2026-11-17): Home, About, Projects,
+ * Experience, Contact. Skills, Education, Certifications and Journey
+ * live inside the About page; GitHub is a link in the header/footer. */
 export const navLinks = [
   { id: "home", label: "Home", href: "/" },
   { id: "about", label: "About", href: "/about" },
   { id: "projects", label: "Projects", href: "/projects" },
-  { id: "skills", label: "Skills", href: "/skills" },
   { id: "experience", label: "Experience", href: "/experience" },
-  { id: "education", label: "Education", href: "/education" },
-  { id: "certifications", label: "Certifications", href: "/certifications" },
-  { id: "journey", label: "Journey", href: "/journey" },
-  { id: "github", label: "GitHub", href: "/github" },
   { id: "contact", label: "Contact", href: "/contact" },
 ] as const;
 
 /**
- * Experience — verified roles only. No other employment claims.
- * Note: Haider's resume lists the instructor role as "Independent";
- * LinkedIn lists it under Maktab e Qulaab (first in Experience, 2026-11-12
- * audit). The page states both so the discrepancy is visible.
+ * Experience — exactly LinkedIn's 3 entries (re-audited live
+ * 2026-11-17). The ICPC team lead role is not a LinkedIn entry; it
+ * stays in About and Journey, not here. Note: Haider's resume lists
+ * the instructor role as "Independent"; LinkedIn lists it under
+ * Maktab e Qulaab — the page states both so the discrepancy is
+ * visible.
  */
 export const experience = [
   {
@@ -326,179 +332,199 @@ export const experience = [
     period: "Sep 2024 – Present",
     location: "Multan, Pakistan",
     detail:
-      "Teaching Programming Fundamentals, OOP, Data Structures and basic Python to 20+ students, online and in-person.",
+      "Instructed over 20 students in programming fundamentals, OOP and data structures through online and in-person sessions; structured lesson plans in C, C++ and Python with introductory machine learning; mentorship in competitive programming, GitHub portfolio building and real-world project development.",
   },
   {
-    role: "Junior .NET Developer Intern",
-    org: "CodeAlpha",
+    role: ".NET Developer",
+    org: "CodeAlpha (Internship)",
     period: "Aug – Sep 2026",
-    location: "Remote",
+    location: "Remote · Multan, Pakistan",
     detail:
-      "Built SocialApp — ASP.NET Core MVC, EF Core 10, SQL Server, Identity and ImageSharp. See Projects.",
+      "Built a social media platform with ASP.NET Core MVC and C# — user authentication, posts and image uploads; database management and responsive web design.",
   },
   {
-    role: "Team Leader — Competitive Programming Team",
-    org: "Multan Al-Khwarizmi",
-    period: "2025 – Present",
-    location: "MNSUAM, Multan",
+    role: "Assistant",
+    org: "Hussain Dental Surgery (Part-time)",
+    period: "Jun 2024 – Feb 2025",
+    location: "Multan, Pakistan",
     detail:
-      "Led a 3-member team in 9 national and international contests, coordinating practice sessions and contest strategy.",
+      "Managed day-to-day clinic operations: patient data handling and scheduling, digital patient records in Excel and a local database, appointments and patient flow.",
   },
 ] as const;
 
 export type CertificationItem = {
   name: string;
   issuer: string;
-  /** Only set when the 2026-11-07 LinkedIn audit confirms the date. */
+  /** Issue date exactly as LinkedIn shows it (re-audited 2026-11-17). */
   date?: string;
-  kind: "award" | "certification";
-  /** True when the name is confirmed by the LinkedIn audit or the resume. */
+  /** True when the item is on LinkedIn — all 18 are, as of 2026-11-17. */
   verified: boolean;
   note?: string;
 };
 
 /**
- * Certifications & Awards — 6 awards + 12 certifications = 18 items,
- * matching the 18 on LinkedIn. Awards are NOT double-counted as
- * certifications. Names come from the old Template B build
- * (../portfolio/certifications.html, 2026-11-12) and were cross-checked
- * against the signed-in LinkedIn audit of 2026-11-07 (which named only
- * some of the 18) and the resume (which lists no certifications).
- *
- * Dates: shown ONLY where the LinkedIn audit confirms them. The old
- * build's dates conflict with the audit in several cases (SQL: May 2026
- * vs Aug 2025; C#: May 2026 vs Jun 2025; Python: May 2026 vs Dec 2024;
- * Excel: Jul 2025 vs Oct 2024; CS50x Puzzle Day: 2026 vs 2025), so all
- * other dates are omitted, not guessed.
+ * Licenses & Certifications — all 18, in LinkedIn order, exactly as
+ * LinkedIn shows them on 2026-11-17 (signed-in re-audit). LinkedIn
+ * has NO separate Honors & Awards section — the ICPC items, the
+ * Certificate of Merit and the Brand Scape appreciation all sit
+ * under Licenses & Certifications there, so the old 6-awards +
+ * 12-certifications split is dropped. Every item is verified and
+ * carries its LinkedIn issue date. The 5 items the 7 Nov audit had
+ * flagged unverified are all present on LinkedIn now (AI & Laptop
+ * Optimization Sep 2026, Advanced Social Media Strategy Nov 2024,
+ * Foundation of Cyber Security Jan 2025, Brand Scape May 2026,
+ * Coding Competition at IOC Dec 2024). Dates corrected from the
+ * 7 Nov audit where LinkedIn now shows otherwise: SQL May 2026
+ * (was Aug 2025), Python May 2026 (was Dec 2024), C# May 2026
+ * (was Jun 2025), Excel Jul 2025 (was Oct 2024), CS50x Puzzle Day
+ * 2026 (was 2025). "Coding Competition at IOC, MNSUAM" is its own
+ * Dec 2024 LinkedIn entry — it is NOT the same as any 2k19 contest.
+ * LinkedIn spells the AWS event "Hakathon"; the correct spelling
+ * "Hackathon" is used here.
  */
-export const awards: CertificationItem[] = [
-  {
-    name: "ICPC Asia Topi Regional 2026",
-    issuer: "ICPC",
-    kind: "award",
-    verified: true,
-    note: "On-site regional contest. Team Multan Al-Khwarizmi.",
-  },
-  {
-    name: "ICPC Asia Topi — Achievement 2025",
-    issuer: "ICPC Foundation",
-    kind: "award",
-    verified: true,
-    note: "Certificate of Achievement, online preliminary programming contest.",
-  },
-  {
-    name: "AWS GameDay Hackathon 2026",
-    issuer: "AWS Student Builder Group, BZU Multan",
-    kind: "award",
-    verified: true,
-  },
-  {
-    name: "SOFTEC '26 Programming Competition",
-    issuer: "SOFTEC, FAST Lahore",
-    kind: "award",
-    verified: true,
-    note: "UniGuide was presented at SOFTEC '26 (resume); the competition certificate details themselves are from the earlier build only.",
-  },
-  {
-    name: "CS50x Puzzle Day 2025",
-    issuer: "CS50",
-    date: "2025",
-    kind: "award",
-    verified: true,
-    note: "Participation certificate.",
-  },
-  {
-    name: "Certificate of Appreciation — Brand Scape",
-    issuer: "Air Business Circle, Multan",
-    kind: "award",
-    verified: false,
-    note: "Appears only in the earlier build — confirm before publishing.",
-  },
-];
-
 export const certifications: CertificationItem[] = [
+  {
+    name: "AI & Laptop Optimization Workshops",
+    issuer: "Muhammad Nawaz Shareef University of Agriculture, Multan",
+    date: "Sep 2026",
+    verified: true,
+    note: "Credential ID CBS-LSW-2026-019, CBS-NBW-2026-019.",
+  },
   {
     name: "Build and Deploy with GitHub Copilot",
     issuer: "Microsoft Learn Student Ambassadors",
     date: "Oct 2026",
-    kind: "certification",
+    verified: true,
+  },
+  {
+    name: "AWS GameDay Hackathon 2026",
+    issuer: "AWS Student Builder Group, BZU Multan",
+    date: "Jul 2026",
     verified: true,
   },
   {
     name: "SQL Course Certificate",
-    issuer: "University of California, Davis (Coursera)",
-    date: "Aug 2025",
-    kind: "certification",
+    issuer: "University of California, Davis",
+    date: "May 2026",
     verified: true,
   },
   {
     name: "Complete Python Developer: From Zero to Mastery",
     issuer: "Udemy",
-    date: "Dec 2024",
-    kind: "certification",
+    date: "May 2026",
+    verified: true,
+  },
+  {
+    name: "SOFTEC '26 Programming Competition Participation Certificate",
+    issuer: "SOFTEC",
+    date: "Apr 2026",
+    verified: true,
+  },
+  {
+    name: "CS50x Puzzle Day 2026 Participation Certificate",
+    issuer: "CS50",
+    date: "Apr 2026",
     verified: true,
   },
   {
     name: "C# for .NET Developers",
     issuer: "Board Infinity",
-    date: "Jun 2025",
-    kind: "certification",
+    date: "May 2026",
     verified: true,
   },
   {
-    name: "Microsoft Office Specialist: Excel",
-    issuer: "Coursera",
-    date: "Oct 2024",
-    kind: "certification",
-    verified: true,
-  },
-  {
-    name: "AI & Laptop Optimization Workshops",
-    issuer: "MNSUAM",
-    kind: "certification",
-    verified: false,
-    note: "Appears only in the earlier build — confirm before publishing.",
-  },
-  {
-    name: "Advanced Social Media Strategy",
+    name: "Advanced Social Media Strategy Training and Certification",
     issuer: "HP LIFE",
-    kind: "certification",
-    verified: false,
-    note: "Appears only in the earlier build — confirm before publishing.",
+    date: "Nov 2024",
+    verified: true,
   },
   {
-    name: "Foundation of Cyber Security",
-    issuer: "Cyber Security Club MNSUAM",
-    kind: "certification",
-    verified: false,
-    note: "Appears only in the earlier build — confirm before publishing.",
-  },
-  {
-    name: "Graphics Designing and UI/UX Designing Workshop",
-    issuer: "Rotary Club MNSUAM",
-    kind: "certification",
-    verified: false,
-    note: "Appears only in the earlier build — confirm before publishing.",
+    name: "Certificate of Appreciation — Brand Scape",
+    issuer: "Air Business Circle",
+    date: "May 2026",
+    verified: true,
   },
   {
     name: "Certificate of Merit",
     issuer: "Workers Welfare School (Boys)",
-    kind: "certification",
-    verified: false,
-    note: "Appears only in the earlier build — confirm before publishing.",
+    date: "Dec 2022",
+    verified: true,
+    note: "1st position, 1st Year (I.C.S Group) Mid-Term Examination.",
   },
   {
-    name: "Scout Camp — Rahyan-E-Karbala Wa Mohiban-E-Watan",
+    name: "Rahyan-E-Karbala Wa Mohiban-E-Watan Scout Camp",
     issuer: "Pakistan Boy Scouts Association",
-    kind: "certification",
-    verified: false,
-    note: "Appears only in the earlier build — confirm before publishing.",
+    date: "Sep 2020",
+    verified: true,
+  },
+  {
+    name: "ICPC Asia Topi Regionals 2026",
+    issuer: "ICPC",
+    date: "Jan 2026",
+    verified: true,
+    note: "On-site regional contest. Team Multan Al-Khwarizmi.",
+  },
+  {
+    name: "ICPC Asia Topi Achievement",
+    issuer: "ICPC",
+    date: "Nov 2025",
+    verified: true,
+    note: "Certificate of Achievement, online preliminary programming contest.",
+  },
+  {
+    name: "Microsoft Office Specialist: Excel Certification",
+    issuer: "Coursera",
+    date: "Jul 2025",
+    verified: true,
+  },
+  {
+    name: "Foundation of Cyber Security",
+    issuer: "Cyber Security Club MNSUAM",
+    date: "Jan 2025",
+    verified: true,
+  },
+  {
+    name: "Graphics Designing and UI/UX Designing Workshop",
+    issuer: "Rotary Club MNSUAM",
+    date: "Dec 2024",
+    verified: true,
   },
   {
     name: "Coding Competition at IOC, MNSUAM",
     issuer: "MNS University of Agriculture, Multan",
-    kind: "certification",
-    verified: false,
-    note: "Appears only in the earlier build — confirm before publishing.",
+    date: "Dec 2024",
+    verified: true,
   },
 ];
+
+/**
+ * Education history — all 3 LinkedIn entries (re-audited 2026-11-17).
+ * `education` above stays as the BSCS summary used elsewhere.
+ */
+export const educationHistory = [
+  {
+    degree: "BS Computer Science",
+    school: "MNS University of Agriculture, Multan",
+    period: "Aug 2024 – Aug 2028",
+    status: "Currently enrolled — expected 2028",
+    detail:
+      "BSCS '28. Competitive programming and teaching run alongside the degree. CGPA 3.44 / 4.00.",
+    cgpa: "3.44 / 4.00",
+  },
+  {
+    degree: "Intermediate in Computer Sciences",
+    school: "Workers Welfare Higher Secondary School For Boys, Multan",
+    period: "Jun 2022 – 2024",
+    status: "Grade: A",
+    detail: "",
+    cgpa: "",
+  },
+  {
+    degree: "Pre-medical / Pre-Medical Studies, Science",
+    school: "Workers Welfare Higher Secondary School For Boys, Multan",
+    period: "Apr 2020 – Aug 2022",
+    status: "Grade: A",
+    detail: "",
+    cgpa: "",
+  },
+] as const;

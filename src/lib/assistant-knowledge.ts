@@ -10,7 +10,6 @@
  */
 import {
   aboutParagraphs,
-  awards,
   certifications,
   competitions,
   education,
@@ -69,9 +68,9 @@ export const knowledgeBase: KnowledgeChunk[] = [
     "Availability and roles",
     `Haider Zaman is seeking opportunities — junior .NET backend roles. ` +
       `His experience is: Software Programming Instructor at Maktab e Qulaab (Sep 2024 – Present), ` +
-      `Junior .NET Developer Intern at CodeAlpha (Aug – Sep 2026), and team leader of the 3-member ` +
-      `competitive programming team Multan Al-Khwarizmi. Do not claim any other job, title, or employer for him.`,
-    "Haider is seeking opportunities — junior .NET backend roles. He is a Software Programming Instructor at Maktab e Qulaab (Sep 2024 – Present) and was a Junior .NET Developer Intern at CodeAlpha (Aug – Sep 2026).",
+      `.NET Developer at CodeAlpha, Internship (Aug – Sep 2026), and Assistant at Hussain Dental Surgery, Part-time (Jun 2024 – Feb 2025). ` +
+      `He also leads the 3-member competitive programming team Multan Al-Khwarizmi. Do not claim any other job, title, or employer for him.`,
+    "Haider is seeking opportunities — junior .NET backend roles. He is a Software Programming Instructor at Maktab e Qulaab (Sep 2024 – Present) and was a .NET Developer Intern at CodeAlpha (Aug – Sep 2026).",
   ),
   chunk(
     "stats",
@@ -106,7 +105,7 @@ export const knowledgeBase: KnowledgeChunk[] = [
           `${e.role} at ${e.org} (${e.period}, ${e.location}): ${e.detail}`,
       )
       .join(" "),
-    "Software Programming Instructor at Maktab e Qulaab since Sep 2024, teaching Programming Fundamentals, OOP, Data Structures, and basic Python to 20+ students. Previously a Junior .NET Developer Intern at CodeAlpha (Aug – Sep 2026).",
+    "Software Programming Instructor at Maktab e Qulaab since Sep 2024, teaching Programming Fundamentals, OOP, Data Structures, and basic Python to 20+ students. Previously a .NET Developer Intern at CodeAlpha (Aug – Sep 2026).",
   ),
   ...featuredProjects.map((p) =>
     chunk(
@@ -133,14 +132,13 @@ export const knowledgeBase: KnowledgeChunk[] = [
   ),
   chunk(
     "certifications",
-    "Certifications and awards",
-    `Haider Zaman has 6 awards and 12 certifications — 18 items in total, matching LinkedIn. ` +
-      `Awards: ${awards.map((a) => a.name).join("; ")}. ` +
-      `Certifications: ${certifications.map((c) => c.name).join("; ")}. ` +
-      `Awards are not double-counted as certifications. Some items are flagged on the site as ` +
-      `"Unverified — confirm before publishing" because they appear only in an earlier build; ` +
-      `do not present unverified items as confirmed. Full list is on LinkedIn.`,
-    "6 awards and 12 certifications. The full list is on his Certifications page.",
+    "Licenses & Certifications",
+    `Haider Zaman has 18 licenses & certifications on LinkedIn, in LinkedIn order, all verified (re-audited 2026-11-17). ` +
+      certifications
+        .map((c) => `${c.name} — ${c.issuer}${c.date ? `, ${c.date}` : ""}`)
+        .join("; ") +
+      `. LinkedIn has no separate Honors & Awards section. Full list is on LinkedIn.`,
+    "18 licenses & certifications. The full list is on his About page.",
   ),
   chunk(
     "journey",

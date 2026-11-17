@@ -4,7 +4,7 @@ Recruiter-focused developer portfolio, built per the approved
 MASTER PROMPT and rebuilt 2026-11-17 as a **multi-page site**:
 every nav tab is its own page. Finished 2026-11-17.
 
-Built locally only. **NOT pushed to GitHub, NOT deployed to Vercel/Netlify.**
+Built locally only. **Pushed to GitHub (Haider-523/Portfolio), NOT deployed to Vercel/Netlify.**
 Haider deploys it himself.
 
 The old Template B plain-HTML build is untouched at
@@ -15,7 +15,7 @@ replace it on disk.
 
 - Next.js 16.4.6 (App Router), React 19.3, TypeScript strict
 - Tailwind CSS 4.3.3, shadcn/ui-style components (`src/components/ui/`),
-  Lucide React, Framer Motion
+  Lucide React (no animation library — CSS + IntersectionObserver only)
 - `next-themes` for the light/dark theme toggle
 - No database. AI assistant: server-side Gemini (optional key) with a
   fail-closed curated knowledge base — see below.
@@ -107,21 +107,18 @@ Known quirk (unchanged): an unknown project slug returns 200 on the
 very first request after a cold server start, then 404 on repeat —
 Next.js 16 cacheComponents/PPR behaviour. Steady state is 404.
 
-## Pages (10 + 5 project detail pages)
+## Pages (5 + 5 project detail pages)
 
 | Route | Page |
 | --- | --- |
 | `/` | Home — hero + featured projects preview + CTA |
-| `/about` | About + photo |
+| `/about` | About + photo, Skills, Education, Licenses & Certifications (18) |
 | `/projects` | All 5 featured projects |
 | `/projects/[slug]` | Project detail / case study (5 slugs) |
-| `/skills` | Skills (his stack only) |
-| `/experience` | Experience (3 verified roles) |
-| `/education` | Education (BSCS, CGPA 3.44) |
-| `/certifications` | Certifications & Awards (6 + 12 = 18) |
-| `/journey` | Journey timeline + competitions |
-| `/github` | GitHub — 2 public repos, honestly described |
-| `/contact` | Contact — mailto/tel/LinkedIn/GitHub, no form |
+| `/experience` | Experience (3 verified roles) + Milestones + Competitions |
+| `/contact` | Contact — form (FormSubmit), mailto/tel/LinkedIn/GitHub |
+
+Nav is exactly 5 items (2026-11-17): Home, About, Projects, Experience, Contact. Skills, Education, Certifications and Journey lost their own pages — their content is folded into About (Skills/Education/Certifications) and Experience (Journey milestones + competitions). GitHub is a header/footer link, not a page.
 
 Header nav links to real pages (pathname-based active state, mobile
 menu closes on navigation / Escape). Footer on every page. No
@@ -208,6 +205,13 @@ no overshow:
   lift + emerald border + shadow, with the arrow shifting; skill chips
   change border/background (emerald fill on hover); social icons lift +
   turn emerald; stat values lift subtly; timeline dots scale.
+- **3D tilt (2026-11-17, Haider's call):** project, education and
+  certification cards tilt up to 6° toward the cursor
+  (`src/components/motion/tilt.tsx`) — mouse/trackpad only, off on
+  touch and under `prefers-reduced-motion`.
+- **Scroll rail (2026-11-17):** a thin emerald line on the left page
+  edge fills top-to-bottom with scroll progress, with a glowing dot
+  at its tip (`src/components/layout/scroll-rail.tsx`). Desktop only.
 - All motion is disabled under `prefers-reduced-motion`: CSS forces
   near-zero durations.
 
@@ -310,160 +314,31 @@ deploy host and ask one in-scope and one out-of-scope question;
 if the model path fails, the API falls back to the verified-data
 extractive answer, never to invention.
 
-## Certifications & Awards — verification
+## Licenses & Certifications — verification (re-audited 2026-11-17)
 
-Page: `/certifications` — 6 awards + 12 certifications = 18 items,
-matching the 18 on LinkedIn. Awards are NOT double-counted as
-certifications. Source: the old Template B build
-(`../portfolio/certifications.html`) cross-checked against the
-signed-in LinkedIn audit of 2026-11-07 (which named only some of
-the 18) and the resume (which lists no certifications).
+Page: About (Licenses & Certifications section) — 18 items, in
+LinkedIn order, all verified, each with its LinkedIn issue date.
+Source: signed-in LinkedIn re-audit of 2026-11-17 (full scroll +
+detail pages). LinkedIn has NO separate Honors & Awards section —
+the ICPC items, Certificate of Merit and Brand Scape appreciation
+all sit under Licenses & Certifications there, so the old
+6-awards + 12-certifications split is dropped.
 
-- **Dates shown only where the audit confirms them** (Copilot
-  Oct 2026; SQL Aug 2025; Python Dec 2024; C# Jun 2025; Excel
-  Oct 2024; CS50x Puzzle Day 2025). The old build's dates conflict
-  with the audit in several cases (SQL May 2026 vs Aug 2025; C#
-  May 2026 vs Jun 2025; Python May 2026 vs Dec 2024; Excel Jul 2025
-  vs Oct 2024; CS50x 2026 vs 2025), so all other dates are omitted,
-  not guessed.
-- **8 items flagged "Unverified — confirm before publishing"**
-  (they appear only in the old build): 1 award — Certificate of
-  Appreciation, Brand Scape; 7 certifications — AI & Laptop
-  Optimization Workshops; Advanced Social Media Strategy; Foundation
-  of Cyber Security; Graphics Designing and UI/UX Designing Workshop;
-  Certificate of Merit; Scout Camp — Rahyan-E-Karbala Wa
-  Mohiban-E-Watan; Coding Competition at IOC, MNSUAM.
-- The LinkedIn audit also flagged the Scout Camp, Certificate of
-  Merit and Graphics workshop as irrelevant/diluting — they are kept
-  but flagged, not hidden.
-
-## Experience — verification
-
-Page: `/experience` — 3 roles only: Software Programming Instructor,
-Maktab e Qulaab (Sep 2024 – Present, 20+ students, PF/OOP/DSA/
-Python); Junior .NET Developer Intern, CodeAlpha (Aug – Sep 2026);
-Team Leader, 3-member ICPC team "Multan Al-Khwarizmi". No other
-employment claims. **Discrepancy stated on the page:** the resume
-lists the instructor role as Independent; LinkedIn lists it under
-Maktab e Qulaab.
-
-## Contact form (FormSubmit, added 2026-11-17)
-
-Page: `/contact` — a message form (name, email, subject optional,
-message) alongside the existing mailto/tel/LinkedIn/GitHub options.
-It posts to FormSubmit (`https://formsubmit.co/haiderzaman.dev@gmail.com`,
-no account or key) with hidden fields `_subject` "New message from
-your portfolio", `_template` "table", `_captcha` "true". With
-JavaScript, submission goes to FormSubmit's AJAX endpoint and the
-page shows real states — sending (button disabled) → sent only
-after FormSubmit returns `{"success": "true"}` → error with a
-mailto fallback. A success message is never shown before the server
-confirms. Without JavaScript, the form posts normally to the
-standard FormSubmit URL.
-
-**Activation — Haider must do this once:** the FIRST message
-triggers an activation email to haiderzaman.dev@gmail.com. He must
-click the activation link in that email; until he does, messages do
-not arrive in his inbox. This is stated on the Contact page itself.
-
-**Not verified end-to-end:** no test message was sent from this
-sandbox (FormSubmit was reachable, but delivery was not tested and
-no message was delivered), so activation is still pending.
-
-## Content rules (verified data only)
-
-- Visible name is only **"Haider Zaman"**. The exact phrase
-  "Haider Zaman Multan" appears only in the meta description and the
-  JSON-LD Person schema — never as visible text (verified: 0× in
-  rendered visible text).
-- Stats: 300+ problems solved, 15+ competitions, CGPA 3.44/4.00
-  (confirmed by Haider 2026-11-17; the resume printed 3.38 / 100+).
-- LinkedIn is https://www.linkedin.com/in/haiderzaman-dev
-  (not the haider-zaman-49209637b URL printed on the resume —
-  the resume PDF itself still prints the old URL; the site does not).
-- Contact shows both email (haiderzaman.dev@gmail.com) and phone
-  (+92370-1403149), as `mailto:`/`tel:` links, plus a message form
-  (see "Contact form" below) — the mailto-only rule was superseded
-  by Haider on 2026-11-17.
-- Skills listed are Haider's stack only:
-  C#, .NET, ASP.NET Core, EF Core, SQL Server, SQLite, WPF,
-  plus resume-verified languages C, C++, HTML, CSS (labelled
-  "languages used", not expert claims). Next.js/React/TypeScript
-  are the build stack, not claimed skills (the Skills page says so
-  explicitly). No percentage skill bars.
-- Featured projects (in order): Stylish Hair Salon Management System,
-  SocialApp, UniGuide, MBTI Quiz, Dynamic Quiz & Evaluation System.
-  Salon features come only from `~/workspace/salon/` README and
-  docs/01, 02, 04. Only the SocialApp and UniGuide repo links are
-  shown (verified public); UniGuide's repo is README-only and says so.
-  Salon code is not public and says so. No screenshots — typographic
-  cards only. Every project detail page carries an explicit
-  verification note stating what is and is not verified.
-- Journey/competitions name only contests in the resume; no invented
-  employment history.
-- GitHub section shows the profile and the two public repos with
-  honest descriptions — no fabricated stars, graphs or commit counts.
-
-## Structure
-
-```text
-src/
-  app/
-    layout.tsx        # metadata, JSON-LD, header/footer, assistant widget
-    page.tsx          # home — Hero + featured preview + CTA
-    about|projects|skills|experience|education|certifications|journey|github|contact/page.tsx
-    projects/[slug]/page.tsx   # project detail pages (generateStaticParams)
-    api/assistant/route.ts     # AI assistant endpoint (fail-closed)
-    globals.css       # Tailwind v4 theme tokens (Haider's palette), dot grid, motion rules
-    robots.ts         # /robots.txt
-    sitemap.ts        # /sitemap.xml (root-relative until deploy)
-  components/
-    layout/           # site-header.tsx (multi-page nav, photo logo), site-footer.tsx
-    sections/         # hero, about, projects, project-card, skills, experience,
-                      # education, certifications, journey, github-section, contact
-    assistant/        # assistant-widget.tsx — floating chat
-    motion/           # reveal.tsx — Reveal (scroll fade-up) + SectionHeading + Section
-    ui/               # button.tsx (shadcn/ui style, cva)
-    theme-provider.tsx
-  data/
-    portfolio.ts      # centralised verified data (profile, stats, projects,
-                      # skills, journey, experience, awards, certifications)
-  lib/
-    utils.ts          # cn()
-    assistant.ts              # retrieval gate + closed-book Gemini call + fallback
-    assistant-knowledge.ts    # curated knowledge base (portfolio.ts only)
-public/
-  documents/HZ-Resume.pdf   # real resume — Download Resume serves this file
-  images/haider-zaman.jpg   # Haider's photo (hero, About, header logo, OG image)
-```
-
-## Verification (2026-11-17, run before reporting)
-
-- `npx tsc --noEmit` — pass. `npm run lint` — pass.
-- `npm run build` — pass, 22 pages (10 pages + 5 project pages +
-  robots + sitemap + API route + not-found).
-- Production server (`npm run start`, port 3100), every route curled:
-  `/`, `/about`, `/projects`, `/skills`, `/experience`,
-  `/education`, `/certifications`, `/journey`, `/github`,
-  `/contact`, all 5 `/projects/[slug]`, `/robots.txt`,
-  `/sitemap.xml`, `/documents/HZ-Resume.pdf`,
-  `/images/haider-zaman.jpg` — all HTTP 200.
-- Unknown project slug `/projects/does-not-exist` — **HTTP 404 on
-  all repeat checks**, rendering "This page could not be found".
-  Quirk, observed twice: the very first request to it after a cold
-  server start returns HTTP 200 with the 404 page body; the second
-  request returns 404 and the 404 is then cached. This is Next 16
-  `cacheComponents` / Partial Prerendering behaviour — there is no
-  per-route PPR opt-out in Next 16 (`experimental_ppr` was removed).
-  Steady state after deploy warm-up is 404; re-check once after deploy.
-- Visible-text checks on rendered home: "Haider Zaman Multan" 0×,
-  wrong LinkedIn `49209637b` 0×, no `/#` anchor hrefs anywhere,
-  no "HZ" initials avatar, photo + role line + proof stats + all 3
-  CTAs + location present.
-- Source checks: no `#2563EB` / `#1D4ED8` / bright blue anywhere in
-  `src`; compiled CSS contains the new palette (`#FFFFFF`, `#111827`,
-  `#1F2937`, `#047857`) and no old navy/teal (`#2B5D7E`, `#0F766E`).
-- Sitemap lists all 10 pages + 5 project pages.
+- **All 18 verified on LinkedIn**, including the 5 the 7 Nov audit
+  had flagged unverified: AI & Laptop Optimization Workshops
+  (Sep 2026), Advanced Social Media Strategy (Nov 2024),
+  Foundation of Cyber Security (Jan 2025), Certificate of
+  Appreciation — Brand Scape (May 2026), Coding Competition at IOC,
+  MNSUAM (Dec 2024).
+- **Dates corrected from the 7 Nov audit** where LinkedIn now shows
+  otherwise: SQL May 2026 (was Aug 2025), Python May 2026 (was
+  Dec 2024), C# May 2026 (was Jun 2025), Excel Jul 2025 (was
+  Oct 2024), CS50x Puzzle Day 2026 (was 2025).
+- **"Coding Competition at IOC, MNSUAM" is its own Dec 2024
+  LinkedIn entry** — not the same as any 2k19 contest (no 2k19
+  entry exists in the 18).
+- LinkedIn spells the AWS event "Hakathon"; the correct spelling
+  "Hackathon" is used on the site.
 
 ## What is pending (not built / not verified)
 

@@ -5,18 +5,7 @@ import { featuredProjects } from "@/data/portfolio";
  * NOTE: URLs are root-relative for now. When Haider deploys, set the
  * real base URL here (and in robots) — no live domain is claimed yet.
  */
-const pages = [
-  "/",
-  "/about",
-  "/projects",
-  "/skills",
-  "/experience",
-  "/education",
-  "/certifications",
-  "/journey",
-  "/github",
-  "/contact",
-];
+const pages = ["/", "/about", "/projects", "/experience", "/contact"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

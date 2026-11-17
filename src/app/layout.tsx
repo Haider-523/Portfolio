@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { profile } from "@/data/portfolio";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
+import { ScrollRail } from "@/components/layout/scroll-rail";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { AssistantLauncher } from "@/components/assistant/assistant-launcher";
 import "./globals.css";
@@ -83,6 +84,7 @@ export default function RootLayout({
             }}
           />
           <SiteHeader />
+          <ScrollRail />
           <main className="flex-1">{children}</main>
           <SiteFooter />
           <AssistantLauncher />

@@ -13,12 +13,12 @@ export function Projects() {
         title="Featured projects"
         description="Five projects, in the order that matters — real client work first. Each card opens a detail page with what was built, the stack, and an honest note on what is and is not verified."
       />
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-10 grid gap-6">
         {featuredProjects.map((project, i) => (
           <Reveal
             key={project.slug}
             delay={Math.min(i * 0.06, 0.24)}
-            className={i === 0 ? "md:col-span-2" : undefined}
+            className="h-full"
           >
             <ProjectCard project={project} />
           </Reveal>
@@ -38,12 +38,12 @@ export function FeaturedProjectsPreview() {
         title="Featured projects"
         description="Real client work first. Each project opens a detail page with what was built, the stack, and an honest note on what is and is not verified."
       />
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-10 grid gap-6">
         {preview.map((project, i) => (
           <Reveal
             key={project.slug}
             delay={Math.min(i * 0.06, 0.18)}
-            className={i === 0 ? "md:col-span-2" : undefined}
+            className="h-full"
           >
             <ProjectCard project={project} />
           </Reveal>
