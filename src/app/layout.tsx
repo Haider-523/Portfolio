@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import { profile } from "@/data/portfolio";
+import { siteUrl } from "@/lib/site";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ScrollRail } from "@/components/layout/scroll-rail";
@@ -13,29 +14,37 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 const description =
   "Haider Zaman Multan — ASP.NET Core Developer in Multan, Pakistan. C#, ASP.NET Core, Entity Framework Core, SQL Server and REST APIs.";
 
+// The title carries the exact ranking keyword "Haider Zaman Multan".
+// It is metadata only — the visible display name stays "Haider Zaman".
+const title = "Haider Zaman Multan | ASP.NET Core Developer";
+
 export const metadata: Metadata = {
-  title: "Haider Zaman | ASP.NET Core Developer",
+  metadataBase: new URL(siteUrl),
+  title,
   description,
+  alternates: { canonical: siteUrl },
   openGraph: {
-    title: "Haider Zaman | ASP.NET Core Developer",
+    title,
     description,
     type: "website",
+    url: siteUrl,
     images: [
       {
-        url: "/images/haider-zaman.jpg",
-        width: 900,
-        height: 1600,
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
         alt: "Haider Zaman — .NET Backend Developer, Multan, Pakistan",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/images/og-image.jpg"],
   },
 };
 
@@ -45,6 +54,8 @@ const jsonLd = {
   name: "Haider Zaman",
   jobTitle: "ASP.NET Core Developer",
   description,
+  url: siteUrl,
+  image: `${siteUrl}/images/haider-zaman.jpg`,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Multan",
@@ -73,7 +84,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <ThemeProvider>
@@ -83,9 +94,15 @@ export default function RootLayout({
               __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
             }}
           />
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-on-accent"
+          >
+            Skip to content
+          </a>
           <SiteHeader />
           <ScrollRail />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1">{children}</main>
           <SiteFooter />
           <AssistantLauncher />
         </ThemeProvider>

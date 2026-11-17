@@ -13,16 +13,32 @@ import { Button } from "@/components/ui/button";
  */
 const AssistantPanel = dynamic(
   () => import("@/components/assistant/assistant-panel"),
-  { ssr: false, loading: () => <p className="text-sm text-muted">Loading…</p> },
+  {
+    ssr: false,
+    loading: () => (
+      <p role="status" className="text-sm text-muted">
+        Loading…
+      </p>
+    ),
+  },
 );
 
 export function AssistantLauncher() {
   const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+
+  // Stable close handler: the panel closes on Escape and calls this;
+  // focus returns to the launcher button.
+  const close = React.useCallback(() => {
+    setOpen(false);
+    buttonRef.current?.focus();
+  }, []);
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
-      {open ? <AssistantPanel onClose={() => setOpen(false)} /> : null}
+      {open ? <AssistantPanel onClose={close} /> : null}
       <Button
+        ref={buttonRef}
         size="lg"
         aria-label={open ? "Close assistant" : "Open AI assistant"}
         aria-expanded={open}

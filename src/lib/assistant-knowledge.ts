@@ -13,6 +13,7 @@ import {
   certifications,
   competitions,
   education,
+  educationHistory,
   experience,
   featuredProjects,
   githubRepos,
@@ -59,7 +60,7 @@ export const knowledgeBase: KnowledgeChunk[] = [
     "Contact Haider Zaman",
     `Contact Haider Zaman by email at ${profile.email} or by phone at ${profile.phone}. ` +
       `LinkedIn: ${profile.linkedin}. GitHub: ${profile.github}. ` +
-      `There is also a message form on the Contact page — it sends to ${profile.email} via FormSubmit. ` +
+      `There is also a message form on the Contact page — it sends to ${profile.email} via the site's own contact API. ` +
       `His resume can be downloaded from the site as HZ-Resume.pdf.`,
     "Email: haiderzaman.dev@gmail.com. Phone: +92370-1403149. LinkedIn: linkedin.com/in/haiderzaman-dev. GitHub: github.com/Haider-523.",
   ),
@@ -70,7 +71,7 @@ export const knowledgeBase: KnowledgeChunk[] = [
       `His experience is: Software Programming Instructor at Maktab e Qulaab (Sep 2024 – Present), ` +
       `.NET Developer at CodeAlpha, Internship (Aug – Sep 2026), and Assistant at Hussain Dental Surgery, Part-time (Jun 2024 – Feb 2025). ` +
       `He also leads the 3-member competitive programming team Multan Al-Khwarizmi. Do not claim any other job, title, or employer for him.`,
-    "Haider is seeking opportunities — junior .NET backend roles. He is a Software Programming Instructor at Maktab e Qulaab (Sep 2024 – Present) and was a .NET Developer Intern at CodeAlpha (Aug – Sep 2026).",
+    "Haider is seeking opportunities — junior .NET backend roles. He is a Software Programming Instructor at Maktab e Qulaab (Sep 2024 – Present), was a .NET Developer Intern at CodeAlpha (Aug – Sep 2026), and was a part-time Assistant at Hussain Dental Surgery (Jun 2024 – Feb 2025).",
   ),
   chunk(
     "stats",
@@ -93,8 +94,13 @@ export const knowledgeBase: KnowledgeChunk[] = [
   chunk(
     "education",
     "Education",
-    `${education.degree} at ${education.school}, ${education.period}. ${education.status}. CGPA ${education.cgpa}. ${education.note}`,
-    "BS Computer Science at MNS University of Agriculture, Multan (2024–2028). CGPA 3.44/4.00.",
+    educationHistory
+      .map(
+        (e) =>
+          `${e.degree} at ${e.school}, ${e.period}. ${e.status}${e.detail ? ` ${e.detail}` : ""}${e.cgpa ? ` CGPA ${e.cgpa}.` : ""}`,
+      )
+      .join(" "),
+    "BS Computer Science at MNS University of Agriculture, Multan (2024–2028). CGPA 3.44/4.00. Also Intermediate in Computer Sciences and Pre-medical Studies, both Grade A.",
   ),
   chunk(
     "experience",
@@ -105,7 +111,7 @@ export const knowledgeBase: KnowledgeChunk[] = [
           `${e.role} at ${e.org} (${e.period}, ${e.location}): ${e.detail}`,
       )
       .join(" "),
-    "Software Programming Instructor at Maktab e Qulaab since Sep 2024, teaching Programming Fundamentals, OOP, Data Structures, and basic Python to 20+ students. Previously a .NET Developer Intern at CodeAlpha (Aug – Sep 2026).",
+    "Software Programming Instructor at Maktab e Qulaab since Sep 2024, teaching Programming Fundamentals, OOP, Data Structures, and basic Python to 20+ students. Previously a .NET Developer Intern at CodeAlpha (Aug – Sep 2026) and a part-time Assistant at Hussain Dental Surgery (Jun 2024 – Feb 2025).",
   ),
   ...featuredProjects.map((p) =>
     chunk(

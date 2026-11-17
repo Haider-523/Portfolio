@@ -38,10 +38,12 @@ const contactMethods = [
 
 export function Contact() {
   return (
-    <Section id="contact">
+    <Section id="contact" labelledBy="contact-heading">
       <SectionHeading
         eyebrow="Contact"
         title="Get in touch"
+        level="h1"
+        id="contact-heading"
         description="Send a message through the form — it goes straight to Haider's email. Or reach him directly by email, phone, LinkedIn or GitHub."
       />
       <div className="mt-10 grid gap-6 sm:grid-cols-2">

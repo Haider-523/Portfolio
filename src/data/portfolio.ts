@@ -2,7 +2,7 @@
  * Centralised portfolio data — verified information only.
  *
  * Sources: Haider's resume (HZ-Resume.pdf, received 2026-11-16),
- * LinkedIn audit (2026-11-12, signed in), GitHub profile
+ * LinkedIn re-audit (2026-11-17, signed in), GitHub profile
  * https://github.com/Haider-523 (verified 2026-11-12), and the
  * Stylish Hair Salon workspace (~/workspace/salon/ README + docs).
  *
@@ -28,11 +28,6 @@ export const profile = {
   phone: "+92370-1403149",
   linkedin: "https://www.linkedin.com/in/haiderzaman-dev",
   github: "https://github.com/Haider-523",
-  education: {
-    degree: "BS Computer Science",
-    school: "MNS University of Agriculture, Multan",
-    period: "2024–2028",
-  },
 } as const;
 
 /**
@@ -165,7 +160,7 @@ export const featuredProjects: Project[] = [
     name: "MBTI Quiz",
     shortDescription:
       "AI-based personality assessment built during a 24-hour AI competition in 2025.",
-    stack: ["AI", "Personality Assessment"],
+    stack: [],
     context: "24-hour AI competition · 2025",
     overview:
       "AI-based personality assessment (MBTI Quiz) built during a 24-hour AI competition in 2025.",
@@ -197,16 +192,6 @@ export function getProjectBySlug(slug: string): Project | undefined {
  * JavaScript are the build stack of this site and are deliberately
  * NOT listed here as his skills. No percentages anywhere.
  */
-export const skills = [
-  "C#",
-  ".NET",
-  "ASP.NET Core",
-  "Entity Framework Core",
-  "SQL Server",
-  "SQLite",
-  "WPF",
-] as const;
-
 export const skillCategories = [
   {
     title: "Backend & Frameworks",
@@ -357,8 +342,6 @@ export type CertificationItem = {
   issuer: string;
   /** Issue date exactly as LinkedIn shows it (re-audited 2026-11-17). */
   date?: string;
-  /** True when the item is on LinkedIn — all 18 are, as of 2026-11-17. */
-  verified: boolean;
   note?: string;
 };
 
@@ -387,113 +370,95 @@ export const certifications: CertificationItem[] = [
     name: "AI & Laptop Optimization Workshops",
     issuer: "Muhammad Nawaz Shareef University of Agriculture, Multan",
     date: "Sep 2026",
-    verified: true,
     note: "Credential ID CBS-LSW-2026-019, CBS-NBW-2026-019.",
   },
   {
     name: "Build and Deploy with GitHub Copilot",
     issuer: "Microsoft Learn Student Ambassadors",
     date: "Oct 2026",
-    verified: true,
   },
   {
     name: "AWS GameDay Hackathon 2026",
     issuer: "AWS Student Builder Group, BZU Multan",
     date: "Jul 2026",
-    verified: true,
   },
   {
     name: "SQL Course Certificate",
     issuer: "University of California, Davis",
     date: "May 2026",
-    verified: true,
   },
   {
     name: "Complete Python Developer: From Zero to Mastery",
     issuer: "Udemy",
     date: "May 2026",
-    verified: true,
   },
   {
     name: "SOFTEC '26 Programming Competition Participation Certificate",
     issuer: "SOFTEC",
     date: "Apr 2026",
-    verified: true,
   },
   {
     name: "CS50x Puzzle Day 2026 Participation Certificate",
     issuer: "CS50",
     date: "Apr 2026",
-    verified: true,
   },
   {
     name: "C# for .NET Developers",
     issuer: "Board Infinity",
     date: "May 2026",
-    verified: true,
   },
   {
     name: "Advanced Social Media Strategy Training and Certification",
     issuer: "HP LIFE",
     date: "Nov 2024",
-    verified: true,
   },
   {
     name: "Certificate of Appreciation — Brand Scape",
     issuer: "Air Business Circle",
     date: "May 2026",
-    verified: true,
   },
   {
     name: "Certificate of Merit",
     issuer: "Workers Welfare School (Boys)",
     date: "Dec 2022",
-    verified: true,
     note: "1st position, 1st Year (I.C.S Group) Mid-Term Examination.",
   },
   {
     name: "Rahyan-E-Karbala Wa Mohiban-E-Watan Scout Camp",
     issuer: "Pakistan Boy Scouts Association",
     date: "Sep 2020",
-    verified: true,
   },
   {
     name: "ICPC Asia Topi Regionals 2026",
     issuer: "ICPC",
     date: "Jan 2026",
-    verified: true,
     note: "On-site regional contest. Team Multan Al-Khwarizmi.",
   },
   {
     name: "ICPC Asia Topi Achievement",
     issuer: "ICPC",
     date: "Nov 2025",
-    verified: true,
     note: "Certificate of Achievement, online preliminary programming contest.",
   },
   {
     name: "Microsoft Office Specialist: Excel Certification",
     issuer: "Coursera",
     date: "Jul 2025",
-    verified: true,
   },
   {
     name: "Foundation of Cyber Security",
     issuer: "Cyber Security Club MNSUAM",
     date: "Jan 2025",
-    verified: true,
   },
   {
     name: "Graphics Designing and UI/UX Designing Workshop",
     issuer: "Rotary Club MNSUAM",
     date: "Dec 2024",
-    verified: true,
   },
   {
     name: "Coding Competition at IOC, MNSUAM",
     issuer: "MNS University of Agriculture, Multan",
     date: "Dec 2024",
-    verified: true,
   },
 ];
 
@@ -508,7 +473,7 @@ export const educationHistory = [
     period: "Aug 2024 – Aug 2028",
     status: "Currently enrolled — expected 2028",
     detail:
-      "BSCS '28. Competitive programming and teaching run alongside the degree. CGPA 3.44 / 4.00.",
+      "BSCS '28. Competitive programming and teaching run alongside the degree.",
     cgpa: "3.44 / 4.00",
   },
   {
@@ -520,7 +485,7 @@ export const educationHistory = [
     cgpa: "",
   },
   {
-    degree: "Pre-medical / Pre-Medical Studies, Science",
+    degree: "Pre-medical Studies",
     school: "Workers Welfare Higher Secondary School For Boys, Multan",
     period: "Apr 2020 – Aug 2022",
     status: "Grade: A",

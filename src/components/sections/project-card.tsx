@@ -66,19 +66,21 @@ export function ProjectCard({ project }: { project: Project }) {
               ))}
             </ul>
           ) : null}
-          <ul
-            className="mt-4 flex flex-wrap gap-2"
-            aria-label="Technologies used"
-          >
-            {project.stack.map((tech) => (
+          {project.stack.length > 0 ? (
+            <ul
+              className="mt-4 flex flex-wrap gap-2"
+              aria-label="Technologies used"
+            >
+              {project.stack.map((tech) => (
               <li
                 key={tech}
                 className="rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-foreground transition-colors duration-200 hover:border-accent/60 hover:bg-accent/5 hover:text-accent"
               >
                 {tech}
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          ) : null}
           <div className="mt-5 flex flex-wrap items-center gap-4 border-t border-border pt-4">
             <Link
               href={`/projects/${project.slug}`}

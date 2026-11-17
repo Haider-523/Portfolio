@@ -33,6 +33,18 @@ export default function AssistantPanel({ onClose }: { onClose: () => void }) {
   const [input, setInput] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const listRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  // Focus management: focus the input when the panel opens, close
+  // on Escape (the launcher returns focus to its button on close).
+  React.useEffect(() => {
+    inputRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   React.useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
@@ -76,8 +88,9 @@ export default function AssistantPanel({ onClose }: { onClose: () => void }) {
   return (
     <div
       role="dialog"
+      aria-modal="true"
       aria-label="AI Portfolio Assistant"
-      className="flex h-[480px] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-lg"
+      className="flex h-[min(480px,calc(100dvh-6rem))] w-[calc(100vw-2.5rem)] max-w-sm flex-col overflow-hidden rounded-xl border border-border bg-surface shadow-lg"
     >
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <div>
@@ -142,6 +155,7 @@ export default function AssistantPanel({ onClose }: { onClose: () => void }) {
             Ask about Haider
           </label>
           <input
+            ref={inputRef}
             id="assistant-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}

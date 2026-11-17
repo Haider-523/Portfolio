@@ -95,7 +95,12 @@ export function Hero() {
                 <LinkedinIcon className="size-5" />
               </a>
             </Button>
-            <span className="ml-2 text-sm text-muted">{profile.email}</span>
+            <a
+              href={`mailto:${profile.email}`}
+              className="ml-2 text-sm text-muted transition-colors hover:text-accent"
+            >
+              {profile.email}
+            </a>
           </div>
         </div>
 

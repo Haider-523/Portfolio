@@ -10,8 +10,8 @@ import { educationHistory } from "@/data/portfolio";
  */
 export function Education() {
   return (
-    <Section id="education">
-      <SectionHeading eyebrow="Education" title="Education" />
+    <Section id="education" labelledBy="education-heading">
+      <SectionHeading eyebrow="Education" title="Education" id="education-heading" />
       <div className="mt-10 space-y-6">
         {educationHistory.map((entry, i) => (
           <Reveal key={entry.degree} delay={Math.min(i * 0.05, 0.15)}>

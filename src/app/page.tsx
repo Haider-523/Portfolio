@@ -17,12 +17,12 @@ export default function Home() {
     <>
       <Hero />
       <FeaturedProjectsPreview />
-      <Section id="hire" tone="soft">
+      <Section id="hire" tone="soft" labelledBy="hire-heading">
         <Reveal>
           <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md">
             <span aria-hidden="true" className="block h-1 w-full bg-accent" />
             <div className="p-8 text-center sm:p-10">
-            <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+            <h2 id="hire-heading" className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">
               Need a backend developer who finishes real work?
             </h2>
             <p className="mx-auto mt-3 max-w-xl leading-relaxed text-muted">

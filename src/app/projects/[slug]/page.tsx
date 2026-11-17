@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Info } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import { featuredProjects, getProjectBySlug } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
+import { siteUrl } from "@/lib/site";
 
 /**
  * Project detail pages — one static route per featured project.
@@ -23,9 +24,30 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project not found | Haider Zaman" };
+  const url = `${siteUrl}/projects/${project.slug}`;
   return {
     title: `${project.name} | Haider Zaman`,
     description: project.shortDescription,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${project.name} | Haider Zaman`,
+      description: project.shortDescription,
+      url,
+      images: [
+        {
+          url: "/images/og-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${project.name} — Haider Zaman`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} | Haider Zaman`,
+      description: project.shortDescription,
+      images: ["/images/og-image.jpg"],
+    },
   };
 }
 
@@ -81,16 +103,18 @@ export default async function ProjectPage({
         {project.overview}
       </p>
 
-      <ul className="mt-8 flex flex-wrap gap-2" aria-label="Technologies used">
-        {project.stack.map((tech) => (
+      {project.stack.length > 0 ? (
+        <ul className="mt-8 flex flex-wrap gap-2" aria-label="Technologies used">
+          {project.stack.map((tech) => (
           <li
             key={tech}
             className="rounded-md border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:border-accent/60 hover:bg-accent/5 hover:text-accent "
           >
             {tech}
           </li>
-        ))}
-      </ul>
+          ))}
+        </ul>
+      ) : null}
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
         {project.githubUrl ? (

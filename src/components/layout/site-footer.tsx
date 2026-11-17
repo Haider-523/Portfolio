@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
-import { profile } from "@/data/portfolio";
+import { navLinks, profile } from "@/data/portfolio";
 
 /**
  * Site footer — a server component: it needs no interactivity, so it
@@ -18,14 +18,36 @@ export async function SiteFooter() {
   const year = await getYear();
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 py-10 sm:px-6 md:flex-row md:justify-between">
         <div>
           <p className="text-sm font-medium text-foreground">Haider Zaman</p>
-          <p className="text-sm text-muted">
+          <p className="mt-1 text-sm text-muted">
             {profile.title} — {profile.location}
           </p>
+          <p className="mt-3 text-sm">
+            <a
+              href={`mailto:${profile.email}`}
+              className="text-accent transition-colors hover:text-accent-hover"
+            >
+              {profile.email}
+            </a>
+          </p>
         </div>
-        <div className="flex items-center gap-4">
+        <nav aria-label="Footer">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {navLinks.map((link) => (
+              <li key={link.id}>
+                <Link
+                  href={link.href}
+                  className="text-sm text-muted transition-colors hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="flex items-start gap-4">
           <Link
             href={profile.github}
             target="_blank"

@@ -11,10 +11,12 @@ import { competitions, experience, journey } from "@/data/portfolio";
  */
 export function Experience() {
   return (
-    <Section id="experience">
+    <Section id="experience" labelledBy="experience-heading">
       <SectionHeading
         eyebrow="Experience"
         title="Experience"
+        level="h1"
+        id="experience-heading"
         description="Three verified roles — teaching, a .NET internship, and a part-time assistant role."
       />
       <ol className="relative mt-10 space-y-8 border-l-2 border-border pl-8">

@@ -240,12 +240,12 @@ says "Seeking opportunities — junior .NET backend roles." Keep as-is.
 219,926 bytes) — the only photo on the site; no stock images. Used
 with `next/image`: hero (4/5 crop, `object-position: top`, priority),
 a smaller version on About, a 32px round crop as the header logo,
-and as the Open Graph image. No "HZ" initials avatar anywhere.
+and as the Open Graph image is a separate 1200×630 landscape card (`public/images/og-image.jpg`, photo + name/role). No "HZ" initials avatar anywhere.
 
 ## AI Portfolio Assistant (Gemini, server-side, fail-closed)
 
 Floating "AI Assistant" widget on every page
-(`src/components/assistant/assistant-widget.tsx`), backed by
+(`src/components/assistant/assistant-launcher.tsx` + `assistant-panel.tsx`), backed by
 `POST /api/assistant` (`src/app/api/assistant/route.ts`).
 
 - **Knowledge base is the only source:**
@@ -275,7 +275,7 @@ Floating "AI Assistant" widget on every page
 - **No secret in the repo:** `.env.example` has only a commented
   placeholder. No `.env` file is committed. No key is ever sent to
   the browser. There is no Gemini connector doc/helper in
-  `~/workspace/custom-connectors/` (empty) — the route calls the
+  `~/workspace/custom-connectors/` (it holds `custom.github`) — the route calls the
   Gemini REST API (`gemini-2.5-flash`) directly with the server-side
   key when present.
 
@@ -348,15 +348,19 @@ all sit under Licenses & Certifications there, so the old
   must click the activation link in the first activation email
   before any message arrives in his inbox. Send one real test
   message after deploy and confirm it arrives.
+- Contact form now posts to `POST /api/contact` (audit 2026-11-17):
+  server-side validation, honeypot + rate limit, and the server
+  forwards to FormSubmit with `_captcha: "false"`. The old
+  browser-side fetch with `_captcha: "true"` could never succeed —
+  FormSubmit answers that combination with an HTML captcha page
+  instead of JSON, so every JS submit hit the error state.
 - AI assistant Gemini live call — untested (no key in this sandbox);
   see above. Test on the deploy host with a key set.
-- Deployment — Haider's job (GitHub push + Vercel/Netlify).
-- Sitemap/robots base URL and `metadataBase`: root-relative until
-  Haider chooses the live domain — the build warns
-  `metadataBase … is not set … using "http://localhost:3000"` for
-  the Open Graph image. Set `metadataBase` to the live domain on deploy.
-- 8 certification/award items flagged unverified — confirm before
-  publishing (or remove them).
+- Deployment — Haider's job (Vercel only now). GitHub push is DONE: commit 34a083b, 2026-11-17, direct push via the custom.github connector.
+- Site URL: set `NEXT_PUBLIC_SITE_URL` in Vercel's env vars to the
+  live domain after deploy — it drives `metadataBase`, canonicals,
+  sitemap, robots and the Open Graph image. Until then Vercel's own
+  production URL is used; locally it falls back to localhost:3000.
 - Instructor role: resume says Independent, LinkedIn says Maktab e
   Qulaab — stated on the Experience page; Haider to confirm which
   is right.

@@ -53,6 +53,9 @@ export function Reveal({
   return (
     <div
       ref={ref}
+      // While hidden below the fold the content is also hidden from
+      // assistive tech; once revealed it is announced normally.
+      aria-hidden={hidden && !visible ? true : undefined}
       style={{ transitionDelay: `${Math.min(Math.max(delay, 0), 0.12)}s` }}
       className={cn(
         "reveal",
@@ -65,25 +68,47 @@ export function Reveal({
   );
 }
 
-/** Shared section heading: eyebrow, large navy title, teal rule, lede. */
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/**
+ * Shared section heading: eyebrow, large navy title, teal rule, lede.
+ * `level="h1"` is for the first heading of a page (About, Projects,
+ * Experience, Contact); the home page already has its h1 in the hero.
+ * The heading gets a stable `id` so its <section> can point at it
+ * with aria-labelledby.
+ */
 export function SectionHeading({
   eyebrow,
   title,
   description,
+  level = "h2",
+  id,
 }: {
   eyebrow: string;
   title: string;
   description?: string;
+  level?: "h1" | "h2";
+  id?: string;
 }) {
+  const headingId = id ?? `${slugify(title)}-heading`;
+  const Heading = level;
   return (
     <Reveal>
       <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
         <span aria-hidden="true" className="inline-block size-2 bg-accent" />
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-4xl font-bold tracking-tight text-navy sm:text-5xl sm:leading-[1.1]">
+      <Heading
+        id={headingId}
+        className="mt-3 text-4xl font-bold tracking-tight text-navy sm:text-5xl sm:leading-[1.1]"
+      >
         {title}
-      </h2>
+      </Heading>
       <span
         aria-hidden="true"
         className="mt-5 block h-1 w-12 rounded-full bg-accent"
@@ -108,15 +133,19 @@ export function Section({
   children,
   className,
   tone = "surface",
+  labelledBy,
 }: {
   id: string;
   children: React.ReactNode;
   className?: string;
   tone?: "surface" | "soft";
+  /** id of the section's heading, for aria-labelledby. */
+  labelledBy?: string;
 }) {
   return (
     <section
       id={id}
+      aria-labelledby={labelledBy}
       className={cn(
         tone === "surface" && "border-y border-border bg-surface",
         className,

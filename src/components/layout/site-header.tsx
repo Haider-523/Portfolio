@@ -21,6 +21,7 @@ export function SiteHeader() {
   const { resolvedTheme, setTheme } = useTheme();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const menuButtonRef = React.useRef<HTMLButtonElement>(null);
   // Route progress: a thin teal bar that runs from the moment a nav
   // link is clicked until the new page's pathname lands, so a click
   // feels instant even before the page arrives.
@@ -39,14 +40,23 @@ export function SiteHeader() {
     return () => clearTimeout(t);
   }, [pathname]);
 
-  // Close the mobile menu on Escape, and on navigation.
+  // Close the mobile menu on Escape, and on navigation. While the
+  // menu is open the page behind it does not scroll; when it closes,
+  // focus returns to the toggle button.
   React.useEffect(() => {
     if (!menuOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const toggle = menuButtonRef.current;
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previousOverflow;
+      toggle?.focus();
+    };
   }, [menuOpen]);
 
   const isActive = (href: string) =>
@@ -86,6 +96,7 @@ export function SiteHeader() {
             alt="Haider Zaman"
             width={32}
             height={32}
+            priority
             className="size-8 rounded-full object-cover object-top transition-transform duration-200 group-hover:-translate-y-0.5"
           />
           Haider Zaman
@@ -156,6 +167,7 @@ export function SiteHeader() {
             <Moon className="size-5 dark:hidden" />
           </Button>
           <Button
+            ref={menuButtonRef}
             variant="ghost"
             size="icon"
             className="lg:hidden"

@@ -1,29 +1,32 @@
 import type { MetadataRoute } from "next";
 import { featuredProjects } from "@/data/portfolio";
+import { LAST_MODIFIED, siteUrl } from "@/lib/site";
 
 /**
- * NOTE: URLs are root-relative for now. When Haider deploys, set the
- * real base URL here (and in robots) — no live domain is claimed yet.
+ * Sitemap — absolute URLs (the protocol requires them; root-relative
+ * URLs were rejected/ignored by Google, so the sitemap gave the
+ * ranking goal nothing). lastModified is a fixed date per page, not
+ * `new Date()` on every deploy, so crawlers can tell what changed.
  */
-const pages = ["/", "/about", "/projects", "/experience", "/contact"];
+const pages = [
+  { path: "/", priority: 1 },
+  { path: "/about", priority: 0.9 },
+  { path: "/projects", priority: 0.9 },
+  { path: "/experience", priority: 0.9 },
+  { path: "/contact", priority: 0.9 },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    {
-      url: "/",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    ...pages.slice(1).map((url) => ({
-      url,
-      lastModified: new Date(),
+    ...pages.map(({ path, priority }) => ({
+      url: `${siteUrl}${path}`,
+      lastModified: LAST_MODIFIED,
       changeFrequency: "monthly" as const,
-      priority: 0.9,
+      priority,
     })),
     ...featuredProjects.map((project) => ({
-      url: `/projects/${project.slug}`,
-      lastModified: new Date(),
+      url: `${siteUrl}/projects/${project.slug}`,
+      lastModified: LAST_MODIFIED,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),

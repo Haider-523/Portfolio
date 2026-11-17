@@ -31,10 +31,11 @@ function ItemCard({ item }: { item: CertificationItem }) {
  */
 export function Certifications() {
   return (
-    <Section id="certifications">
+    <Section id="certifications" labelledBy="certifications-heading">
       <SectionHeading
         eyebrow="Licenses & Certifications"
         title="Licenses & Certifications"
+        id="certifications-heading"
         description="18 items in total, in LinkedIn order, each with its LinkedIn issue date. All verified on LinkedIn."
       />
 

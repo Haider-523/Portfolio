@@ -7,10 +7,12 @@ import { ProjectCard } from "@/components/sections/project-card";
 /** Full projects listing (used by the /projects page). */
 export function Projects() {
   return (
-    <Section id="projects">
+    <Section id="projects" labelledBy="projects-heading">
       <SectionHeading
         eyebrow="Projects"
         title="Featured projects"
+        level="h1"
+        id="projects-heading"
         description="Five projects, in the order that matters — real client work first. Each card opens a detail page with what was built, the stack, and an honest note on what is and is not verified."
       />
       <div className="mt-10 grid gap-6">
@@ -32,10 +34,11 @@ export function Projects() {
 export function FeaturedProjectsPreview() {
   const preview = featuredProjects.slice(0, 3);
   return (
-    <Section id="featured-projects">
+    <Section id="featured-projects" labelledBy="featured-projects-heading">
       <SectionHeading
         eyebrow="Projects"
         title="Featured projects"
+        id="featured-projects-heading"
         description="Real client work first. Each project opens a detail page with what was built, the stack, and an honest note on what is and is not verified."
       />
       <div className="mt-10 grid gap-6">

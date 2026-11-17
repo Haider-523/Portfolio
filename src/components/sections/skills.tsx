@@ -11,10 +11,11 @@ const categoryIcons = {
 
 export function Skills() {
   return (
-    <Section id="skills">
+    <Section id="skills" labelledBy="skills-heading">
       <SectionHeading
         eyebrow="Skills"
         title="What I work with"
+        id="skills-heading"
         description="Only the stack I actually use. No percentages, no expert claims — the evidence is the projects."
       />
       <div className="mt-10 grid gap-6 sm:grid-cols-2">

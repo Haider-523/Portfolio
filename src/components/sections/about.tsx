@@ -6,10 +6,12 @@ import { aboutParagraphs, profile, stats } from "@/data/portfolio";
 
 export function About() {
   return (
-    <Section id="about">
+    <Section id="about" labelledBy="about-heading">
       <SectionHeading
         eyebrow="About"
         title="Backend developer, teacher, competitor"
+        level="h1"
+        id="about-heading"
       />
       <div className="mt-8 grid gap-10 md:grid-cols-[1fr_280px]">
         <Reveal delay={0.05}>
@@ -34,6 +36,7 @@ export function About() {
             alt="Haider Zaman"
             width={560}
             height={700}
+            sizes="(max-width: 768px) 100vw, 280px"
             className="aspect-[4/5] w-full rounded-xl border border-border object-cover object-top"
           />
           <p className="mt-3 text-center text-sm text-muted">

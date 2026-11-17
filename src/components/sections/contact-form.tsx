@@ -6,13 +6,21 @@ import { profile } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
 
 /**
- * Contact form — sends via FormSubmit (https://formsubmit.co), no
- * account or API key needed. The form's `action` is the standard
- * FormSubmit URL (works even with JavaScript disabled); with JS,
- * submission is intercepted and sent to the AJAX endpoint instead,
- * so the page can show real sending / sent / error states from the
- * JSON response — a success message is NEVER shown before the
- * server confirms it.
+ * Contact form — sends via POST /api/contact (server route), which
+ * validates the input and forwards it to FormSubmit
+ * (https://formsubmit.co), no account or API key needed. The form's
+ * `action` is the standard FormSubmit URL, so it still works with
+ * JavaScript disabled; with JS, submission is intercepted and sent
+ * to the API route instead, so the page can show real sending /
+ * sent / error states from the JSON response — a success message is
+ * NEVER shown before the server confirms it.
+ *
+ * Why the server route: FormSubmit's AJAX endpoint with
+ * `_captcha: "true"` returns an HTML captcha page instead of JSON,
+ * so the old browser-side fetch could never succeed. The server
+ * forwards with `_captcha: "false"` and relies on the honeypot +
+ * validation + rate limit instead. The destination email is also no
+ * longer in client-side code.
  *
  * ACTIVATION (honest limitation, also stated on the page): the FIRST
  * message triggers an activation email to haiderzaman.dev@gmail.com.
@@ -21,7 +29,13 @@ import { Button } from "@/components/ui/button";
  * messages do not arrive.
  */
 const FORM_ACTION = "https://formsubmit.co/haiderzaman.dev@gmail.com";
-const FORM_AJAX_URL = "https://formsubmit.co/ajax/haiderzaman.dev@gmail.com";
+
+// No-JS fallback: after FormSubmit's own captcha page, send the
+// visitor back to the portfolio instead of FormSubmit's generic
+// thank-you page. Only set when the public site URL is known.
+const NEXT_URL = process.env.NEXT_PUBLIC_SITE_URL
+  ? `${process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/contact`
+  : undefined;
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -36,18 +50,29 @@ export function ContactForm() {
     setErrorDetail("");
     const formData = new FormData(e.currentTarget);
     try {
-      const res = await fetch(FORM_AJAX_URL, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          subject: formData.get("subject"),
+          message: formData.get("message"),
+          company: formData.get("company"),
+        }),
       });
-      // FormSubmit's AJAX endpoint answers JSON { "success": "true" }.
-      // Anything else (HTML captcha page, error page, non-JSON) is
-      // NOT a confirmed delivery — show the error state instead.
+      // The API route answers { ok: true } only when FormSubmit
+      // confirmed delivery. Anything else is NOT a confirmed
+      // delivery — show the error state instead.
       let ok = false;
+      let serverError = "";
       try {
-        const data = (await res.json()) as { success?: unknown };
-        ok = res.ok && data.success === "true";
+        const data = (await res.json()) as {
+          ok?: unknown;
+          error?: unknown;
+        };
+        ok = res.ok && data.ok === true;
+        if (typeof data.error === "string") serverError = data.error;
       } catch {
         ok = false;
       }
@@ -56,7 +81,8 @@ export function ContactForm() {
       } else {
         setStatus("error");
         setErrorDetail(
-          "FormSubmit did not confirm delivery. Please try again or email Haider directly.",
+          serverError ||
+            "The message was not confirmed as delivered. Please try again or email Haider directly.",
         );
       }
     } catch {
@@ -113,7 +139,9 @@ export function ContactForm() {
         email once. Until he does, messages do not arrive in his inbox.
       </p>
 
-      {/* FormSubmit configuration (no key needed). */}
+      {/* FormSubmit configuration (no-JS fallback only — the JS path
+          goes through /api/contact). _captcha stays on here because
+          the fallback has no honeypot or server validation. */}
       <input
         type="hidden"
         name="_subject"
@@ -121,6 +149,21 @@ export function ContactForm() {
       />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="true" />
+      {NEXT_URL ? (
+        <input type="hidden" name="_next" value={NEXT_URL} />
+      ) : null}
+      {/* Honeypot: off-screen, never filled by a human. The server
+          rejects the submission if it has a value. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] opacity-0">
+        <label htmlFor="contact-company">Company</label>
+        <input
+          id="contact-company"
+          name="company"
+          type="text"
+          autoComplete="off"
+          tabIndex={-1}
+        />
+      </div>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <div>
@@ -136,6 +179,7 @@ export function ContactForm() {
             type="text"
             autoComplete="name"
             required
+            maxLength={100}
             placeholder="Your name"
             className={inputClass}
           />
@@ -171,6 +215,7 @@ export function ContactForm() {
           name="subject"
           type="text"
           autoComplete="off"
+          maxLength={120}
           placeholder="What is this about?"
           className={inputClass}
         />
@@ -188,6 +233,7 @@ export function ContactForm() {
           name="message"
           required
           minLength={10}
+          maxLength={2000}
           rows={5}
           placeholder="Write your message…"
           className="w-full resize-y rounded-lg border border-border bg-background px-3 py-2.5 text-sm leading-relaxed text-foreground outline-none placeholder:text-muted transition-colors focus:border-accent"
