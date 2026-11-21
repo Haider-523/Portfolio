@@ -83,7 +83,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+    <article className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-20">
       <p>
         <Link
           href="/blog"

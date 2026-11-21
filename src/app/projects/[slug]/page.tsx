@@ -82,7 +82,7 @@ export default async function ProjectPage({
   const next = featuredProjects[(index + 1) % featuredProjects.length];
 
   return (
-    <article className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+    <article className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-20">
       <p>
         <Link
           href="/projects"

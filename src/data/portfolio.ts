@@ -44,7 +44,7 @@ export const profile = {
  * About page keeps the personal story (degree, teaching, contests).
  */
 export const heroIntro =
-  "ASP.NET Core backend developer from Multan. I build real systems end to end — a salon management system for a real client, with 64/64 tests passing — and I am looking for junior .NET backend roles where I can ship production code.";
+  "I build tested backend systems for real clients. My salon management system passes 64/64 tests — and I am looking for junior .NET backend roles where I can ship production code.";
 
 /** Availability line — confirmed by Haider on 2026-11-17: keep as-is. */
 export const availabilityNote =
@@ -172,6 +172,7 @@ export const featuredProjects: Project[] = [
       "Identity",
       "ImageSharp",
     ],
+    metrics: ["Auth + posts + image uploads", "Public GitHub repo"],
     context: "CodeAlpha project · 2026",
     overview:
       "A social media platform built with ASP.NET Core MVC on .NET 10, using Entity Framework Core 10 with SQL Server, ASP.NET Core Identity and ImageSharp — user authentication, posts and image uploads, database management and responsive web design.",
@@ -192,6 +193,7 @@ export const featuredProjects: Project[] = [
     shortDescription:
       "Smart university and career guidance platform for intermediate students, presented at SOFTEC '26.",
     stack: ["ASP.NET Core MVC", "C#", "SQL Server", "Entity Framework Core"],
+    metrics: ["Presented at SOFTEC '26"],
     context: "Presented at SOFTEC '26",
     overview:
       "Smart university and career guidance platform for intermediate students, built with ASP.NET Core MVC, C#, SQL Server and Entity Framework Core. Presented at SOFTEC '26.",
@@ -211,6 +213,7 @@ export const featuredProjects: Project[] = [
     shortDescription:
       "AI-based personality assessment built during a 24-hour AI competition in 2025.",
     stack: [],
+    metrics: ["Built in a 24-hour AI competition"],
     context: "24-hour AI competition · 2025",
     overview:
       "AI-based personality assessment (MBTI Quiz) built during a 24-hour AI competition in 2025.",
@@ -229,6 +232,7 @@ export const featuredProjects: Project[] = [
     shortDescription:
       "Interactive quiz platform for C/C++ practice with real-time evaluation.",
     stack: ["HTML", "CSS", "JavaScript"],
+    metrics: ["Interactive C/C++ quiz", "Real-time evaluation"],
     context: "Quiz platform · C/C++ practice",
     overview:
       "Interactive quiz platform for C/C++ practice with real-time evaluation, built with HTML, CSS and JavaScript.",
