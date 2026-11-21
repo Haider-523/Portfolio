@@ -111,7 +111,7 @@ Next.js 16 cacheComponents/PPR behaviour. Steady state is 404.
 
 | Route | Page |
 | --- | --- |
-| `/` | Home — hero + featured projects preview + CTA |
+| `/` | Home — hero + featured projects preview + services + CTA |
 | `/about` | About + photo, Skills, Education, Licenses & Certifications (18) |
 | `/projects` | All 5 featured projects |
 | `/projects/[slug]` | Project detail / case study (5 slugs) |

@@ -123,7 +123,7 @@ export const featuredProjects: Project[] = [
     slug: "socialapp",
     name: "SocialApp",
     shortDescription:
-      "Social media platform built with ASP.NET Core MVC, Identity and SQL Server.",
+      "Social media platform built with ASP.NET Core MVC, Identity and SQL Server — user authentication, posts and image uploads.",
     stack: [
       "ASP.NET Core MVC",
       ".NET 10",
@@ -134,7 +134,7 @@ export const featuredProjects: Project[] = [
     ],
     context: "CodeAlpha project · 2026",
     overview:
-      "A social media platform built with ASP.NET Core MVC on .NET 10, using Entity Framework Core 10 with SQL Server, ASP.NET Core Identity and ImageSharp.",
+      "A social media platform built with ASP.NET Core MVC on .NET 10, using Entity Framework Core 10 with SQL Server, ASP.NET Core Identity and ImageSharp — user authentication, posts and image uploads, database management and responsive web design.",
     verification:
       "The repository is public on GitHub. No live deployment or hosted demo is claimed, and the application has not been run end-to-end against a live SQL Server in this workspace.",
     // Repo verified public on GitHub, 2026-11-17:
@@ -213,6 +213,46 @@ export const skillCategories = [
     description:
       "Languages used in projects and coursework — listed as used, not as expert claims.",
     items: ["C", "C++", "HTML", "CSS"],
+  },
+] as const;
+
+/**
+ * Services — what Haider builds for a client or employer. Every item
+ * is evidenced by a featured project or a verified fact in this file;
+ * nothing here is a claim without proof behind it. Added 2026-11-21
+ * after the Daim Ali portfolio QA: his "Engineering Services" section
+ * states the offer plainly, and this site had no equivalent — the
+ * home page went straight from proof to the hire CTA without saying
+ * what the reader can hire Haider to do.
+ */
+export const services = [
+  {
+    icon: "server",
+    title: "Backend & REST API Development",
+    description:
+      "ASP.NET Core APIs in C# with EF Core — authentication, business rules and clean layered design.",
+    proof: "Salon system · SocialApp",
+  },
+  {
+    icon: "database",
+    title: "Database Design & EF Core",
+    description:
+      "SQL Server and SQLite schemas, Code-First migrations and indexes — including the filtered unique index that keeps one session per salon chair.",
+    proof: "SQL Server · SQLite · EF Core 10",
+  },
+  {
+    icon: "app-window",
+    title: "Desktop Applications",
+    description:
+      "Native Windows apps with WPF and MVVM — the salon runs its whole shop on one.",
+    proof: "WPF · MVVM · 20 screens",
+  },
+  {
+    icon: "shield-check",
+    title: "Tested, documented delivery",
+    description:
+      "Business rules covered by xUnit tests and written up honestly — what is verified, and what is not.",
+    proof: "64/64 tests · honest verification notes",
   },
 ] as const;
 

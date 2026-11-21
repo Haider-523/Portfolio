@@ -2,13 +2,14 @@ import Link from "next/link";
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { Hero } from "@/components/sections/hero";
 import { FeaturedProjectsPreview } from "@/components/sections/projects";
+import { Services } from "@/components/sections/services";
 import { Reveal, Section } from "@/components/motion/reveal";
 import { profile } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
 
 /**
  * Home page — multi-page model. Hero + featured projects preview +
- * CTA only. About (with Skills, Education, Certifications folded
+ * services + CTA only. About (with Skills, Education, Certifications folded
  * in), Projects, Experience (with Journey milestones) and Contact
  * each have their own page; nothing here is an anchor section.
  */
@@ -17,6 +18,7 @@ export default function Home() {
     <>
       <Hero />
       <FeaturedProjectsPreview />
+      <Services />
       <Section id="hire" tone="soft" labelledBy="hire-heading">
         <Reveal>
           <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md">
