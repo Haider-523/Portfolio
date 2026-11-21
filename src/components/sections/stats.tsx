@@ -1,4 +1,5 @@
 import { stats } from "@/data/portfolio";
+import { CountUp } from "@/components/motion/count-up";
 
 /**
  * Proof strip — the same four numbers (300+ problems, 15+
@@ -20,7 +21,9 @@ function StatItem({
   return (
     <div className="transition-transform duration-200 hover:-translate-y-0.5">
       <dt className="sr-only">{label}</dt>
-      <dd className={valueClassName}>{value}</dd>
+      <dd className={valueClassName}>
+        <CountUp value={value} />
+      </dd>
       <dd className={labelClassName}>{label}</dd>
     </div>
   );

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
 import { aboutParagraphs, profile } from "@/data/portfolio";
 import { StatsList } from "@/components/sections/stats";
+import { TypewriterCode } from "@/components/motion/typewriter-code";
 
 export function About() {
   return (
@@ -48,6 +49,15 @@ export function About() {
           </div>
         </Reveal>
       </div>
+      <Reveal delay={0.1}>
+        <figure className="mt-12">
+          <TypewriterCode />
+          <figcaption className="mt-3 text-sm text-muted">
+            Example endpoint in C# / ASP.NET Core — the shape of my
+            backend work, not production code.
+          </figcaption>
+        </figure>
+      </Reveal>
     </Section>
   );
 }

@@ -103,6 +103,31 @@ export function Hero() {
               {profile.email}
             </a>
           </div>
+
+          {/* Core stack at a glance — Daim's hero shows his stack as
+              chips; this hero only named it in prose. Same chip style
+              as the project cards, server-rendered, zero JavaScript. */}
+          <ul
+            aria-label="Core stack"
+            className="mt-6 flex flex-wrap gap-2"
+          >
+            {[
+              "C#",
+              "ASP.NET Core",
+              "EF Core",
+              "SQL Server",
+              "REST APIs",
+              "SQLite",
+              "WPF",
+            ].map((tech) => (
+              <li
+                key={tech}
+                className="rounded-md border border-border bg-surface px-2.5 py-1 text-xs font-medium text-foreground transition-colors duration-200 hover:border-accent/60 hover:bg-accent/5 hover:text-accent"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="mx-auto w-full max-w-[280px]">
