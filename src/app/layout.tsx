@@ -4,7 +4,6 @@ import { profile } from "@/data/portfolio";
 import { siteUrl } from "@/lib/site";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
-import { ScrollRail } from "@/components/layout/scroll-rail";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { AssistantLauncher } from "@/components/assistant/assistant-launcher";
 import "./globals.css";
@@ -101,7 +100,6 @@ export default function RootLayout({
             Skip to content
           </a>
           <SiteHeader />
-          <ScrollRail />
           <main id="main-content" className="flex-1">{children}</main>
           <SiteFooter />
           <AssistantLauncher />

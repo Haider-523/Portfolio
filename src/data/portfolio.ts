@@ -109,6 +109,20 @@ export type Project = {
   githubUrl?: string;
   /** Honest note about code availability, e.g. "Code not public". */
   codeNote?: string;
+  /** Dashboard / screenshot image for the project card and the
+   * case-study page. `imageSource` says honestly where it came from:
+   * "linkedin" is an exact copy of a screenshot Haider posted on
+   * LinkedIn; "mockup" is a generated illustration of the app's
+   * screens, not a real screenshot — the UI labels it as such. */
+  image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageSource?: "linkedin" | "mockup";
+  /** LinkedIn post the screenshot was copied from (exact copy). */
+  imagePostUrl?: string;
+  /** Extra screenshots shown on the case-study page. */
+  gallery?: { src: string; alt: string; width: number; height: number; caption: string }[];
 };
 
 export const featuredProjects: Project[] = [
@@ -158,6 +172,11 @@ export const featuredProjects: Project[] = [
     // Metrics restated from the contribution line above — same facts.
     metrics: ["64/64 tests passing", "20 screens", "165 source files"],
     codeNote: "Code not public — built for a real client.",
+    image: "/images/projects/salon-dashboard-mockup.jpg",
+    imageAlt: "Dashboard mockup of the salon management system",
+    imageWidth: 1920,
+    imageHeight: 1280,
+    imageSource: "mockup",
   },
   {
     slug: "socialapp",
@@ -186,6 +205,13 @@ export const featuredProjects: Project[] = [
     // Repo verified public on GitHub, 2026-11-17:
     // https://github.com/Haider-523/CodeAlpha_SocialMediaPlatform
     githubUrl: "https://github.com/Haider-523/CodeAlpha_SocialMediaPlatform",
+    image: "/images/projects/socialapp-1.jpg",
+    imageAlt: "SocialApp home feed with posts and image uploads",
+    imageWidth: 480,
+    imageHeight: 789,
+    imageSource: "linkedin",
+    imagePostUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7503475421666193408/",
   },
   {
     slug: "uniguide",
@@ -206,6 +232,23 @@ export const featuredProjects: Project[] = [
     ],
     githubUrl: "https://github.com/Haider-523/NewUniGuide",
     codeNote: "GitHub repository is README-only.",
+    image: "/images/projects/uniguide-1.jpg",
+    imageAlt: "UniGuide landing page — Find the Right University For Your Future",
+    imageWidth: 480,
+    imageHeight: 309,
+    imageSource: "linkedin",
+    imagePostUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7441031671920893952/",
+    gallery: [
+      {
+        src: "/images/projects/uniguide-4.jpg",
+        alt: "UniGuide admin dashboard with university and program counts",
+        width: 480,
+        height: 208,
+        caption:
+          "Dashboard from the same LinkedIn post (21 Mar 2026) — an exact copy, not edited.",
+      },
+    ],
   },
   {
     slug: "mbti-quiz",
@@ -225,6 +268,11 @@ export const featuredProjects: Project[] = [
       "No live demo or feature list claimed",
     ],
     codeNote: "No public repository.",
+    image: "/images/projects/mbti-quiz-mockup.jpg",
+    imageAlt: "MBTI personality quiz mockup — question with four answer options",
+    imageWidth: 1920,
+    imageHeight: 1280,
+    imageSource: "mockup",
   },
   {
     slug: "dynamic-quiz",
@@ -244,6 +292,11 @@ export const featuredProjects: Project[] = [
       "No live demo or feature list claimed",
     ],
     codeNote: "No public repository.",
+    image: "/images/projects/dynamic-quiz-mockup.jpg",
+    imageAlt: "C/C++ quiz mockup — code question with timer and score panel",
+    imageWidth: 1920,
+    imageHeight: 1280,
+    imageSource: "mockup",
   },
 ];
 
@@ -379,18 +432,95 @@ export const education = {
 } as const;
 
 /** Journey timeline — most recent first. Verified facts only. */
-export const journey = [
+/** Milestones on /experience. `photo` is an exact, unedited copy of a
+ * photo Haider posted on LinkedIn for that competition; `photoPostUrl`
+ * links to the post as proof. Milestones without a photo have no
+ * matching LinkedIn photo post — the activity feed only goes back to
+ * November 2025. */
+export type JourneyItem = {
+  period: string;
+  title: string;
+  detail: string;
+  photo?: string;
+  photoAlt?: string;
+  photoWidth?: number;
+  photoHeight?: number;
+  photoPostUrl?: string;
+};
+
+export const journey: JourneyItem[] = [
+  {
+    period: "Nov 2026",
+    title: "Local Nominee — NASA Space Apps Challenge 2026",
+    detail:
+      "Team IGNIX's FIRENEX was one of five teams nominated at the local level in Multan.",
+    photo: "/images/milestones/nasa-nominee.jpg",
+    photoAlt: "FIRENEX named Local Nominee — Team IGNIX announcement poster",
+    photoWidth: 800,
+    photoHeight: 1000,
+    photoPostUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7529954734632415232/",
+  },
   {
     period: "2026",
     title: "Real client project & SOFTEC '26",
     detail:
       "Built the Stylish Hair Salon Management System for a real client, and presented UniGuide at SOFTEC '26.",
+    photo: "/images/milestones/softec-26.jpg",
+    photoAlt: "Haider at SOFTEC '26, FAST NUCES Lahore",
+    photoWidth: 480,
+    photoHeight: 853,
+    photoPostUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7453969538158833664/",
+  },
+  {
+    period: "Jul 2026",
+    title: "Game Day Hackathon 2026",
+    detail:
+      "Participated in Game Day Hackathon 2026, organized by AWS Student Builder Group, BZU Multan.",
+    photo: "/images/milestones/gameday-2026.jpg",
+    photoAlt: "Haider at Game Day Hackathon 2026",
+    photoWidth: 800,
+    photoHeight: 619,
+    photoPostUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7485222917908254722/",
+  },
+  {
+    period: "May 2026",
+    title: "BrandScape — Business Idea Competition",
+    detail:
+      "Attended BrandScape, a Business Idea Competition at Air University Multan Campus.",
+    photo: "/images/milestones/brandscape-2026.jpg",
+    photoAlt: "Haider at BrandScape, Air University Multan Campus",
+    photoWidth: 480,
+    photoHeight: 606,
+    photoPostUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7467216875081609216/",
+  },
+  {
+    period: "Apr 2026",
+    title: "Inter Universities Programming Championship — IUPC 2026",
+    detail:
+      "Team CodeVisionX from MNS University of Agriculture, Multan entered IUPC 2026.",
+    photo: "/images/milestones/iupc-2026.jpg",
+    photoAlt: "Team CodeVisionX — IUPC 2026 announcement",
+    photoWidth: 800,
+    photoHeight: 974,
+    photoPostUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7447616710624612352/",
   },
   {
     period: "Dec 2025 & Feb 2026",
     title: "ICPC",
     detail:
       "Competed in ICPC in December 2025 and February 2026 with team Multan Al-Khwarizmi.",
+    photo: "/images/milestones/icpc-certificate.jpg",
+    photoAlt:
+      "ICPC Certificate of Achievement — 2025 Asia Topi Online Preliminary Round",
+    photoWidth: 480,
+    photoHeight: 339,
+    photoPostUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7402415518848393216/",
   },
   {
     period: "2025",
@@ -414,7 +544,7 @@ export const journey = [
     detail:
       "Began BS Computer Science at MNS University of Agriculture, Multan (2024–2028).",
   },
-] as const;
+];
 
 /** Competitions named in Haider's resume — no others added. */
 export const competitions = [

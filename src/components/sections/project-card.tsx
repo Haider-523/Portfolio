@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
@@ -5,9 +6,11 @@ import { Tilt } from "@/components/motion/tilt";
 import type { Project } from "@/data/portfolio";
 
 /**
- * Typographic monogram for the card's visual half — first letters of
- * the first two words ("SH", "SA", "UG", "MQ", "DQ"). No stock image,
- * no invented screenshot: the visual half is type only.
+ * Typographic monogram for the card's visual half when a project has
+ * no image — first letters of the first two words ("SH", "SA", "UG",
+ * "MQ", "DQ"). Projects with a dashboard image use the image instead;
+ * generated mockups carry a "Mockup" badge so they are never mistaken
+ * for real screenshots.
  */
 function monogram(name: string): string {
   const words = name.split(/[\s&]+/).filter(Boolean);
@@ -20,32 +23,58 @@ function monogram(name: string): string {
 /**
  * Shared project card — used on the home preview and /projects.
  *
- * Split layout (2026-11-17): one half is the visual panel — navy,
- * big monogram, context and name — the other half is the detail:
- * description, verified metrics, stack tags and links. The whole
- * card has a subtle 3D tilt on mouse move (see motion/tilt.tsx).
+ * Split layout (2026-11-17): one half is the visual panel — the
+ * project's dashboard image (an exact LinkedIn screenshot copy, or a
+ * labelled mockup), with context and name overlaid — the other half
+ * is the detail: description, verified metrics, stack tags and links.
+ * The whole card has a subtle 3D tilt on mouse move (see
+ * motion/tilt.tsx). Projects without an image fall back to the navy
+ * panel with the monogram.
  */
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Tilt className="h-full">
       <article className="group grid h-full overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:border-accent/60 hover:shadow-lg md:grid-cols-2">
-        <div className="flex flex-col justify-center gap-3 bg-navy px-6 py-8 text-on-navy sm:px-8">
-          <span
-            aria-hidden="true"
-            className="flex size-14 items-center justify-center rounded-lg bg-accent text-xl font-bold tracking-tight text-on-accent"
-          >
-            {monogram(project.name)}
-          </span>
-          <p className="text-xs font-semibold uppercase tracking-wide text-on-navy/70">
-            {project.context}
-          </p>
-          <h3 className="text-2xl font-semibold leading-tight tracking-tight">
-            {project.name}
-          </h3>
-          <ArrowUpRight
-            aria-hidden="true"
-            className="size-5 text-on-navy/60 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-on-navy"
-          />
+        <div className="relative flex min-h-56 flex-col justify-end overflow-hidden bg-navy px-6 py-8 text-white sm:px-8 md:min-h-full">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.imageAlt ?? `${project.name} dashboard`}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-top"
+            />
+          ) : (
+            <span
+              aria-hidden="true"
+              className="absolute left-6 top-8 flex size-14 items-center justify-center rounded-lg bg-accent text-xl font-bold tracking-tight text-on-accent sm:left-8"
+            >
+              {monogram(project.name)}
+            </span>
+          )}
+          {project.imageSource === "mockup" ? (
+            <span className="absolute left-4 top-4 z-10 rounded-full bg-black/70 px-2.5 py-1 text-xs font-semibold text-white">
+              Mockup
+            </span>
+          ) : null}
+          {project.image ? (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10"
+            />
+          ) : null}
+          <div className="relative">
+            <p className="text-xs font-semibold uppercase tracking-wide text-white/75">
+              {project.context}
+            </p>
+            <h3 className="mt-1 text-2xl font-semibold leading-tight tracking-tight">
+              {project.name}
+            </h3>
+            <ArrowUpRight
+              aria-hidden="true"
+              className="mt-3 size-5 text-white/70 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white"
+            />
+          </div>
         </div>
         <div className="flex flex-1 flex-col p-6">
           <p className="flex-1 leading-relaxed text-muted">

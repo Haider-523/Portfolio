@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Info, Minus } from "lucide-react";
@@ -115,6 +116,55 @@ export default async function ProjectPage({
           </li>
           ))}
         </ul>
+      ) : null}
+
+      {project.image ? (
+        <figure className="mt-8">
+          <Image
+            src={project.image}
+            alt={project.imageAlt ?? project.name}
+            width={project.imageWidth ?? 1200}
+            height={project.imageHeight ?? 800}
+            className="h-auto w-full rounded-xl border border-border"
+          />
+          <figcaption className="mt-2 text-sm leading-relaxed text-muted">
+            {project.imageSource === "linkedin" ? (
+              <>
+                Screenshot from Haider&apos;s{" "}
+                <a
+                  href={project.imagePostUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-accent underline underline-offset-2 hover:text-accent-hover"
+                >
+                  LinkedIn post
+                </a>{" "}
+                — exact copy, not edited.
+              </>
+            ) : (
+              "Dashboard mockup — an illustration of the app's screens, not a screenshot. Names and figures inside the image are placeholders."
+            )}
+          </figcaption>
+        </figure>
+      ) : null}
+
+      {project.gallery?.length ? (
+        <div className="mt-8 space-y-8">
+          {project.gallery.map((shot) => (
+            <figure key={shot.src}>
+              <Image
+                src={shot.src}
+                alt={shot.alt}
+                width={shot.width}
+                height={shot.height}
+                className="h-auto w-full rounded-xl border border-border"
+              />
+              <figcaption className="mt-2 text-sm leading-relaxed text-muted">
+                {shot.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       ) : null}
 
       {/* Verified / Not verified — the honest verification notes are
