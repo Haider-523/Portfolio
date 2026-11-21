@@ -112,11 +112,13 @@ Next.js 16 cacheComponents/PPR behaviour. Steady state is 404.
 | Route | Page |
 | --- | --- |
 | `/` | Home — hero + featured projects preview + services + CTA |
-| `/about` | About + photo, Skills, Education, Licenses & Certifications (18), typing code sample |
+| `/about` | About + photo, Skills, Education, Licenses & Certifications (18), typing code sample, GitHub block |
 | `/projects` | All 5 featured projects |
 | `/projects/[slug]` | Project detail / case study (5 slugs) |
 | `/experience` | Experience (3 verified roles) + Milestones + Competitions |
-| `/contact` | Contact — form (FormSubmit), mailto/tel/LinkedIn/GitHub |
+| `/contact` | Contact — form (FormSubmit), mailto/tel/LinkedIn/GitHub, 20-min call button, FAQ + FAQ JSON-LD |
+| `/blog` | Blog index (2 posts: salon 64/64 tests, filtered unique index) |
+| `/blog/[slug]` | Blog post pages (2) |
 
 Nav is exactly 5 items (2026-11-17): Home, About, Projects, Experience, Contact. Skills, Education, Certifications and Journey lost their own pages — their content is folded into About (Skills/Education/Certifications) and Experience (Journey milestones + competitions). GitHub is a header/footer link, not a page.
 

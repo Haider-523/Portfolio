@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
-import { navLinks, profile } from "@/data/portfolio";
+import { lastUpdated, navLinks, profile } from "@/data/portfolio";
 
 /**
  * Site footer — a server component: it needs no interactivity, so it
@@ -69,9 +69,18 @@ export async function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border">
-        <p className="mx-auto max-w-5xl px-4 py-4 text-xs text-muted sm:px-6">
-          © {year} Haider Zaman. All rights reserved.
-        </p>
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-4 py-4 text-xs text-muted sm:px-6">
+          <p>© {year} Haider Zaman. All rights reserved.</p>
+          <p>
+            Last updated {lastUpdated} ·{" "}
+            <Link
+              href="/blog"
+              className="text-accent transition-colors hover:text-accent-hover"
+            >
+              Blog
+            </Link>
+          </p>
+        </div>
       </div>
     </footer>
   );

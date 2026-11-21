@@ -28,6 +28,13 @@ export const profile = {
   phone: "+92370-1403149",
   linkedin: "https://www.linkedin.com/in/haiderzaman-dev",
   github: "https://github.com/Haider-523",
+  /** Coding profiles — from Haider's GitHub profile README
+   * (github.com/Haider-523), verified 2026-11-21. The portfolio's
+   * "300+ Problems solved" and "15+ Competitions" stats link here,
+   * so a recruiter can check the numbers instead of taking them
+   * on trust. */
+  leetcode: "https://leetcode.com/u/Haider5123/",
+  codeforces: "https://codeforces.com/profile/Haider5123",
 } as const;
 
 /**
@@ -37,17 +44,32 @@ export const profile = {
  * About page keeps the personal story (degree, teaching, contests).
  */
 export const heroIntro =
-  "ASP.NET Core backend developer from Multan, building real systems end to end: a salon management system for a real client — appointments, billing, inventory and reports, with 64/64 tests passing; a social platform with Identity and SQL Server; and a university guidance platform presented at SOFTEC '26. I work in C#, ASP.NET Core, Entity Framework Core and SQL Server, and I am looking for junior .NET backend roles where I can ship production code.";
+  "ASP.NET Core backend developer from Multan. I build real systems end to end — a salon management system for a real client, with 64/64 tests passing — and I am looking for junior .NET backend roles where I can ship production code.";
 
 /** Availability line — confirmed by Haider on 2026-11-17: keep as-is. */
 export const availabilityNote =
   "Seeking opportunities — junior .NET backend roles.";
 
+/** Shown in the footer; update on every content push. */
+export const lastUpdated = "21 Nov 2026";
+
 export const stats = [
-  { value: "300+", label: "Problems solved" },
-  { value: "15+", label: "Competitions" },
-  { value: "3.44", label: "CGPA / 4.00" },
-  { value: "64/64", label: "Tests passing — Salon system" },
+  {
+    value: "300+",
+    label: "Problems solved",
+    href: "https://leetcode.com/u/Haider5123/",
+  },
+  {
+    value: "15+",
+    label: "Competitions",
+    href: "https://codeforces.com/profile/Haider5123",
+  },
+  { value: "3.44", label: "CGPA / 4.00", href: "/about" },
+  {
+    value: "64/64",
+    label: "Tests passing — Salon system",
+    href: "/projects/salon-management-system",
+  },
 ] as const;
 
 export const aboutParagraphs = [
@@ -72,6 +94,15 @@ export type Project = {
   challenges?: string[];
   /** Honest statement of what is and is not verified. Always present. */
   verification: string;
+  /** Short verified proof points, shown as a checklist at the top of
+   * the case-study page (green check) and the gaps beside them
+   * (grey dash) — a skimming recruiter sees the honesty in 2 seconds.
+   * Each point restates the verification string above; nothing new. */
+  verified?: string[];
+  notVerified?: string[];
+  /** Blog posts that go deeper into this project, linked from the
+   * case-study page as further reading. */
+  blogSlugs?: string[];
   /** Short verified proof points shown as chips, e.g. test counts. */
   metrics?: string[];
   /** Only set when the repo link is verified public. */
@@ -115,6 +146,15 @@ export const featuredProjects: Project[] = [
     ],
     verification:
       "Verified 2026-10-15: full solution builds with 0 errors and 64/64 xUnit tests pass. Not verified: WPF UI interaction on Windows (no Windows machine was available) and no installer was produced.",
+    verified: [
+      "Full solution builds with 0 errors",
+      "64/64 xUnit tests pass — business rules, security, migrations and backup",
+    ],
+    notVerified: [
+      "WPF UI interaction on Windows",
+      "No installer produced",
+    ],
+    blogSlugs: ["salon-64-tests", "filtered-unique-index-chair"],
     // Metrics restated from the contribution line above — same facts.
     metrics: ["64/64 tests passing", "20 screens", "165 source files"],
     codeNote: "Code not public — built for a real client.",
@@ -137,6 +177,11 @@ export const featuredProjects: Project[] = [
       "A social media platform built with ASP.NET Core MVC on .NET 10, using Entity Framework Core 10 with SQL Server, ASP.NET Core Identity and ImageSharp — user authentication, posts and image uploads, database management and responsive web design.",
     verification:
       "The repository is public on GitHub. No live deployment or hosted demo is claimed, and the application has not been run end-to-end against a live SQL Server in this workspace.",
+    verified: ["Repository is public on GitHub"],
+    notVerified: [
+      "No live deployment or hosted demo",
+      "Not run end-to-end against a live SQL Server in this workspace",
+    ],
     // Repo verified public on GitHub, 2026-11-17:
     // https://github.com/Haider-523/CodeAlpha_SocialMediaPlatform
     githubUrl: "https://github.com/Haider-523/CodeAlpha_SocialMediaPlatform",
@@ -152,6 +197,11 @@ export const featuredProjects: Project[] = [
       "Smart university and career guidance platform for intermediate students, built with ASP.NET Core MVC, C#, SQL Server and Entity Framework Core. Presented at SOFTEC '26.",
     verification:
       "Presented at SOFTEC '26. The GitHub repository contains only a README — it is not a full implementation — and no live deployment is claimed.",
+    verified: ["Presented at SOFTEC '26"],
+    notVerified: [
+      "GitHub repository is README-only",
+      "No live deployment",
+    ],
     githubUrl: "https://github.com/Haider-523/NewUniGuide",
     codeNote: "GitHub repository is README-only.",
   },
@@ -166,6 +216,11 @@ export const featuredProjects: Project[] = [
       "AI-based personality assessment (MBTI Quiz) built during a 24-hour AI competition in 2025.",
     verification:
       "Only the facts above are verified — no repository, live demo or feature list is claimed.",
+    verified: ["Built during a 24-hour AI competition in 2025"],
+    notVerified: [
+      "No public repository",
+      "No live demo or feature list claimed",
+    ],
     codeNote: "No public repository.",
   },
   {
@@ -179,6 +234,11 @@ export const featuredProjects: Project[] = [
       "Interactive quiz platform for C/C++ practice with real-time evaluation, built with HTML, CSS and JavaScript.",
     verification:
       "Only the facts above are verified — no repository, live demo or feature list is claimed.",
+    verified: ["Interactive quiz platform for C/C++ practice"],
+    notVerified: [
+      "No public repository",
+      "No live demo or feature list claimed",
+    ],
     codeNote: "No public repository.",
   },
 ];
@@ -232,6 +292,12 @@ export const services = [
     description:
       "ASP.NET Core APIs in C# with EF Core — authentication, business rules and clean layered design.",
     proof: "Salon system · SocialApp",
+    deliverables: [
+      "Authentication and authorisation with ASP.NET Core Identity",
+      "Business rules in the service layer, not in controllers",
+      "Layered design — domain, application, infrastructure",
+    ],
+    scope: "From a single endpoint to a full API.",
   },
   {
     icon: "database",
@@ -239,6 +305,12 @@ export const services = [
     description:
       "SQL Server and SQLite schemas, Code-First migrations and indexes — including the filtered unique index that keeps one session per salon chair.",
     proof: "SQL Server · SQLite · EF Core 10",
+    deliverables: [
+      "Code-First migrations that apply cleanly",
+      "Indexes for the queries that actually run — including one filtered unique index",
+      "Money and dates stored exactly — decimal amounts, salon-local time",
+    ],
+    scope: "From schema design to a tested migration.",
   },
   {
     icon: "app-window",
@@ -246,6 +318,12 @@ export const services = [
     description:
       "Native Windows apps with WPF and MVVM — the salon runs its whole shop on one.",
     proof: "WPF · MVVM · 20 screens",
+    deliverables: [
+      "MVVM views with commands, not code-behind",
+      "One active session per chair, enforced in the database",
+      "Backup and restore with a safety backup first",
+    ],
+    scope: "From one screen to the full 20-screen system.",
   },
   {
     icon: "shield-check",
@@ -253,6 +331,37 @@ export const services = [
     description:
       "Business rules covered by xUnit tests and written up honestly — what is verified, and what is not.",
     proof: "64/64 tests · honest verification notes",
+    deliverables: [
+      "xUnit tests for business rules, security, migrations and backup",
+      "A verification note on every project — what is verified, and what is not",
+      "No fake screenshots, no invented metrics",
+    ],
+    scope: "From the first test to the verification note.",
+  },
+] as const;
+
+/**
+ * How I work — the 4 steps behind every service above. Grounded in
+ * how the salon system was actually built: scoped first, layered
+ * design, tested as it grew, and handed over with documentation
+ * and a verification note.
+ */
+export const workSteps = [
+  {
+    step: "Scope",
+    detail: "Agree what the system must do — and what is out of scope.",
+  },
+  {
+    step: "Build",
+    detail: "Layered design, EF Core, tested as it grows.",
+  },
+  {
+    step: "Test",
+    detail: "xUnit suite plus an honest verification note.",
+  },
+  {
+    step: "Handover",
+    detail: "Documentation, backup and restore, so the next person can run it.",
   },
 ] as const;
 
@@ -328,6 +437,47 @@ export const githubRepos = [
     description:
       "UniGuide — smart university and career guidance platform. Repository is README-only.",
     url: "https://github.com/Haider-523/NewUniGuide",
+  },
+  {
+    name: "Portfolio",
+    description:
+      "This site — Next.js, React, TypeScript, Tailwind. The code behind the portfolio itself.",
+    url: "https://github.com/Haider-523/Portfolio",
+  },
+] as const;
+
+/**
+ * FAQ — answers only from verified facts in this file. The same
+ * data drives the Contact page accordion and the FAQ JSON-LD, so
+ * the two cannot drift apart. "I reply within 24 hours" is a
+ * commitment Haider makes by publishing it — it is a promise,
+ * not a measured fact.
+ */
+export const faqs = [
+  {
+    question: "Are you available for junior .NET backend roles?",
+    answer:
+      "Yes — I am seeking junior .NET backend roles, based in Multan, Pakistan, and open to remote work.",
+  },
+  {
+    question: "Can you work remotely or on-site?",
+    answer:
+      "Remote is the default. I am based in Multan and teach in-person there, so on-site work in Multan is possible — ask about anything further away.",
+  },
+  {
+    question: "Which .NET version do you use?",
+    answer:
+      ".NET 10 with ASP.NET Core and Entity Framework Core 10 — both the salon system and SocialApp are built on it.",
+  },
+  {
+    question: "Who owns the code for client work?",
+    answer:
+      "Client work stays private — the salon system's code is not public because it was built for a real client.",
+  },
+  {
+    question: "How fast do you reply?",
+    answer:
+      "Within 24 hours — by email, or through the form on this page.",
   },
 ] as const;
 

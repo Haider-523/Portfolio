@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Info } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Info, Minus } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import { featuredProjects, getProjectBySlug } from "@/data/portfolio";
+import { getBlogPostBySlug } from "@/data/blog";
 import { Button } from "@/components/ui/button";
 import { siteUrl } from "@/lib/site";
 
@@ -116,6 +117,45 @@ export default async function ProjectPage({
         </ul>
       ) : null}
 
+      {/* Verified / Not verified — the honest verification notes are
+          a differentiator, but as text only a skimming recruiter
+          misses them. This checklist states them in 2 seconds; the
+          full dated note stays at the bottom of the page. */}
+      {project.verified || project.notVerified ? (
+        <div className="mt-8 grid gap-6 rounded-xl border border-border bg-surface p-6 sm:grid-cols-2">
+          {project.verified ? (
+            <div>
+              <h2 className="text-sm font-semibold tracking-wide text-accent uppercase">
+                Verified
+              </h2>
+              <ul className="mt-3 space-y-2">
+                {project.verified.map((item) => (
+                  <li key={item.slice(0, 32)} className="flex items-start gap-2 text-sm leading-relaxed text-muted">
+                    <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {project.notVerified ? (
+            <div>
+              <h2 className="text-sm font-semibold tracking-wide text-muted uppercase">
+                Not verified
+              </h2>
+              <ul className="mt-3 space-y-2">
+                {project.notVerified.map((item) => (
+                  <li key={item.slice(0, 32)} className="flex items-start gap-2 text-sm leading-relaxed text-muted">
+                    <Minus aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-muted" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
       <div className="mt-8 flex flex-wrap items-center gap-3">
         {project.githubUrl ? (
           <Button asChild>
@@ -176,6 +216,31 @@ export default async function ProjectPage({
           </p>
         </div>
       </div>
+
+      {project.blogSlugs?.length ? (
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold tracking-tight text-navy">
+            Further reading
+          </h2>
+          <ul className="mt-3 space-y-2">
+            {project.blogSlugs.map((slug) => {
+              const post = getBlogPostBySlug(slug);
+              if (!post) return null;
+              return (
+                <li key={slug}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group inline-flex items-center gap-1.5 font-medium text-accent transition-colors hover:text-accent-hover"
+                  >
+                    {post.title}
+                    <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
 
       <nav
         aria-label="Next project"

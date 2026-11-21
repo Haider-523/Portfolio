@@ -1,8 +1,8 @@
-import { Download, Mail, Phone } from "lucide-react";
+import { Calendar, Download, Mail, Phone } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
-import { profile } from "@/data/portfolio";
+import { faqs, profile } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
 
 const contactMethods = [
@@ -44,7 +44,7 @@ export function Contact() {
         title="Get in touch"
         level="h1"
         id="contact-heading"
-        description="Send a message through the form — it goes straight to Haider's email. Or reach him directly by email, phone, LinkedIn or GitHub."
+        description="Send a message through the form — it goes straight to Haider's email. He replies within 24 hours. Or reach him directly by email, phone, LinkedIn or GitHub."
       />
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
         {contactMethods.map((method, i) => (
@@ -80,7 +80,7 @@ export function Contact() {
         </div>
       </Reveal>
       <Reveal delay={0.1}>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <Button size="lg" asChild>
             <a
               href="/documents/HZ-Resume.pdf"
@@ -90,6 +90,44 @@ export function Contact() {
               Download Resume
             </a>
           </Button>
+          {/* Book a call — the top portfolios convert interest into
+              a meeting (Asad: Cal.com, Shakir: 15-min call). No
+              Cal.com account exists yet, so this is a plain mailto
+              with a prefilled subject until one is set up. */}
+          <Button size="lg" variant="secondary" asChild>
+            <a
+              href={`mailto:${profile.email}?subject=Intro%20call%20with%20Haider%20Zaman`}
+            >
+              <Calendar />
+              Book a 20-minute intro call
+            </a>
+          </Button>
+        </div>
+      </Reveal>
+
+      {/* FAQ — the top portfolios answer objections before contact
+          (Asad, Ramzan). Native <details>: zero JavaScript, keyboard
+          accessible, and the same data drives the FAQ JSON-LD. */}
+      <Reveal delay={0.1}>
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold tracking-tight text-navy">
+            Frequently asked questions
+          </h2>
+          <div className="mt-6 space-y-3">
+            {faqs.map((faq) => (
+              <details
+                key={faq.question}
+                className="group rounded-xl border border-border bg-surface p-5 transition-colors duration-200 hover:border-accent/60"
+              >
+                <summary className="cursor-pointer list-none font-medium text-foreground transition-colors group-hover:text-accent">
+                  {faq.question}
+                </summary>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
+          </div>
         </div>
       </Reveal>
     </Section>

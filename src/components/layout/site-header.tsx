@@ -128,6 +128,16 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-1">
+          {/* Availability pill — visible on every page. Short form
+              of the confirmed availability line; the full line is
+              in the hero. */}
+          <span className="mr-1 hidden items-center gap-1.5 rounded-full border border-accent/30 bg-accent/5 px-2.5 py-1 text-xs font-medium text-accent md:flex">
+            <span
+              aria-hidden="true"
+              className="inline-block size-1.5 rounded-full bg-accent"
+            />
+            Seeking junior .NET roles
+          </span>
           <Button
             variant="ghost"
             size="icon"

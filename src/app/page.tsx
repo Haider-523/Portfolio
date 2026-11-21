@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Download, Mail } from "lucide-react";
+import { ArrowRight, Calendar, Download, Mail } from "lucide-react";
 import { Hero } from "@/components/sections/hero";
 import { FeaturedProjectsPreview } from "@/components/sections/projects";
 import { Services } from "@/components/sections/services";
@@ -46,6 +46,14 @@ export default function Home() {
                 <a href={`mailto:${profile.email}`}>
                   <Mail />
                   Contact Haider
+                </a>
+              </Button>
+              <Button size="lg" variant="secondary" asChild>
+                <a
+                  href={`mailto:${profile.email}?subject=Intro%20call%20with%20Haider%20Zaman`}
+                >
+                  <Calendar />
+                  Book a 20-minute intro call
                 </a>
               </Button>
               <Button size="lg" variant="secondary" asChild>

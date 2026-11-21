@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
-import { aboutParagraphs, profile } from "@/data/portfolio";
+import { aboutParagraphs, githubRepos, profile } from "@/data/portfolio";
 import { StatsList } from "@/components/sections/stats";
 import { TypewriterCode } from "@/components/motion/typewriter-code";
 
@@ -57,6 +57,47 @@ export function About() {
             backend work, not production code.
           </figcaption>
         </figure>
+      </Reveal>
+      {/* GitHub — the public repos, surfaced on the site instead of
+          only in the header link. No contribution-graph image: the
+          profile link below is where the graph lives, and no
+          third-party chart service is added for it. */}
+      <Reveal delay={0.1}>
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold tracking-tight text-navy">
+            On GitHub
+          </h2>
+          <ul className="mt-4 space-y-3">
+            {githubRepos.map((repo) => (
+              <li key={repo.name}>
+                <a
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md"
+                >
+                  <span className="font-medium text-foreground transition-colors group-hover:text-accent">
+                    {repo.name}
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-muted">
+                    {repo.description}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-sm text-muted">
+            Full profile, including the contribution graph:{" "}
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-accent transition-colors hover:text-accent-hover"
+            >
+              github.com/Haider-523
+            </a>
+          </p>
+        </div>
       </Reveal>
     </Section>
   );

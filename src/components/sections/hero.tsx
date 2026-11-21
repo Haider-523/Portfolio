@@ -24,7 +24,19 @@ export function Hero() {
     <section className="mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-6 sm:pt-16">
       <div className="grid items-start gap-10 md:grid-cols-[1fr_280px]">
         <div>
-          <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
+          {/* Availability pill — the top 3 Pakistani portfolios all
+              show an availability signal in the hero; this one reuses
+              the exact confirmed availability line, moved up from
+              the location line below so it is seen in the first
+              seconds. */}
+          <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm font-medium text-accent">
+            <span
+              aria-hidden="true"
+              className="inline-block size-2 rounded-full bg-accent"
+            />
+            {availabilityNote}
+          </p>
+          <p className="mt-4 flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
             <span aria-hidden="true" className="inline-block size-2 bg-accent" />
             {profile.roleLine}
           </p>
@@ -38,7 +50,7 @@ export function Hero() {
             {heroIntro}
           </p>
           <p className="mt-4 text-sm font-medium text-muted">
-            {profile.location} · {availabilityNote}
+            {profile.location} · Multan / Remote
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">

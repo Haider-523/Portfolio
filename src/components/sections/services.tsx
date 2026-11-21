@@ -1,6 +1,6 @@
 import { AppWindow, Database, Server, ShieldCheck } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
-import { services } from "@/data/portfolio";
+import { services, workSteps } from "@/data/portfolio";
 
 const serviceIcons = {
   server: Server,
@@ -44,14 +44,49 @@ export function Services() {
                 <p className="mt-1 text-sm leading-relaxed text-muted">
                   {service.description}
                 </p>
+                <ul className="mt-4 space-y-1.5">
+                  {service.deliverables.map((item) => (
+                    <li
+                      key={item.slice(0, 32)}
+                      className="flex items-start gap-2 text-sm leading-relaxed text-muted"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-accent"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
                 <p className="mt-4 text-xs font-semibold text-accent">
-                  {service.proof}
+                  {service.proof} · {service.scope}
                 </p>
               </div>
             </Reveal>
           );
         })}
       </div>
+
+      {/* How I work — the process strip the top portfolios show
+          (Usman's 6-step process, Shakir's FAQ/pricing): 4 steps,
+          each one line, grounded in how the salon system was built. */}
+      <Reveal delay={0.1}>
+        <h3 className="mt-12 text-xl font-semibold tracking-tight text-navy">
+          How I work
+        </h3>
+        <ol className="mt-6 grid gap-6 border-t border-border pt-10 sm:grid-cols-2 lg:grid-cols-4">
+          {workSteps.map((step, i) => (
+            <li key={step.step}>
+              <p className="text-sm font-semibold tracking-wide text-accent uppercase">
+                {String(i + 1).padStart(2, "0")} · {step.step}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                {step.detail}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </Reveal>
     </Section>
   );
 }
