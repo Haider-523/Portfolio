@@ -117,7 +117,7 @@ export function SiteHeader() {
                   if (!active) setProgress("loading");
                 }}
                 className={cn(
-                  "nav-link rounded-md px-3 py-2 text-[15px] font-medium transition-colors duration-200",
+                  "nav-link rounded-md px-3 py-2 font-mono text-[15px] font-medium transition-colors duration-200",
                   active ? "text-accent" : "text-muted hover:text-accent",
                 )}
               >
@@ -214,7 +214,7 @@ export function SiteHeader() {
                   if (!active) setProgress("loading");
                 }}
                 className={cn(
-                  "rounded-md px-3 py-2.5 text-base font-medium transition-colors duration-200",
+                  "rounded-md px-3 py-2.5 font-mono text-base font-medium transition-colors duration-200",
                   active
                     ? "text-accent"
                     : "text-muted hover:bg-background hover:text-accent",

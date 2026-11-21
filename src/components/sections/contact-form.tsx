@@ -133,12 +133,6 @@ export function ContactForm() {
         Ask a question or start a conversation — your message goes
         straight to Haider&apos;s email, {profile.email}.
       </p>
-      <p className="mt-3 rounded-lg border border-border bg-background px-3 py-2 text-sm leading-relaxed text-muted">
-        First-time setup: the first message triggers an activation
-        email to Haider — he must click the activation link in that
-        email once. Until he does, messages do not arrive in his inbox.
-      </p>
-
       {/* FormSubmit configuration (no-JS fallback only — the JS path
           goes through /api/contact). _captcha stays on here because
           the fallback has no honeypot or server validation. */}

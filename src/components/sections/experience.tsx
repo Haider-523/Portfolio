@@ -47,6 +47,15 @@ export function Experience() {
           ))}
         </ol>
       </div>
+      <Reveal delay={0.1}>
+        <p className="mt-12 text-sm leading-relaxed text-muted">
+          Note: Haider&apos;s resume lists the instructor role as Independent;
+          LinkedIn lists it under Maktab e Qulaab. The work described — teaching
+          Programming Fundamentals, OOP, Data Structures and basic Python to 20+
+          students — is the same in both.
+        </p>
+      </Reveal>
+
       <h2 className="mt-16 text-xl font-semibold tracking-tight text-navy">
         Milestones
       </h2>
