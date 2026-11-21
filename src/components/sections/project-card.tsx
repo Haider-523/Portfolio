@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { GithubIcon } from "@/components/icons";
+import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { Tilt } from "@/components/motion/tilt";
-import type { Project } from "@/data/portfolio";
+import { profile, type Project } from "@/data/portfolio";
 
 /**
  * Typographic monogram for the card's visual half when a project has
@@ -35,7 +35,16 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Tilt className="h-full">
       <article className="group grid h-full overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:border-accent/60 hover:shadow-lg md:grid-cols-2">
-        <div className="relative flex min-h-56 flex-col justify-end overflow-hidden bg-navy px-6 py-8 text-white sm:px-8 md:min-h-full">
+        {/* Visual half — clicking it opens the LinkedIn post for
+            this project, or Haider's profile where there is no
+            post. The case-study link stays in the row below. */}
+        <a
+          href={project.imagePostUrl ?? profile.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View ${project.name} on LinkedIn`}
+          className="relative flex min-h-56 flex-col justify-end overflow-hidden bg-navy px-6 py-8 text-white sm:px-8 md:min-h-full"
+        >
           {project.image ? (
             <Image
               src={project.image}
@@ -75,7 +84,7 @@ export function ProjectCard({ project }: { project: Project }) {
               className="mt-3 size-5 text-white/70 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white"
             />
           </div>
-        </div>
+        </a>
         <div className="flex flex-1 flex-col p-6">
           <p className="flex-1 leading-relaxed text-muted">
             {project.shortDescription}
@@ -132,6 +141,15 @@ export function ProjectCard({ project }: { project: Project }) {
             {project.codeNote ? (
               <span className="text-xs text-muted">{project.codeNote}</span>
             ) : null}
+            <Link
+              href={project.imagePostUrl ?? profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors duration-200 hover:text-accent"
+            >
+              <LinkedinIcon className="size-4" />
+              LinkedIn
+            </Link>
           </div>
         </div>
       </article>

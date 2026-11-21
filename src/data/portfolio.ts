@@ -591,27 +591,27 @@ export const faqs = [
   {
     question: "Are you available for junior .NET backend roles?",
     answer:
-      "Yes — I am seeking junior .NET backend roles, based in Multan, Pakistan, and open to remote work.",
+      "Yes — I am looking for a junior .NET backend role. I build in C# with ASP.NET Core, Entity Framework Core and SQL Server, and I have already shipped a tested system for a real client: the salon app builds clean and all 64 of its tests pass. I am based in Multan and open to remote work.",
   },
   {
     question: "Can you work remotely or on-site?",
     answer:
-      "Remote is the default. I am based in Multan and teach in-person there, so on-site work in Multan is possible — ask about anything further away.",
+      "Remote is how I work by default. I am based in Multan, where I also teach in person, so on-site work in Multan is straightforward. For anything further away, ask — I will tell you plainly whether it works.",
   },
   {
     question: "Which .NET version do you use?",
     answer:
-      ".NET 10 with ASP.NET Core and Entity Framework Core 10 — both the salon system and SocialApp are built on it.",
+      ".NET 10, with ASP.NET Core and Entity Framework Core 10, backed by SQL Server. Both the salon system and SocialApp are built on it — and the salon system is the one I test hardest, 64 tests, all passing.",
   },
   {
     question: "Who owns the code for client work?",
     answer:
-      "Client work stays private — the salon system's code is not public because it was built for a real client.",
+      "The client's code stays the client's. The salon system is not public because it was built for a real client. My own projects — SocialApp and UniGuide — are public on GitHub, and I link them from their case studies.",
   },
   {
     question: "How fast do you reply?",
     answer:
-      "Within 24 hours — by email, or through the form on this page.",
+      "Within 24 hours. Email me directly or use the form on this page — both go to the same inbox, and I answer every message myself.",
   },
 ] as const;
 

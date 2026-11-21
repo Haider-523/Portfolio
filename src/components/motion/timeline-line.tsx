@@ -3,18 +3,19 @@
 import * as React from "react";
 
 /**
- * Scroll-driven fill line — for the Experience roles timeline ONLY.
+ * Scroll-driven fill line — for the Experience roles timeline, the
+ * Milestones timeline and the Projects list.
  *
  * The old site-wide ScrollRail (a fixed left-edge line on every page,
  * driven by whole-page scroll progress) is gone: the effect belongs
- * on this one timeline, not on the whole site. This component renders
- * inside a `relative` wrapper around the timeline <ol> and fills the
- * line from top to bottom as the timeline scrolls through the
- * viewport — filling starts when the timeline top reaches 80% of the
- * viewport height and completes when its top has scrolled a full
- * timeline height past that line. Scrolling back up drains it again.
- * rAF-throttled scroll listener, transform scaleY only (no layout
- * work). Reduced motion: the line renders full, with no animation.
+ * on the timelines, not on the whole site. This component renders
+ * inside a `relative` wrapper around a list and fills the line from
+ * top to bottom as the list scrolls through the viewport — filling
+ * starts when the list top reaches 80% of the viewport height and
+ * completes when its top has scrolled a full list height past that
+ * line. Scrolling back up drains it again. rAF-throttled scroll
+ * listener, transform scaleY only (no layout work). Reduced motion:
+ * the line renders full, with no animation.
  */
 export function TimelineLine() {
   const fillRef = React.useRef<HTMLDivElement>(null);

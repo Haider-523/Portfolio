@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Info, Minus } from "lucide-react";
-import { GithubIcon } from "@/components/icons";
-import { featuredProjects, getProjectBySlug } from "@/data/portfolio";
+import { GithubIcon, LinkedinIcon } from "@/components/icons";
+import { featuredProjects, getProjectBySlug, profile } from "@/data/portfolio";
 import { getBlogPostBySlug } from "@/data/blog";
 import { Button } from "@/components/ui/button";
 import { siteUrl } from "@/lib/site";
@@ -222,6 +222,16 @@ export default async function ProjectPage({
         {project.codeNote ? (
           <span className="text-sm text-muted">{project.codeNote}</span>
         ) : null}
+        <Button asChild variant="secondary">
+          <a
+            href={project.imagePostUrl ?? profile.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LinkedinIcon className="size-4" />
+            View on LinkedIn
+          </a>
+        </Button>
       </div>
 
       {project.problem ? (

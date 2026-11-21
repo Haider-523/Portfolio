@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
+import { TimelineLine } from "@/components/motion/timeline-line";
 import { featuredProjects } from "@/data/portfolio";
 import { ProjectCard } from "@/components/sections/project-card";
 
@@ -15,16 +16,25 @@ export function Projects() {
         id="projects-heading"
         description="Five projects, in the order that matters — real client work first. Each card opens a detail page with what was built, the stack, and an honest note on what is and is not verified."
       />
-      <div className="mt-10 grid gap-6">
-        {featuredProjects.map((project, i) => (
-          <Reveal
-            key={project.slug}
-            delay={Math.min(i * 0.06, 0.24)}
-            className="h-full"
-          >
-            <ProjectCard project={project} />
-          </Reveal>
-        ))}
+      {/* Scroll-driven line — the same fill as Experience. Each
+          card gets a dot on the line. */}
+      <div className="relative mt-10">
+        <TimelineLine />
+        <div className="relative grid gap-6 border-l-2 border-border pl-8">
+          {featuredProjects.map((project, i) => (
+            <Reveal
+              key={project.slug}
+              delay={Math.min(i * 0.06, 0.24)}
+              className="relative h-full"
+            >
+              <span
+                aria-hidden="true"
+                className="absolute -left-[41px] top-6 size-3.5 rounded-full border-2 border-navy bg-background transition-transform duration-200 hover:scale-125"
+              />
+              <ProjectCard project={project} />
+            </Reveal>
+          ))}
+        </div>
       </div>
     </Section>
   );

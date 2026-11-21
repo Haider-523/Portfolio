@@ -2,7 +2,8 @@ import { Calendar, Download, Mail, Phone } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
-import { faqs, profile } from "@/data/portfolio";
+import { FaqAccordion } from "@/components/sections/faq-accordion";
+import { profile } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
 
 const contactMethods = [
@@ -106,28 +107,15 @@ export function Contact() {
       </Reveal>
 
       {/* FAQ — the top portfolios answer objections before contact
-          (Asad, Ramzan). Native <details>: zero JavaScript, keyboard
-          accessible, and the same data drives the FAQ JSON-LD. */}
+          (Asad, Ramzan). Controlled accordion: exactly one answer
+          open at a time — opening one closes the one before it.
+          The same data drives the FAQ JSON-LD. */}
       <Reveal delay={0.1}>
         <div className="mt-16">
           <h2 className="text-2xl font-bold tracking-tight text-navy">
             Frequently asked questions
           </h2>
-          <div className="mt-6 space-y-3">
-            {faqs.map((faq) => (
-              <details
-                key={faq.question}
-                className="group rounded-xl border border-border bg-surface p-5 transition-colors duration-200 hover:border-accent/60"
-              >
-                <summary className="cursor-pointer list-none font-medium text-foreground transition-colors group-hover:text-accent">
-                  {faq.question}
-                </summary>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {faq.answer}
-                </p>
-              </details>
-            ))}
-          </div>
+          <FaqAccordion />
         </div>
       </Reveal>
     </Section>
