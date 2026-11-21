@@ -323,7 +323,7 @@ export const skillCategories = [
   {
     title: "Desktop",
     description: "Native Windows UI for the salon system.",
-    items: ["WPF", "MVVM"],
+    items: ["WPF", "MVVM", "XAML"],
   },
   {
     title: "Languages used",

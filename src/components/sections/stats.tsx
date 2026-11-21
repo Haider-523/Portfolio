@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { stats } from "@/data/portfolio";
-import { CountUp } from "@/components/motion/count-up";
 
 /**
  * Proof strip — the same four numbers (300+ problems, 15+
  * competitions, CGPA 3.44, 64/64 tests) appear in the hero and on
  * the About page. One component renders both layouts so the markup
  * and the numbers cannot drift apart.
+ *
+ * Values are static on purpose: the old count-up animation briefly
+ * showed wrong intermediate numbers on load (58+, 0.67, 12/64), so
+ * a screenshot or a fast glance captured false figures. The final
+ * numbers are the verified ones, and they are what renders.
  *
  * Every number links to where it can be checked: problems to the
  * LeetCode profile, competitions to Codeforces, CGPA to the
@@ -28,7 +32,7 @@ function StatItem({
   labelClassName: string;
 }) {
   const isExternal = href?.startsWith("http");
-  const valueNode = <CountUp value={value} />;
+  const valueNode = value;
   return (
     <div className="transition-transform duration-200 hover:-translate-y-0.5">
       <dt className="sr-only">{label}</dt>
