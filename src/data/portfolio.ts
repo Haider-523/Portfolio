@@ -312,23 +312,25 @@ export function getProjectBySlug(slug: string): Project | undefined {
 export const skillCategories = [
   {
     title: "Backend & Frameworks",
-    description: "The stack used across the featured projects.",
+    description:
+      "C# and .NET for the salon system; ASP.NET Core for SocialApp and UniGuide — MVC, Identity auth, layered design.",
     items: ["C#", ".NET", "ASP.NET Core"],
   },
   {
     title: "Data",
-    description: "Relational data access in every project.",
+    description:
+      "EF Core 10 with SQL Server and SQLite — migrations, and the filtered unique index that keeps one session per salon chair.",
     items: ["Entity Framework Core", "SQL Server", "SQLite"],
   },
   {
     title: "Desktop",
-    description: "Native Windows UI for the salon system.",
+    description: "WPF, MVVM and XAML for the salon system's 20 screens.",
     items: ["WPF", "MVVM", "XAML"],
   },
   {
     title: "Languages used",
     description:
-      "Languages used in projects and coursework — listed as used, not as expert claims.",
+      "C and C++ for competitive programming and teaching; HTML and CSS for the web.",
     items: ["C", "C++", "HTML", "CSS"],
   },
 ] as const;
@@ -795,7 +797,7 @@ export const educationHistory = [
     degree: "BS Computer Science",
     school: "MNS University of Agriculture, Multan",
     period: "Aug 2024 – Aug 2028",
-    status: "Currently enrolled — expected 2028",
+    status: "Currently enrolled",
     detail:
       "BSCS '28. Competitive programming and teaching run alongside the degree.",
     cgpa: "3.44 / 4.00",

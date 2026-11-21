@@ -11,12 +11,13 @@ const categoryIcons = {
 
 export function Skills() {
   return (
-    <Section id="skills" labelledBy="skills-heading">
+    <Section id="skills" labelledBy="skills-heading" tone="soft" compact>
       <SectionHeading
         eyebrow="Skills"
         title="What I work with"
+        size="md"
         id="skills-heading"
-        description="Only the stack I actually use. No percentages, no expert claims — the evidence is the projects."
+        description="The stack I actually use — in projects, teaching, and competitive programming."
       />
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
         {skillCategories.map((category, i) => {

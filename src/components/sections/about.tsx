@@ -19,16 +19,16 @@ b.HasIndex(s => s.StationId).IsUnique()
 
 export function About() {
   return (
-    <Section id="about" labelledBy="about-heading">
+    <Section id="about" labelledBy="about-heading" compact>
       <SectionHeading
         eyebrow="About"
-        title="Backend developer, teacher, competitor"
+        title="Haider Zaman"
         level="h1"
         id="about-heading"
       />
       <div className="mt-8 grid gap-10 md:grid-cols-[1fr_280px]">
         <Reveal delay={0.05}>
-          <div className="space-y-4 leading-relaxed text-muted">
+          <div className="space-y-4 leading-relaxed text-foreground">
             {aboutParagraphs.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
@@ -54,7 +54,7 @@ export function About() {
             className="aspect-[4/5] w-full rounded-xl border border-border object-cover object-top"
           />
           <p className="mt-3 text-center text-sm text-muted">
-            {profile.name} · {profile.location}
+            {profile.location}
           </p>
           <div className="mt-6 rounded-xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md">
             <StatsList />
@@ -93,10 +93,6 @@ export function About() {
           </figcaption>
         </figure>
       </Reveal>
-      {/* GitHub — the public repos, surfaced on the site instead of
-          only in the header link. No contribution-graph image: the
-          profile link below is where the graph lives, and no
-          third-party chart service is added for it. */}
       {/* GitHub — only the repo with real backend code is
           showcased as a card. The README-only UniGuide and this
           site are already covered in Projects; they are linked in
@@ -140,7 +136,7 @@ export function About() {
                 </a>
               </span>
             ))}
-            {" — "}full profile, including the contribution graph:{" "}
+            {". "}Full profile, including the contribution graph:{" "}
             <a
               href={profile.github}
               target="_blank"

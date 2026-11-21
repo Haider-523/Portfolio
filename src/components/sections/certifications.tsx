@@ -15,12 +15,13 @@ import { certifications } from "@/data/portfolio";
  */
 export function Certifications() {
   return (
-    <Section id="certifications" labelledBy="certifications-heading">
+    <Section id="certifications" labelledBy="certifications-heading" tone="soft" compact>
       <SectionHeading
         eyebrow="Licenses & Certifications"
         title="Licenses & Certifications"
+        size="md"
         id="certifications-heading"
-        description="18 items in total, in LinkedIn order, each with its LinkedIn issue date. All verified on LinkedIn."
+        description="Licenses and certifications from LinkedIn, each with its issue date — all verified."
       />
 
       <Reveal delay={0.1}>
@@ -47,7 +48,7 @@ export function Certifications() {
 
       <Reveal delay={0.1}>
         <p className="mt-10 text-sm leading-relaxed text-muted">
-          Full list of 18 is on LinkedIn:{" "}
+          See the full list on LinkedIn:{" "}
           <a
             href="https://www.linkedin.com/in/haiderzaman-dev"
             target="_blank"

@@ -1,6 +1,5 @@
 import { GraduationCap } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
-import { Tilt } from "@/components/motion/tilt";
 import { educationHistory } from "@/data/portfolio";
 
 /**
@@ -16,12 +15,11 @@ import { educationHistory } from "@/data/portfolio";
 export function Education() {
   const [degree, ...schooling] = educationHistory;
   return (
-    <Section id="education" labelledBy="education-heading">
-      <SectionHeading eyebrow="Education" title="Education" id="education-heading" />
+    <Section id="education" labelledBy="education-heading" compact>
+      <SectionHeading eyebrow="Education" title="Education" size="md" id="education-heading" />
       <div className="mt-10 space-y-6">
         <Reveal delay={0.05}>
-          <Tilt>
-            <div className="flex flex-col gap-6 rounded-xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md sm:flex-row sm:items-start sm:gap-8">
+          <div className="flex flex-col gap-6 rounded-xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md sm:flex-row sm:items-start sm:gap-8">
               <span
                 aria-hidden="true"
                 className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-navy text-on-navy"
@@ -51,7 +49,6 @@ export function Education() {
                 </div>
               ) : null}
             </div>
-          </Tilt>
         </Reveal>
         <Reveal delay={0.1}>
           <div className="rounded-xl border border-border bg-surface p-6">

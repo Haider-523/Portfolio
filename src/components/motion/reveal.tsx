@@ -87,12 +87,16 @@ export function SectionHeading({
   title,
   description,
   level = "h2",
+  size = "lg",
   id,
 }: {
   eyebrow: string;
   title: string;
   description?: string;
   level?: "h1" | "h2";
+  /** "lg" is the page title; "md" is one size down for sub-sections
+      on the same page (About's Skills, Education, Certifications). */
+  size?: "lg" | "md";
   id?: string;
 }) {
   const headingId = id ?? `${slugify(title)}-heading`;
@@ -105,7 +109,11 @@ export function SectionHeading({
       </p>
       <Heading
         id={headingId}
-        className="mt-3 text-4xl font-bold tracking-tight text-navy sm:text-5xl sm:leading-[1.1]"
+        className={
+          size === "md"
+            ? "mt-3 text-2xl font-bold tracking-tight text-navy sm:text-3xl"
+            : "mt-3 text-4xl font-bold tracking-tight text-navy sm:text-5xl sm:leading-[1.1]"
+        }
       >
         {title}
       </Heading>
@@ -126,19 +134,24 @@ export function SectionHeading({
  * Shared section shell. `tone="surface"` renders a full-width #F9FAFB
  * band (bordered top and bottom) so pages get a clear visual rhythm
  * against the white body; `tone="soft"` leaves the body
- * background showing. Default is surface.
+ * background showing. Default is surface. `compact` tightens the
+ * vertical padding (py-12/sm:py-16 instead of py-16/sm:py-20) for
+ * pages that stack several sections, like About — without it, the
+ * gaps between stacked sections run to 128px mobile / 160px desktop.
  */
 export function Section({
   id,
   children,
   className,
   tone = "surface",
+  compact = false,
   labelledBy,
 }: {
   id: string;
   children: React.ReactNode;
   className?: string;
   tone?: "surface" | "soft";
+  compact?: boolean;
   /** id of the section's heading, for aria-labelledby. */
   labelledBy?: string;
 }) {
@@ -151,7 +164,12 @@ export function Section({
         className,
       )}
     >
-      <div className="mx-auto max-w-5xl scroll-mt-24 px-4 py-16 sm:px-6 sm:py-20">
+      <div
+        className={cn(
+          "mx-auto max-w-5xl scroll-mt-24 px-4 sm:px-6",
+          compact ? "py-12 sm:py-16" : "py-16 sm:py-20",
+        )}
+      >
         {children}
       </div>
     </section>
