@@ -79,7 +79,7 @@ export const knowledgeBase: KnowledgeChunk[] = [
     stats.map((s) => `${s.value} ${s.label}`).join(". ") +
       `. The Stylish Hair Salon Management System builds with 0 errors and 64/64 xUnit tests pass. ` +
       `WPF UI interaction on Windows was not verified.`,
-    "300+ problems solved. 15+ competitions. CGPA 3.44/4.00. 64/64 tests passing on his salon management system.",
+    "300+ problems solved. 9+ competitions. CGPA 3.44/4.00. 64/64 tests passing on his salon management system.",
   ),
   chunk(
     "skills",

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { stats } from "@/data/portfolio";
 
 /**
- * Proof strip — the same four numbers (300+ problems, 15+
+ * Proof strip — the same four numbers (300+ problems, 9+
  * competitions, CGPA 3.44, 64/64 tests) appear in the hero and on
  * the About page. One component renders both layouts so the markup
  * and the numbers cannot drift apart.

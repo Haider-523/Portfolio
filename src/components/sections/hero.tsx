@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
  * second, proof third): eyebrow states the exact target role, the
  * headline states the offer, a credibility line follows, then 2–3
  * CTAs and the photo. Proof strip answers "can this person finish
- * real work?" — 300+ problems, 15+ competitions, CGPA 3.44, 64/64
+ * real work?" — 300+ problems, 9+ competitions, CGPA 3.44, 64/64
  * tests passing on the real client system. No skill percentage bars,
  * no "passionate developer" fluff.
  *

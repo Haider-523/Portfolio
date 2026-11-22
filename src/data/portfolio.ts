@@ -30,7 +30,7 @@ export const profile = {
   github: "https://github.com/Haider-523",
   /** Coding profiles — from Haider's GitHub profile README
    * (github.com/Haider-523), verified 2026-11-21. The portfolio's
-   * "300+ Problems solved" and "15+ Competitions" stats link here,
+   * "300+ Problems solved" and "9+ Competitions" stats link here,
    * so a recruiter can check the numbers instead of taking them
    * on trust. */
   leetcode: "https://leetcode.com/u/Haider5123/",
@@ -51,16 +51,16 @@ export const availabilityNote =
   "Seeking opportunities — junior .NET backend roles.";
 
 /** Shown in the footer; update on every content push. */
-export const lastUpdated = "21 Nov 2026";
+export const lastUpdated = "22 Nov 2026";
 
 export const stats = [
   {
     value: "300+",
     label: "Problems solved",
-    href: "https://leetcode.com/u/Haider5123/",
+    href: "/about",
   },
   {
-    value: "15+",
+    value: "9+",
     label: "Competitions",
     href: "https://codeforces.com/profile/Haider5123",
   },
@@ -75,7 +75,7 @@ export const stats = [
 export const aboutParagraphs = [
   "I am a BSCS student at MNS University of Agriculture, Multan, and an ASP.NET Core developer working with C#, Entity Framework Core, SQL Server and REST APIs. I learn by building real systems — software people actually use, not tutorials.",
   "Alongside my degree I teach programming — Programming Fundamentals, OOP, Data Structures and basic Python — to 20+ students, online and in-person. Teaching is how I keep my own fundamentals honest.",
-  "I also compete in programming contests. I lead a 3-member competitive programming team across national and international contests, and I solve problems on Codeforces, CodeChef and LeetCode.",
+  "I also compete in programming contests. I lead a 3-member competitive programming team across national and international contests, and I solve problems on Codeforces, CodeChef and LeetCode — 300+ solved across the three platforms.",
 ] as const;
 
 export type Project = {
@@ -581,7 +581,7 @@ export const competitions = [
   "Veiro Mind AI",
   "COMSATS",
   "PIT",
-  "Maktab-e-Gulaab",
+  "Maktab e Qulaab",
   "University Programming Contest — 2nd place",
 ] as const;
 
