@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, Info, Minus } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
-import { featuredProjects, getProjectBySlug, profile } from "@/data/portfolio";
+import { featuredProjects, getProjectBySlug } from "@/data/portfolio";
 import { getBlogPostBySlug } from "@/data/blog";
 import { Button } from "@/components/ui/button";
 import { siteUrl } from "@/lib/site";
@@ -125,7 +125,8 @@ export default async function ProjectPage({
             alt={project.imageAlt ?? project.name}
             width={project.imageWidth ?? 1200}
             height={project.imageHeight ?? 800}
-            className="h-auto w-full rounded-xl border border-border"
+            priority
+            className="h-auto w-full rounded-xl border border-border bg-surface"
           />
           <figcaption className="mt-2 text-sm leading-relaxed text-muted">
             {project.imageSource === "linkedin" ? (
@@ -142,7 +143,7 @@ export default async function ProjectPage({
                 — exact copy, not edited.
               </>
             ) : (
-              "Dashboard mockup — an illustration of the app's screens, not a screenshot. Names and figures inside the image are placeholders."
+              "Dashboard mockup — an illustration of the app's screens, not a screenshot. Names, figures, currency and dates inside the image are placeholders."
             )}
           </figcaption>
         </figure>
@@ -206,33 +207,41 @@ export default async function ProjectPage({
         </div>
       ) : null}
 
-      <div className="mt-8 flex flex-wrap items-center gap-3">
-        {project.githubUrl ? (
-          <Button asChild>
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <GithubIcon className="size-4" />
-              View on GitHub
-            </a>
-          </Button>
-        ) : null}
-        {project.codeNote ? (
-          <span className="text-sm text-muted">{project.codeNote}</span>
-        ) : null}
-        <Button asChild variant="secondary">
-          <a
-            href={project.imagePostUrl ?? profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LinkedinIcon className="size-4" />
-            View on LinkedIn
-          </a>
-        </Button>
-      </div>
+      {/* Link row — only when there is somewhere to link to. The
+          LinkedIn button appears only for projects with a specific
+          post (imagePostUrl); without one it would point at the
+          generic profile, which is not evidence for the case study. */}
+      {project.githubUrl || project.codeNote || project.imagePostUrl ? (
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          {project.githubUrl ? (
+            <Button asChild>
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GithubIcon className="size-4" />
+                View on GitHub
+              </a>
+            </Button>
+          ) : null}
+          {project.codeNote ? (
+            <span className="text-sm text-muted">{project.codeNote}</span>
+          ) : null}
+          {project.imagePostUrl ? (
+            <Button asChild variant="secondary">
+              <a
+                href={project.imagePostUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedinIcon className="size-4" />
+                View on LinkedIn
+              </a>
+            </Button>
+          ) : null}
+        </div>
+      ) : null}
 
       {project.problem ? (
         <DetailBlock title="The problem">{project.problem}</DetailBlock>

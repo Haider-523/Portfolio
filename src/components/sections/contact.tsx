@@ -91,16 +91,17 @@ export function Contact() {
               Download Resume
             </a>
           </Button>
-          {/* Book a call — the top portfolios convert interest into
+          {/* Request a call — the top portfolios convert interest into
               a meeting (Asad: Cal.com, Shakir: 15-min call). No
               Cal.com account exists yet, so this is a plain mailto
-              with a prefilled subject until one is set up. */}
+              with a prefilled subject until one is set up, and the
+              label says Request, not Book. */}
           <Button size="lg" variant="secondary" asChild>
             <a
               href={`mailto:${profile.email}?subject=Intro%20call%20with%20Haider%20Zaman`}
             >
               <Calendar />
-              Book a 20-minute intro call
+              Request a 20-minute intro call
             </a>
           </Button>
         </div>

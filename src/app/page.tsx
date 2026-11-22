@@ -53,7 +53,7 @@ export default function Home() {
                   href={`mailto:${profile.email}?subject=Intro%20call%20with%20Haider%20Zaman`}
                 >
                   <Calendar />
-                  Book a 20-minute intro call
+                  Request a 20-minute intro call
                 </a>
               </Button>
               <Button size="lg" variant="secondary" asChild>

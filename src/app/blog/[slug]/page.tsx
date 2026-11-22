@@ -54,7 +54,7 @@ function Block({ block }: { block: BlogBlock }) {
       );
     case "code":
       return (
-        <pre className="mt-4 overflow-x-auto rounded-xl border border-border bg-navy p-5 font-mono text-sm leading-relaxed text-white/90">
+        <pre className="mt-4 overflow-x-auto rounded-xl border border-border bg-navy p-5 font-mono text-sm leading-relaxed whitespace-pre-wrap text-white/90 break-words">
           <code>{block.text}</code>
         </pre>
       );

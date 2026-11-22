@@ -50,7 +50,7 @@ export function Hero() {
             {heroIntro}
           </p>
           <p className="mt-4 text-sm font-medium text-muted">
-            {profile.location} · Multan / Remote
+            {profile.location} · Remote
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">

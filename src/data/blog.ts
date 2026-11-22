@@ -76,7 +76,7 @@ public async Task ExclusiveStation_NoDoubleOccupancy()
     {
         var sessions = scope.Get<ISessionService>();
         var customers = scope.Get<ICustomerService>();
-        var other = await customers.CreateAsync(new("Sara", "03007654321", null, null));
+        var other = await customers.CreateAsync(new("Sara", "03000000000", null, null));
 
         await sessions.StartAsync(new StartSessionInput(seed.CustomerId,
             [new SessionLineInput(seed.ServiceId, null, seed.Employee1Id)],

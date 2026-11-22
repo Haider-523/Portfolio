@@ -51,7 +51,7 @@ export function About() {
             height={700}
             priority
             sizes="(max-width: 768px) 100vw, 280px"
-            className="aspect-[4/5] w-full rounded-xl border border-border object-cover object-top"
+            className="aspect-[4/5] w-full rounded-xl border border-border bg-surface object-cover object-top"
           />
           <p className="mt-3 text-center text-sm text-muted">
             {profile.location}

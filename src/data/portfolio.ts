@@ -195,6 +195,21 @@ export const featuredProjects: Project[] = [
     context: "CodeAlpha project · 2026",
     overview:
       "A social media platform built with ASP.NET Core MVC on .NET 10, using Entity Framework Core 10 with SQL Server, ASP.NET Core Identity and ImageSharp — user authentication, posts and image uploads, database management and responsive web design.",
+    problem:
+      "Mainstream social platforms ship UX anti-patterns: invisible keyboard focus, cramped touch targets, uninformative errors, ambiguous timestamps, feeds that jump as images load, addictive infinite scroll, ambiguous tabs and follow states, no direct post URLs, and comment boxes buried under threads. SocialApp was built to fix eleven of these deliberately.",
+    solution:
+      "A server-rendered ASP.NET Core MVC application on .NET 10 with Entity Framework Core 10 and SQL Server, ASP.NET Core Identity for auth, and an ImageSharp media pipeline — chronological feeds, post permalinks, threaded comments, and a handcrafted vanilla CSS design system with no front-end framework.",
+    features: [
+      "Authentication with ASP.NET Core Identity, mandatory email confirmation and real-time MX-record validation of email domains",
+      "Home and Explore feeds — chronological, no algorithmic ranking — with finite pagination (10 posts per page) and an explicit end indicator",
+      "Posts with permalinks (/p/{id}), a composer with a 500-character counter and ImageSharp image processing (auto-orient, EXIF stripped, WebP, max 1280px)",
+      "Likes and follows with database-level race protection, working with or without JavaScript",
+      "Threaded comments (300 characters) with the composer above the list and owner moderation",
+      "Profiles with custom display names, bios, avatars and follower/following lists; tabbed people/post search",
+      "Accessibility: high-contrast focus rings, 48px touch targets, exact image dimensions for zero layout shift, reduced-motion support",
+    ],
+    contribution:
+      "Built the full platform for the CodeAlpha internship (Task 2): MVC controllers, the EF Core data layer, Identity auth, the ImageSharp media pipeline and the vanilla CSS design system.",
     verification:
       "The repository is public on GitHub. No live deployment or hosted demo is claimed, and the application has not been run end-to-end against a live SQL Server in this workspace.",
     verified: ["Repository is public on GitHub"],
@@ -223,6 +238,10 @@ export const featuredProjects: Project[] = [
     context: "Presented at SOFTEC '26",
     overview:
       "Smart university and career guidance platform for intermediate students, built with ASP.NET Core MVC, C#, SQL Server and Entity Framework Core. Presented at SOFTEC '26.",
+    problem:
+      "Intermediate students choosing a university and a career face scattered, hard-to-compare information about programmes and admissions.",
+    solution:
+      "A guidance platform that helps intermediate students find the right university and programme — built with ASP.NET Core MVC, C#, SQL Server and Entity Framework Core, and presented at SOFTEC '26.",
     verification:
       "Presented at SOFTEC '26. The GitHub repository contains only a README — it is not a full implementation — and no live deployment is claimed.",
     verified: ["Presented at SOFTEC '26"],
@@ -231,7 +250,6 @@ export const featuredProjects: Project[] = [
       "No live deployment",
     ],
     githubUrl: "https://github.com/Haider-523/NewUniGuide",
-    codeNote: "GitHub repository is README-only.",
     image: "/images/projects/uniguide-1.jpg",
     imageAlt: "UniGuide landing page — Find the Right University For Your Future",
     imageWidth: 480,
@@ -260,6 +278,10 @@ export const featuredProjects: Project[] = [
     context: "24-hour AI competition · 2025",
     overview:
       "AI-based personality assessment (MBTI Quiz) built during a 24-hour AI competition in 2025.",
+    problem:
+      "Personality assessments are usually long forms or paywalled tests — this one had to be quick, interactive and built inside a 24-hour AI competition.",
+    solution:
+      "An AI-based MBTI personality assessment — a question flow with four answer options — built during the 24-hour AI competition in 2025.",
     verification:
       "Only the facts above are verified — no repository, live demo or feature list is claimed.",
     verified: ["Built during a 24-hour AI competition in 2025"],
@@ -267,7 +289,6 @@ export const featuredProjects: Project[] = [
       "No public repository",
       "No live demo or feature list claimed",
     ],
-    codeNote: "No public repository.",
     image: "/images/projects/mbti-quiz-mockup.jpg",
     imageAlt: "MBTI personality quiz mockup — question with four answer options",
     imageWidth: 1920,
@@ -284,6 +305,10 @@ export const featuredProjects: Project[] = [
     context: "Quiz platform · C/C++ practice",
     overview:
       "Interactive quiz platform for C/C++ practice with real-time evaluation, built with HTML, CSS and JavaScript.",
+    problem:
+      "C/C++ learners need interactive practice with immediate feedback, not just static questions.",
+    solution:
+      "A quiz platform for C/C++ practice with real-time evaluation — code questions with a timer and a live score panel — built with HTML, CSS and JavaScript.",
     verification:
       "Only the facts above are verified — no repository, live demo or feature list is claimed.",
     verified: ["Interactive quiz platform for C/C++ practice"],
@@ -291,7 +316,6 @@ export const featuredProjects: Project[] = [
       "No public repository",
       "No live demo or feature list claimed",
     ],
-    codeNote: "No public repository.",
     image: "/images/projects/dynamic-quiz-mockup.jpg",
     imageAlt: "C/C++ quiz mockup — code question with timer and score panel",
     imageWidth: 1920,
