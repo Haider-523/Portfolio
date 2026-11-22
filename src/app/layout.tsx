@@ -30,6 +30,13 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: siteUrl },
+  // Google Search Console ownership verification (Haider added the
+  // property 23 Nov 2026 and sent the HTML-tag code). Next.js
+  // renders this as <meta name="google-site-verification"> in
+  // <head> on every page.
+  verification: {
+    google: "Y4wPHTO9awUeDIvWDMEuhwDC9PMwRfQcLiCYBIEOQ7o",
+  },
   openGraph: {
     title,
     description,
