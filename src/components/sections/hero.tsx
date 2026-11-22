@@ -161,7 +161,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="mt-14 overflow-hidden rounded-xl border border-border bg-surface shadow-sm">
+      <div className="mt-14 overflow-hidden rounded-xl border border-border bg-mint shadow-sm">
         <span aria-hidden="true" className="block h-1 w-full bg-accent" />
         <StatsGrid />
       </div>

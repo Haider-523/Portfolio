@@ -1,19 +1,25 @@
 import Link from "next/link";
 import { stats } from "@/data/portfolio";
+import { CountUp } from "@/components/motion/count-up";
 
 /**
  * Proof strip — the same four numbers (300+ problems, 9+
- * competitions, CGPA 3.44, 64/64 tests) appear in the hero and on
- * the About page. One component renders both layouts so the markup
- * and the numbers cannot drift apart.
+ * competitions, CGPA 3.44, 64/64 tests), rendered only in the hero.
+ * The About page used to repeat them in a side box; that duplicated
+ * the first page, so it was removed (voice-note feedback, 23 Nov
+ * 2026).
  *
- * Values are static on purpose: the old count-up animation briefly
- * showed wrong intermediate numbers on load (58+, 0.67, 12/64), so
- * a screenshot or a fast glance captured false figures. The final
- * numbers are the verified ones, and they are what renders.
+ * Each number counts up from 0 to its verified final value when it
+ * scrolls into view (same feedback). A screenshot mid-animation can
+ * catch an intermediate number — that is why the count-up was
+ * removed on 21 Nov — but the reviewer asked for it back, so it is
+ * back; the animation is short (1.2s), respects reduced motion, and
+ * ends exactly on the verified final value. First paint and no-JS
+ * still show the final values.
  *
  * Every number links to where it can be checked: problems to the
- * LeetCode profile, competitions to Codeforces, CGPA to the
+ * About page (which states the combined 300+ across Codeforces,
+ * CodeChef and LeetCode), competitions to Codeforces, CGPA to the
  * education section on About, tests to the salon case study. A
  * number a recruiter cannot verify is a claim; a linked one is
  * proof.
@@ -32,7 +38,7 @@ function StatItem({
   labelClassName: string;
 }) {
   const isExternal = href?.startsWith("http");
-  const valueNode = value;
+  const valueNode = <CountUp value={value} />;
   return (
     <div className="transition-transform duration-200 hover:-translate-y-0.5">
       <dt className="sr-only">{label}</dt>
@@ -76,24 +82,6 @@ export function StatsGrid() {
           href={stat.href}
           valueClassName="text-3xl font-bold tracking-tight text-navy sm:text-4xl"
           labelClassName="mt-1 text-sm font-medium text-muted"
-        />
-      ))}
-    </dl>
-  );
-}
-
-/** About layout: vertical list inside the photo-side card. */
-export function StatsList() {
-  return (
-    <dl className="space-y-5">
-      {stats.map((stat) => (
-        <StatItem
-          key={stat.label}
-          value={stat.value}
-          label={stat.label}
-          href={stat.href}
-          valueClassName="text-3xl font-bold tracking-tight text-navy"
-          labelClassName="mt-1 text-sm text-muted"
         />
       ))}
     </dl>

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
 import { aboutParagraphs, githubRepos, profile } from "@/data/portfolio";
-import { StatsList } from "@/components/sections/stats";
 
 /**
  * Real code from the salon system — the filtered unique index that
@@ -56,9 +55,8 @@ export function About() {
           <p className="mt-3 text-center text-sm text-muted">
             {profile.location}
           </p>
-          <div className="mt-6 rounded-xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md">
-            <StatsList />
-          </div>
+          {/* No stats box here (voice-note feedback, 23 Nov 2026):
+              the same four numbers are already on the home page. */}
         </Reveal>
       </div>
       {/* Static real code, not a typing animation: the panel used

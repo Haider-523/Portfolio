@@ -51,7 +51,7 @@ export const availabilityNote =
   "Seeking opportunities — junior .NET backend roles.";
 
 /** Shown in the footer; update on every content push. */
-export const lastUpdated = "22 Nov 2026";
+export const lastUpdated = "23 Nov 2026";
 
 export const stats = [
   {

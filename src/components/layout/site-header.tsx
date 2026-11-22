@@ -6,8 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Menu, Moon, Sun, X } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/icons";
-import { navLinks, profile } from "@/data/portfolio";
+import { navLinks } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -128,42 +127,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-1">
-          {/* Availability pill — visible on every page. Short form
-              of the confirmed availability line; the full line is
-              in the hero. */}
-          <span className="mr-1 hidden items-center gap-1.5 rounded-full border border-accent/30 bg-accent/5 px-2.5 py-1 text-xs font-medium text-accent md:flex">
-            <span
-              aria-hidden="true"
-              className="inline-block size-1.5 rounded-full bg-accent"
-            />
-            Seeking junior .NET roles
-          </span>
-          <Button
-            variant="ghost"
-            size="icon"
-            asChild
-            aria-label="GitHub"
-            className="hover:text-accent"
-          >
-            <a href={profile.github} target="_blank" rel="noopener noreferrer">
-              <GithubIcon className="size-5" />
-            </a>
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            asChild
-            aria-label="LinkedIn"
-            className="hover:text-accent"
-          >
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LinkedinIcon className="size-5" />
-            </a>
-          </Button>
+          {/* No availability pill or social icons here (voice-note
+              feedback, 23 Nov 2026): the "Seeking junior .NET roles"
+              line lives in the hero, and GitHub/LinkedIn are in the
+              footer, the hero and the contact page. */}
           <Button
             variant="ghost"
             size="icon"

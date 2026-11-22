@@ -16,6 +16,9 @@
  * borders are neutral greys derived from the body text. `--surface`
  * (#F9FAFB) is only the alternating section-band colour on an
  * otherwise white page, so the visual rhythm survives on white.
+ * `--mint` (#ECFDF5) is the greenish tint for the hero stats box
+ * (voice-note feedback, 23 Nov 2026) — a light emerald wash, not a
+ * new accent colour.
  *
  * The old token names `--navy` / `--accent` are kept so the existing
  * `text-navy` / `bg-accent` classes keep working — their VALUES are
@@ -29,6 +32,7 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-surface: var(--surface);
+  --color-mint: var(--mint);
   --color-navy: var(--navy);
   --color-navy-hover: var(--navy-hover);
   --color-on-navy: var(--on-navy);
@@ -45,6 +49,7 @@
   --muted: #4b5563;
   --border: #e5e7eb;
   --surface: #f9fafb;
+  --mint: #ecfdf5;
   --navy: #1f2937;
   --navy-hover: #111827;
   --on-navy: #ffffff;
@@ -59,6 +64,7 @@
   --muted: #9ca3af;
   --border: #374151;
   --surface: #1f2937;
+  --mint: #052e16;
   --navy: #f9fafb;
   --navy-hover: #ffffff;
   --on-navy: #111827;
