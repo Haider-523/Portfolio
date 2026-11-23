@@ -40,7 +40,7 @@ export function Hero() {
             <span aria-hidden="true" className="inline-block size-2 bg-accent" />
             {profile.roleLine}
           </p>
-          <h1 className="mt-3 text-5xl font-bold leading-[1.05] tracking-tight text-navy sm:text-6xl">
+          <h1 className="mt-3 text-6xl font-extrabold leading-[1.02] tracking-tight text-navy sm:text-7xl">
             Haider Zaman
           </h1>
           <p className="mt-4 max-w-xl text-xl font-medium leading-snug text-navy sm:text-2xl">
@@ -116,30 +116,53 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Core stack at a glance — Daim's hero shows his stack as
-              chips; this hero only named it in prose. Same chip style
-              as the project cards, server-rendered, zero JavaScript. */}
-          <ul
-            aria-label="Core stack"
-            className="mt-6 flex flex-wrap gap-2"
-          >
-            {[
-              "C#",
-              "ASP.NET Core",
-              "EF Core",
-              "SQL Server",
-              "REST APIs",
-              "SQLite",
-              "WPF",
-            ].map((tech) => (
-              <li
-                key={tech}
-                className="rounded-md border border-border bg-surface px-2.5 py-1 text-xs font-medium text-foreground transition-colors duration-200 hover:border-accent/60 hover:bg-accent/5 hover:text-accent"
+          {/* Core stack as two accent cards (design upgrade, 24 Nov
+              2026, inspired by the coloured stack cards on Humais
+              Nawazish's portfolio): the stack grouped by area, in
+              the palette's own two colour blocks — mint for backend,
+              navy for desktop — instead of a flat row of chips, so
+              the hero has the same visual energy. Same tech, no new
+              claim. */}
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-accent/30 bg-mint p-5">
+              <p className="text-sm font-bold tracking-wide text-navy uppercase">
+                Backend &amp; APIs
+              </p>
+              <ul
+                aria-label="Backend stack"
+                className="mt-3 flex flex-wrap gap-2"
               >
-                {tech}
-              </li>
-            ))}
-          </ul>
+                {["C#", "ASP.NET Core", "EF Core", "SQL Server", "REST APIs"].map(
+                  (tech) => (
+                    <li
+                      key={tech}
+                      className="rounded-md border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-semibold text-accent"
+                    >
+                      {tech}
+                    </li>
+                  ),
+                )}
+              </ul>
+            </div>
+            <div className="rounded-xl bg-navy p-5">
+              <p className="text-sm font-bold tracking-wide text-on-navy uppercase">
+                Desktop &amp; Data
+              </p>
+              <ul
+                aria-label="Desktop stack"
+                className="mt-3 flex flex-wrap gap-2"
+              >
+                {["WPF", "XAML", "SQLite"].map((tech) => (
+                  <li
+                    key={tech}
+                    className="rounded-md border border-on-navy/25 bg-on-navy/10 px-2.5 py-1 text-xs font-semibold text-on-navy"
+                  >
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div className="mx-auto w-full max-w-[280px]">

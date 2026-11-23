@@ -81,6 +81,12 @@ function slugify(text: string): string {
  * Experience, Contact); the home page already has its h1 in the hero.
  * The heading gets a stable `id` so its <section> can point at it
  * with aria-labelledby.
+ *
+ * Type is deliberately oversized (design upgrade, 24 Nov 2026,
+ * inspired by the bold uppercase headings on Humais Nawazish's
+ * portfolio): the page title is text-5xl/sm:text-6xl, sub-sections
+ * text-3xl/sm:text-4xl, with a wider accent rule — so the hierarchy
+ * reads at a glance instead of blending into the body text.
  */
 export function SectionHeading({
   eyebrow,
@@ -111,15 +117,15 @@ export function SectionHeading({
         id={headingId}
         className={
           size === "md"
-            ? "mt-3 text-2xl font-bold tracking-tight text-navy sm:text-3xl"
-            : "mt-3 text-4xl font-bold tracking-tight text-navy sm:text-5xl sm:leading-[1.1]"
+            ? "mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl"
+            : "mt-3 text-5xl font-extrabold tracking-tight text-navy sm:text-6xl sm:leading-[1.05]"
         }
       >
         {title}
       </Heading>
       <span
         aria-hidden="true"
-        className="mt-5 block h-1 w-12 rounded-full bg-accent"
+        className="mt-5 block h-1 w-16 rounded-full bg-accent"
       />
       {description ? (
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
