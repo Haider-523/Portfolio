@@ -19,7 +19,13 @@ function clean(value: string | undefined): string | undefined {
 }
 
 function withScheme(value: string): string {
-  return /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  const v = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  // Never keep a trailing slash: the sitemap builds URLs as
+  // `${siteUrl}/about`, so a trailing slash here would produce
+  // `//about` (this happened when NEXT_PUBLIC_SITE_URL was entered
+  // with a trailing slash in Vercel on 24 Nov 2026). The canonical
+  // and Open Graph URLs use the same value, so they stay clean too.
+  return v.replace(/\/+$/, "");
 }
 
 export const siteUrl: string =
@@ -37,4 +43,4 @@ export const siteUrl: string =
 /** Last content change, used as a fixed sitemap lastModified so
  * crawlers can tell what actually changed (a fresh `new Date()` on
  * every deploy made the signal useless). Update on content changes. */
-export const LAST_MODIFIED = new Date("2026-11-23");
+export const LAST_MODIFIED = new Date("2026-11-24");
