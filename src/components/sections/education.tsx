@@ -16,7 +16,7 @@ export function Education() {
   const [degree, ...schooling] = educationHistory;
   return (
     <Section id="education" labelledBy="education-heading" compact>
-      <SectionHeading eyebrow="Education" title="Education" size="md" id="education-heading" />
+      <SectionHeading eyebrow="Education" num="03" title="Education" size="md" id="education-heading" />
       <div className="mt-10 space-y-6">
         <Reveal delay={0.05}>
           <div className="flex flex-col gap-6 rounded-xl border border-border bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md sm:flex-row sm:items-start sm:gap-8">

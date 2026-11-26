@@ -22,6 +22,7 @@ export default function Page() {
     <Section id="blog" labelledBy="blog-heading" tone="soft">
       <SectionHeading
         eyebrow="Blog"
+        num="01"
         title="Writing"
         level="h1"
         id="blog-heading"

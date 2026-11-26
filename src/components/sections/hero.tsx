@@ -184,18 +184,19 @@ export function Hero() {
           className="hero-enter mx-auto w-full max-w-[280px]"
           style={{ animationDelay: "0.16s" }}
         >
-          <div className="overflow-hidden rounded-xl border-2 border-navy/20 shadow-md">
-            <Image
-              src="/images/haider-zaman.jpg"
-              alt="Haider Zaman — .NET Backend Developer, Multan, Pakistan"
-              width={560}
-              height={700}
-              priority
-              quality={70}
-              sizes="(max-width: 768px) 280px, 280px"
-              className="aspect-[4/5] w-full object-cover object-top transition-transform duration-300 hover:scale-[1.02]"
-            />
-          </div>
+          {/* No card frame: the photo is a background-free cutout
+              that floats on the cream page, lifted by a soft
+              drop-shadow (photo-shadow) — no border, no box. */}
+          <Image
+            src="/images/haider-zaman.png"
+            alt="Haider Zaman — .NET Backend Developer, Multan, Pakistan"
+            width={560}
+            height={700}
+            priority
+            quality={70}
+            sizes="(max-width: 768px) 280px, 280px"
+            className="photo-shadow aspect-[4/5] w-full object-cover object-top transition-transform duration-300 hover:scale-[1.02]"
+          />
           <p className="mt-3 text-center text-sm font-medium text-navy">
             {profile.roleLine} · {profile.location}
           </p>

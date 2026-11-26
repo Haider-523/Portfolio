@@ -180,6 +180,39 @@ body {
 }
 
 /*
+ * Footer marquee (see layout/site-footer.tsx): a slow repeating
+ * strip. The track holds the items twice and translates -50%,
+ * so the loop is seamless. Reduced motion collapses it via the
+ * global rule above (animation-duration 0.01ms).
+ */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+
+/*
+ * Cutout photo shadow (26 Nov 2026): the hero / About photo is a
+ * background-free PNG, so a box-shadow would frame the rectangle.
+ * drop-shadow follows the cutout's alpha shape instead — a soft,
+ * professional lift, deliberately light (Haider: "bilkul hulka sa").
+ */
+.photo-shadow {
+  filter: drop-shadow(0 10px 16px rgb(15 61 46 / 0.13));
+}
+
+.photo-shadow-sm {
+  filter: drop-shadow(0 2px 3px rgb(15 61 46 / 0.15));
+}
+
+/*
  * 3D tilt fallback (see components/motion/tilt.tsx): the JS tilt
  * follows the cursor (an inline transform, which wins over the
  * hover class whenever it is set). But some environments move the

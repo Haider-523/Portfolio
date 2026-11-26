@@ -11,6 +11,7 @@ export function Projects() {
     <Section id="projects" labelledBy="projects-heading">
       <SectionHeading
         eyebrow="Projects"
+        num="01"
         title="Featured projects"
         level="h1"
         id="projects-heading"
@@ -47,6 +48,7 @@ export function FeaturedProjectsPreview() {
     <Section id="featured-projects" labelledBy="featured-projects-heading">
       <SectionHeading
         eyebrow="Projects"
+        num="02"
         title="Featured projects"
         id="featured-projects-heading"
         description="Real client work first. Each project opens a detail page with what was built, the stack, and an honest note on what is and is not verified."

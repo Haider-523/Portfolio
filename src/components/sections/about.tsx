@@ -21,6 +21,7 @@ export function About() {
     <Section id="about" labelledBy="about-heading" compact>
       <SectionHeading
         eyebrow="About"
+        num="01"
         title="Haider Zaman"
         level="h1"
         id="about-heading"
@@ -43,14 +44,16 @@ export function About() {
           </p>
         </Reveal>
         <Reveal delay={0.1}>
+          {/* No card background: the cutout floats on the cream
+              page, lifted by a soft drop-shadow (photo-shadow). */}
           <Image
-            src="/images/haider-zaman.jpg"
+            src="/images/haider-zaman.png"
             alt="Haider Zaman"
             width={560}
             height={700}
             priority
             sizes="(max-width: 768px) 100vw, 280px"
-            className="aspect-[4/5] w-full rounded-xl border border-border bg-surface object-cover object-top"
+            className="photo-shadow aspect-[4/5] w-full rounded-xl object-cover object-top"
           />
           <p className="mt-3 text-center text-sm text-muted">
             {profile.location}

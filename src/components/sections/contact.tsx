@@ -42,6 +42,7 @@ export function Contact() {
     <Section id="contact" labelledBy="contact-heading">
       <SectionHeading
         eyebrow="Contact"
+        num="01"
         title="Get in touch"
         level="h1"
         id="contact-heading"

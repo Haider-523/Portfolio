@@ -65,7 +65,7 @@ const jsonLd = {
   jobTitle: "ASP.NET Core Developer",
   description,
   url: siteUrl,
-  image: `${siteUrl}/images/haider-zaman.jpg`,
+  image: `${siteUrl}/images/haider-zaman.png`,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Multan",

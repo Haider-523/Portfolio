@@ -96,6 +96,7 @@ export function SectionHeading({
   level = "h2",
   size = "lg",
   id,
+  num,
 }: {
   eyebrow: string;
   title: string;
@@ -105,14 +106,28 @@ export function SectionHeading({
       on the same page (About's Skills, Education, Certifications). */
   size?: "lg" | "md";
   id?: string;
+  /** Optional mission-control section number (26 Nov 2026,
+      Agentware-inspired): rendered as "[ 01 — … ]" in the mono
+      eyebrow. Omit it and the eyebrow is just "[ … ]". */
+  num?: string;
 }) {
   const headingId = id ?? `${slugify(title)}-heading`;
   const Heading = level;
   return (
     <Reveal>
-      <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
-        <span aria-hidden="true" className="inline-block size-2 bg-lime" />
-        {eyebrow}
+      {/* Bracketed mono eyebrow (26 Nov 2026): the terminal-style
+          "[ 01 — LABEL ]" replaces the old lime-square eyebrow. */}
+      <p className="font-mono text-sm font-semibold tracking-wide uppercase">
+        <span aria-hidden="true" className="text-accent">
+          [{" "}
+        </span>
+        <span className="text-navy">
+          {num ? `${num} — ` : ""}
+          {eyebrow}
+        </span>
+        <span aria-hidden="true" className="text-accent">
+          {" ]"}
+        </span>
       </p>
       <Heading
         id={headingId}

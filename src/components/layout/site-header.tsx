@@ -19,6 +19,23 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
+  // Mission-control chrome (26 Nov 2026, Agentware-inspired):
+  // a lime scroll-progress bar across the top, and a shadow +
+  // backdrop blur once the page is scrolled. Colours stay the
+  // green + cream palette — only the chrome is new.
+  const [scrollProgress, setScrollProgress] = React.useState(0);
+  const [scrolled, setScrolled] = React.useState(false);
+  React.useEffect(() => {
+    const onScroll = () => {
+      const el = document.documentElement;
+      const max = el.scrollHeight - el.clientHeight;
+      setScrollProgress(max > 0 ? (el.scrollTop / max) * 100 : 0);
+      setScrolled(el.scrollTop > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   // No route progress bar (Haider, 26 Nov 2026): pages are static
   // and open without a loading state, so there is no loading bar to
   // show — a click goes straight to the next page.
@@ -48,7 +65,23 @@ export function SiteHeader() {
       : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background">
+    <header
+      id="top"
+      className={cn(
+        "sticky top-0 z-40 border-b border-border bg-background",
+        scrolled && "shadow-[0_1px_12px_rgb(15_61_46/0.08)] backdrop-blur-md",
+      )}
+    >
+      {/* Scroll progress — lime bar across the very top. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-[3px] bg-transparent"
+      >
+        <div
+          className="h-full bg-lime transition-[width] duration-100 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
@@ -59,12 +92,12 @@ export function SiteHeader() {
           aria-label="Haider Zaman — home"
         >
           <Image
-            src="/images/haider-zaman.jpg"
+            src="/images/haider-zaman.png"
             alt="Haider Zaman"
             width={32}
             height={32}
             priority
-            className="size-8 rounded-full object-cover object-top transition-transform duration-200 group-hover:-translate-y-0.5"
+            className="photo-shadow-sm size-8 rounded-full object-cover object-top transition-transform duration-200 group-hover:-translate-y-0.5"
           />
           Haider Zaman
         </Link>
@@ -81,23 +114,54 @@ export function SiteHeader() {
                 href={link.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "nav-link rounded-md px-3 py-2 font-mono text-[15px] font-medium transition-colors duration-200",
-                  active ? "text-accent" : "text-muted hover:text-accent",
+                  "group rounded-md px-3 py-2 font-mono text-[15px] font-medium transition-colors duration-200",
+                  active
+                    ? "bg-mint text-accent"
+                    : "text-muted hover:text-accent",
                 )}
               >
+                {/* Corner brackets on hover (Agentware-style) — the
+                    bracket spans fade in; active page keeps them. */}
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "text-accent transition-opacity duration-200",
+                    active
+                      ? "opacity-100"
+                      : "opacity-0 group-hover:opacity-100",
+                  )}
+                >
+                  [
+                </span>
                 {link.label}
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "text-accent transition-opacity duration-200",
+                    active
+                      ? "opacity-100"
+                      : "opacity-0 group-hover:opacity-100",
+                  )}
+                >
+                  ]
+                </span>
               </Link>
             );
           })}
         </nav>
 
         <div className="flex items-center gap-1">
-          {/* No availability pill, social icons, or theme toggle
-              here (voice-note feedback, 23 Nov 2026; single theme,
-              26 Nov 2026): the "Seeking junior .NET roles" line
-              lives in the hero, GitHub/LinkedIn are in the footer,
-              the hero and the contact page, and the site is green +
-              cream only — there is no dark theme to toggle to. */}
+          {/* Terminal-style status pill (26 Nov 2026): the header
+              was bare, so a compact availability signal returns —
+              small, mono, and distinct from the old pill removed
+              on 23 Nov. The full seeking line lives in the hero. */}
+          <span className="mr-2 hidden items-center gap-2 rounded-full border border-border bg-background px-3 py-1 font-mono text-xs font-medium text-accent lg:inline-flex">
+            <span
+              aria-hidden="true"
+              className="inline-block size-1.5 animate-pulse rounded-full bg-lime"
+            />
+            AVAILABLE
+          </span>
           <Button
             ref={menuButtonRef}
             variant="ghost"
