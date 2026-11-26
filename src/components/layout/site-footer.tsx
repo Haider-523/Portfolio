@@ -34,8 +34,36 @@ async function getYear(): Promise<number> {
 
 export async function SiteFooter() {
   const year = await getYear();
+  const marqueeItems = [
+    "OPEN TO WORK",
+    ".NET BACKEND",
+    "ASP.NET CORE",
+    "C#",
+    "SQL SERVER",
+    "MULTAN, PAKISTAN",
+  ];
   return (
     <footer className="bg-navy text-on-navy">
+      {/* Marquee — slow repeating strip across the top of the
+          footer band (Agentware-inspired). The track holds the
+          items twice so the -50% loop is seamless. */}
+      <div
+        aria-hidden="true"
+        className="overflow-hidden border-b border-on-navy/10 py-2.5"
+      >
+        <div className="marquee-track flex w-max items-center gap-6 font-mono text-xs font-medium tracking-[0.2em] text-lime/80">
+          {[0, 1].map((copy) => (
+            <span key={copy} className="flex items-center gap-6">
+              {marqueeItems.map((item) => (
+                <span key={`${copy}-${item}`} className="flex items-center gap-6">
+                  <span>{item}</span>
+                  <span className="text-on-navy/40">✦</span>
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
       <div className="mx-auto grid max-w-5xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <p className="text-lg font-bold tracking-tight">Haider Zaman</p>
@@ -56,6 +84,10 @@ export async function SiteFooter() {
             >
               {profile.email}
             </a>
+          </p>
+          {/* Terminal line — hacker touch, static text. */}
+          <p className="mt-4 font-mono text-xs text-on-navy/60">
+            <span className="text-lime">$</span> whoami — haider-zaman
           </p>
         </div>
         <nav aria-label="Footer">
@@ -154,9 +186,29 @@ export async function SiteFooter() {
           </ul>
         </div>
       </div>
+      {/* Big faded wordmark — signature presence above the bottom
+          bar, deliberately low-contrast so it stays a backdrop. */}
+      <p
+        aria-hidden="true"
+        className="mx-auto max-w-5xl px-4 text-center text-[13vw] leading-none font-bold tracking-tight text-on-navy/10 select-none sm:px-6 md:text-8xl"
+      >
+        HAIDER ZAMAN
+      </p>
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-4 py-4 text-xs text-on-navy/60 sm:px-6">
           <p>© {year} Haider Zaman. All rights reserved.</p>
+          <p className="flex flex-wrap items-center gap-4">
+            <span className="font-mono">
+              STATUS <span className="text-lime">●</span> AVAILABLE — .NET
+              BACKEND — MULTAN, PAKISTAN
+            </span>
+            <a
+              href="#top"
+              className="font-mono font-medium text-on-navy/80 transition-colors hover:text-lime"
+            >
+              BACK TO TOP ↑
+            </a>
+          </p>
         </div>
       </div>
     </footer>
