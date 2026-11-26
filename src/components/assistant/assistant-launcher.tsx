@@ -13,9 +13,16 @@ import { Button } from "@/components/ui/button";
  *
  * Icon + movement (26 Nov 2026, Agentware-inspired): the generic
  * chat bubble is now a robot (Bot) — the assistant reads as an
- * agent, not a chat box — and the button drifts a few pixels
+ * agent, not a chat box — and the launcher drifts a few pixels
  * toward the pointer, easing back, so it feels alive. Purely
  * cosmetic; disabled for reduced motion and while the panel is open.
+ *
+ * The drift is applied to a plain wrapper span, NOT to the Button
+ * itself: the Button carries `transition-all`, which would damp
+ * every per-frame transform update into near-invisibility
+ * (verified live 27 Nov — the first version, transforming the
+ * Button directly, did not move at all). The wrapper has no
+ * transition, so the JS lerp controls the motion directly.
  */
 const AssistantPanel = dynamic(
   () => import("@/components/assistant/assistant-panel"),
@@ -32,14 +39,15 @@ const AssistantPanel = dynamic(
 export function AssistantLauncher() {
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
+  const wrapRef = React.useRef<HTMLSpanElement>(null);
 
   // Cursor-follow: drift the launcher toward the pointer, capped
-  // at 6px, stronger when the pointer is near. A lerp smooths it.
+  // at 8px, stronger when the pointer is near. A lerp smooths it.
   React.useEffect(() => {
-    const btn = buttonRef.current;
-    if (!btn) return;
+    const wrap = wrapRef.current;
+    if (!wrap) return;
     if (open) {
-      btn.style.transform = "";
+      wrap.style.transform = "";
       return;
     }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -51,18 +59,18 @@ export function AssistantLauncher() {
     let cx = 0;
     let cy = 0;
     const onMove = (e: MouseEvent) => {
-      const r = btn.getBoundingClientRect();
+      const r = wrap.getBoundingClientRect();
       const dx = e.clientX - (r.left + r.width / 2);
       const dy = e.clientY - (r.top + r.height / 2);
       const d = Math.hypot(dx, dy) || 1;
-      const strength = Math.min(6, Math.max(0, (400 - d) / 400) * 6);
+      const strength = Math.min(8, Math.max(0, (500 - d) / 500) * 8);
       tx = (dx / d) * strength;
       ty = (dy / d) * strength;
     };
     const tick = () => {
-      cx += (tx - cx) * 0.12;
-      cy += (ty - cy) * 0.12;
-      btn.style.transform = `translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px)`;
+      cx += (tx - cx) * 0.15;
+      cy += (ty - cy) * 0.15;
+      wrap.style.transform = `translate(${cx.toFixed(2)}px, ${cy.toFixed(2)}px)`;
       raf = requestAnimationFrame(tick);
     };
     window.addEventListener("mousemove", onMove, { passive: true });
@@ -70,7 +78,7 @@ export function AssistantLauncher() {
     return () => {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);
-      btn.style.transform = "";
+      wrap.style.transform = "";
     };
   }, [open ]);
 
@@ -84,21 +92,23 @@ export function AssistantLauncher() {
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
       {open ? <AssistantPanel onClose={close} /> : null}
-      <Button
-        ref={buttonRef}
-        size="lg"
-        aria-label={open ? "Close assistant" : "Open AI assistant"}
-        aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
-        className="h-12 rounded-full px-5 shadow-lg"
-      >
-        {open ? <X className="size-5" /> : <Bot className="size-5" />}
-        <span
-          aria-hidden="true"
-          className="inline-block size-2 animate-pulse rounded-full bg-lime"
-        />
-        AI Assistant
-      </Button>
+      <span ref={wrapRef} className="inline-block">
+        <Button
+          ref={buttonRef}
+          size="lg"
+          aria-label={open ? "Close assistant" : "Open AI assistant"}
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+          className="h-12 rounded-full px-5 shadow-lg"
+        >
+          {open ? <X className="size-5" /> : <Bot className="size-5" />}
+          <span
+            aria-hidden="true"
+            className="inline-block size-2 animate-pulse rounded-full bg-lime"
+          />
+          AI Assistant
+        </Button>
+      </span>
     </div>
   );
 }
