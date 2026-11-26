@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { Tilt } from "@/components/motion/tilt";
+import { HoverBrackets } from "@/components/motion/hover-brackets";
 import { profile, type Project } from "@/data/portfolio";
 
 /**
@@ -37,7 +38,17 @@ function monogram(name: string): string {
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Tilt className="h-full">
-      <article className="group grid h-full overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)] md:grid-cols-2">
+      <article className="group relative grid h-full overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)] md:grid-cols-2">
+        {/* Corner brackets + VIEW tag on hover (Agentware hover
+            language, 26 Nov 2026). The tag is a visual affordance;
+            the real link is "View case study" below. */}
+        <HoverBrackets />
+        <span
+          aria-hidden="true"
+          className="absolute right-4 top-4 z-10 rounded-full bg-lime px-2.5 py-1 font-mono text-[11px] font-bold tracking-wide text-navy opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+        >
+          VIEW ↗
+        </span>
         {/* Visual half — clicking it opens the LinkedIn post for
             this project, or Haider's profile where there is no
             post. The case-study link stays in the row below. */}

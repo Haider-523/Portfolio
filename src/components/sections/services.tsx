@@ -1,5 +1,6 @@
 import { AppWindow, Database, Server, ShieldCheck } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
+import { HoverBrackets } from "@/components/motion/hover-brackets";
 import { services, workSteps } from "@/data/portfolio";
 
 const serviceIcons = {
@@ -20,6 +21,7 @@ export function Services() {
     <Section id="services" labelledBy="services-heading">
       <SectionHeading
         eyebrow="Services"
+        num="01"
         title="What I build"
         id="services-heading"
         description="Backend systems, databases and desktop apps — each one backed by a project on this site, not a claim."
@@ -31,7 +33,8 @@ export function Services() {
             Server;
           return (
             <Reveal key={service.title} delay={Math.min(i * 0.06, 0.18)}>
-              <div className="h-full rounded-xl border border-border bg-surface p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md">
+              <div className="group relative h-full rounded-xl border border-border bg-surface p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)]">
+                <HoverBrackets />
                 <span
                   aria-hidden="true"
                   className="flex size-11 items-center justify-center rounded-lg bg-navy text-on-navy"

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
 import { TimelineLine } from "@/components/motion/timeline-line";
+import { HoverBrackets } from "@/components/motion/hover-brackets";
 import { LinkedinIcon } from "@/components/icons";
 import { competitions, experience, journey, profile } from "@/data/portfolio";
 
@@ -34,6 +35,7 @@ export function Experience() {
     <Section id="experience" labelledBy="experience-heading">
       <SectionHeading
         eyebrow="Experience"
+        num="01"
         title="Experience"
         level="h1"
         id="experience-heading"
@@ -56,7 +58,8 @@ export function Experience() {
                 {/* Split card, like the project cards: half visual,
                     half description. Roles have no photos, so the
                     visual half is a navy monogram panel. */}
-                <div className="grid overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md md:grid-cols-2">
+                <div className="group relative grid overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)] md:grid-cols-2">
+                  <HoverBrackets />
                   <div className="relative flex min-h-44 flex-col justify-center gap-1 bg-navy p-6">
                     <span className="flex size-11 items-center justify-center rounded-lg bg-background font-mono text-sm font-bold text-navy">
                       {monogram(item.org)}
@@ -126,10 +129,11 @@ export function Experience() {
                     the title/period and read as a missing image
                     (live QA, 25 Nov 2026). */}
                 <div
-                  className={`overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md ${
+                  className={`group relative overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)] ${
                     item.photo ? "grid md:grid-cols-2" : ""
                   }`}
                 >
+                  <HoverBrackets />
                   {item.photo && (
                     <div className="relative min-h-48 overflow-hidden bg-surface md:min-h-full">
                       <a

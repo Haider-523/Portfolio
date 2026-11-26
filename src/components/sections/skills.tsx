@@ -1,5 +1,6 @@
 import { AppWindow, Code2, Database, Languages } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
+import { HoverBrackets } from "@/components/motion/hover-brackets";
 import { skillCategories } from "@/data/portfolio";
 
 const categoryIcons = {
@@ -14,6 +15,7 @@ export function Skills() {
     <Section id="skills" labelledBy="skills-heading" tone="soft" compact>
       <SectionHeading
         eyebrow="Skills"
+        num="02"
         title="What I work with"
         size="md"
         id="skills-heading"
@@ -26,7 +28,8 @@ export function Skills() {
             Code2;
           return (
             <Reveal key={category.title} delay={Math.min(i * 0.06, 0.18)}>
-              <div className="h-full rounded-xl border border-border bg-surface p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md">
+              <div className="group relative h-full rounded-xl border border-border bg-surface p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)]">
+                <HoverBrackets />
                 <span
                   aria-hidden="true"
                   className="flex size-11 items-center justify-center rounded-lg bg-navy text-on-navy"

@@ -1,5 +1,6 @@
 import { Award } from "lucide-react";
 import { Reveal, Section, SectionHeading } from "@/components/motion/reveal";
+import { HoverBrackets } from "@/components/motion/hover-brackets";
 import { certifications } from "@/data/portfolio";
 
 /**
@@ -21,6 +22,7 @@ export function Certifications() {
     <Section id="certifications" labelledBy="certifications-heading" tone="soft" compact>
       <SectionHeading
         eyebrow="Licenses & Certifications"
+        num="04"
         title="Licenses & Certifications"
         size="md"
         id="certifications-heading"
@@ -34,7 +36,8 @@ export function Certifications() {
             delay={(i % 3) * 0.04}
             className="h-full"
           >
-            <article className="group flex h-full flex-col rounded-xl border border-border bg-surface p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-md">
+            <article className="group relative flex h-full flex-col rounded-xl border border-border bg-surface p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-md hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)]">
+              <HoverBrackets />
               <div className="flex items-start justify-between gap-3">
                 <span
                   aria-hidden="true"
