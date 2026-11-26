@@ -56,7 +56,7 @@ export function Experience() {
                 {/* Split card, like the project cards: half visual,
                     half description. Roles have no photos, so the
                     visual half is a navy monogram panel. */}
-                <div className="grid overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:border-accent/60 hover:shadow-md md:grid-cols-2">
+                <div className="grid overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md md:grid-cols-2">
                   <div className="relative flex min-h-44 flex-col justify-center gap-1 bg-navy p-6">
                     <span className="flex size-11 items-center justify-center rounded-lg bg-background font-mono text-sm font-bold text-navy">
                       {monogram(item.org)}
@@ -126,7 +126,7 @@ export function Experience() {
                     the title/period and read as a missing image
                     (live QA, 25 Nov 2026). */}
                 <div
-                  className={`overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:border-accent/60 hover:shadow-md ${
+                  className={`overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md ${
                     item.photo ? "grid md:grid-cols-2" : ""
                   }`}
                 >

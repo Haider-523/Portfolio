@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
+import { Tilt } from "@/components/motion/tilt";
 import { profile, type Project } from "@/data/portfolio";
 
 /**
@@ -26,14 +27,17 @@ function monogram(name: string): string {
  * project's dashboard image (an exact LinkedIn screenshot copy, or a
  * labelled mockup), with context and name overlaid — the other half
  * is the detail: description, verified metrics, stack tags and links.
- * The card is static — the 3D tilt on mouse move was removed
- * (voice-note feedback, 23 Nov 2026: "keep it static here").
- * Projects without an image fall back to the navy panel with the
- * monogram.
+ * The card tilts gently in 3D on mouse move (max 4deg, desktop
+ * only — see components/motion/tilt.tsx), lifts on hover, and its
+ * image zooms slightly; the tilt was removed once (23 Nov,
+ * voice-note feedback: "keep it static") and is back at Haider's
+ * request (26 Nov) for visible, professional 3D. Projects without
+ * an image fall back to the navy panel with the monogram.
  */
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group grid h-full overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:border-accent/60 hover:shadow-lg md:grid-cols-2">
+    <Tilt className="h-full">
+      <article className="group grid h-full overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg md:grid-cols-2">
         {/* Visual half — clicking it opens the LinkedIn post for
             this project, or Haider's profile where there is no
             post. The case-study link stays in the row below. */}
@@ -50,7 +54,7 @@ export function ProjectCard({ project }: { project: Project }) {
               alt={project.imageAlt ?? `${project.name} dashboard`}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover object-top"
+              className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
             <span
@@ -151,6 +155,7 @@ export function ProjectCard({ project }: { project: Project }) {
             </Link>
           </div>
         </div>
-    </article>
+      </article>
+    </Tilt>
   );
 }

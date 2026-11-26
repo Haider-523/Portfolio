@@ -10,10 +10,11 @@ import { cn } from "@/lib/utils";
  * hidden state at all, so the page reads instantly even before
  * hydration or if JavaScript fails. After mount, only content that
  * is still below the fold is briefly hidden (via a CSS class) and
- * revealed with a short 0.3s transition when it scrolls into view.
- * Above-the-fold content is never hidden. Delays are capped at
- * 0.12s so nothing ever waits long to appear. Reduced motion is
- * handled globally in globals.css (transitions collapse to ~0ms).
+ * revealed with a 0.5s rise (20px) when it scrolls into view, so
+ * the scroll animation is actually visible. Above-the-fold
+ * content is never hidden. Delays are capped at 0.12s so nothing
+ * ever waits long to appear. Reduced motion is handled globally
+ * in globals.css (transitions collapse to ~0ms).
  */
 export function Reveal({
   children,

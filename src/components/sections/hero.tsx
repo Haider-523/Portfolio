@@ -15,9 +15,11 @@ import { Button } from "@/components/ui/button";
  * tests passing on the real client system. No skill percentage bars,
  * no "passionate developer" fluff.
  *
- * Deliberately a server component with NO entrance animation: the
- * content is in the server-rendered HTML and visible on first paint,
- * with no wait for JavaScript, hydration or a motion library.
+ * Entrance animation is CSS-only (hero-enter keyframes in
+ * globals.css, staggered by inline delay), so this stays a server
+ * component with no JavaScript cost — the blocks rise and fade in
+ * on load. Added 26 Nov at Haider's request for visible,
+ * professional animation; reduced motion collapses it globally.
  */
 export function Hero() {
   return (
@@ -29,31 +31,38 @@ export function Hero() {
               the exact confirmed availability line, moved up from
               the location line below so it is seen in the first
               seconds. */}
-          <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm font-medium text-accent">
+          <p className="hero-enter inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm font-medium text-accent">
             <span
               aria-hidden="true"
               className="inline-block size-2 rounded-full bg-lime"
             />
             {availabilityNote}
           </p>
-          <p className="mt-4 flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
-            <span aria-hidden="true" className="inline-block size-2 bg-lime" />
-            {profile.roleLine}
-          </p>
-          <h1 className="mt-3 text-6xl font-extrabold leading-[1.02] tracking-tight text-navy sm:text-7xl">
-            Haider Zaman
-          </h1>
-          <p className="mt-4 max-w-xl text-xl font-medium leading-snug text-navy sm:text-2xl">
-            I build real, tested backend systems.
-          </p>
-          <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted">
-            {heroIntro}
-          </p>
-          <p className="mt-4 text-sm font-medium text-muted">
-            {profile.location} · Remote
-          </p>
+          <div className="hero-enter" style={{ animationDelay: "0.08s" }}>
+            <p className="mt-4 flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
+              <span aria-hidden="true" className="inline-block size-2 bg-lime" />
+              {profile.roleLine}
+            </p>
+            <h1 className="mt-3 text-6xl font-extrabold leading-[1.02] tracking-tight text-navy sm:text-7xl">
+              Haider Zaman
+            </h1>
+          </div>
+          <div className="hero-enter" style={{ animationDelay: "0.16s" }}>
+            <p className="mt-4 max-w-xl text-xl font-medium leading-snug text-navy sm:text-2xl">
+              I build real, tested backend systems.
+            </p>
+            <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted">
+              {heroIntro}
+            </p>
+            <p className="mt-4 text-sm font-medium text-muted">
+              {profile.location} · Remote
+            </p>
+          </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div
+            className="hero-enter mt-8 flex flex-wrap items-center gap-3"
+            style={{ animationDelay: "0.24s" }}
+          >
             <Button size="lg" asChild>
               <a
                 href="/documents/HZ-Resume.pdf"
@@ -77,7 +86,10 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="mt-8 flex items-center gap-2">
+          <div
+            className="hero-enter mt-8 flex items-center gap-2"
+            style={{ animationDelay: "0.32s" }}
+          >
             <Button
               variant="ghost"
               size="icon"
@@ -123,7 +135,10 @@ export function Hero() {
               navy for desktop — instead of a flat row of chips, so
               the hero has the same visual energy. Same tech, no new
               claim. */}
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <div
+            className="hero-enter mt-8 grid gap-3 sm:grid-cols-2"
+            style={{ animationDelay: "0.4s" }}
+          >
             <div className="rounded-xl border border-accent/30 bg-mint p-5">
               <p className="text-sm font-bold tracking-wide text-navy uppercase">
                 Backend &amp; APIs
@@ -165,7 +180,10 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mx-auto w-full max-w-[280px]">
+        <div
+          className="hero-enter mx-auto w-full max-w-[280px]"
+          style={{ animationDelay: "0.16s" }}
+        >
           <div className="overflow-hidden rounded-xl border-2 border-navy/20 shadow-md">
             <Image
               src="/images/haider-zaman.jpg"
@@ -184,7 +202,10 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="mt-14 overflow-hidden rounded-xl border border-border bg-mint shadow-sm">
+      <div
+        className="hero-enter mt-14 overflow-hidden rounded-xl border border-border bg-mint shadow-sm"
+        style={{ animationDelay: "0.48s" }}
+      >
         <span aria-hidden="true" className="block h-1 w-full bg-accent" />
         <StatsGrid />
       </div>
