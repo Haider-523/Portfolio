@@ -178,3 +178,22 @@ body {
 .hero-enter {
   animation: hero-rise 0.6s ease-out both;
 }
+
+/*
+ * 3D tilt fallback (see components/motion/tilt.tsx): the JS tilt
+ * follows the cursor (an inline transform, which wins over the
+ * hover class whenever it is set). But some environments move the
+ * pointer without dispatching mousemove DOM events to the page
+ * — the cloud browser check (26 Nov) saw 0° of tilt three times
+ * even though CSS :hover worked fine there. So the project card
+ * also carries a Tailwind hover class
+ * (hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)]
+ * in project-card.tsx) that gives a small fixed tilt on hover:
+ * there is always a visible 3D effect on hover, and on a real
+ * desktop the JS cursor-following tilt takes over (its inline
+ * style overrides the class). Reduced motion collapses it via
+ * the global rule above. Note: a plain `.tilt-hover:hover` rule
+ * here was dropped by the Tailwind build (custom :hover rules
+ * are not kept), which is why the fallback lives in the JSX as
+ * a Tailwind arbitrary property instead.
+ */

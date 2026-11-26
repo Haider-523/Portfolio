@@ -36,7 +36,7 @@ function monogram(name: string): string {
  */
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <Tilt className="h-full">
+    <Tilt className="h-full hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)]">
       <article className="group grid h-full overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg md:grid-cols-2">
         {/* Visual half — clicking it opens the LinkedIn post for
             this project, or Haider's profile where there is no
