@@ -539,10 +539,17 @@ export const journey: JourneyItem[] = [
       "https://www.linkedin.com/feed/update/urn:li:activity:7447616710624612352/",
   },
   {
-    period: "Dec 2025 & Feb 2026",
-    title: "ICPC",
+    period: "Dec 2025",
+    title: "ICPC Asia Topi Online Preliminary",
+    // Result from Haider's own LinkedIn certificate post (re-checked
+    // 26 Nov 2026): Silver Medal, 5th in Pakistan, qualified for the
+    // ICPC Asia West Continental Round. The team name is NOT stated
+    // here — the old "Multan Al-Khwarizmi" claim is removed because
+    // the Feb 2026 on-site LinkedIn post names the team CodeVisionX,
+    // and which name is right for ICPC is still unconfirmed (asked
+    // Haider 21 Nov 2026, unanswered).
     detail:
-      "Competed in ICPC in December 2025 and February 2026 with team Multan Al-Khwarizmi.",
+      "Competed in the ICPC Asia Topi Online Preliminary Round — Silver Medal, 5th in Pakistan, qualified for the ICPC Asia West Continental Round.",
     photo: "/images/milestones/icpc-certificate.jpg",
     photoAlt:
       "ICPC Certificate of Achievement — 2025 Asia Topi Online Preliminary Round",
@@ -550,6 +557,23 @@ export const journey: JourneyItem[] = [
     photoHeight: 339,
     photoPostUrl:
       "https://www.linkedin.com/feed/update/urn:li:activity:7402415518848393216/",
+  },
+  {
+    period: "Feb 2026",
+    title: "ICPC Asia Topi Regional On-site — GIKI",
+    // Team photo from Haider's LinkedIn post (ICPC Asia Topi
+    // Regional On-site Contest, Round 2, GIKI Topi, ~Feb 2026).
+    // Exact copy, not edited. photoPostUrl links to his activity
+    // feed — the specific post URL was not exposed in the feed.
+    detail:
+      "Competed in the ICPC Asia Topi Regional On-site Contest (Round 2) at GIKI, Topi.",
+    photo: "/images/milestones/icpc-topi-onsite.jpg",
+    photoAlt:
+      "Team CodeVisionX at the ICPC Asia Topi Regional On-site Contest, GIKI, Topi",
+    photoWidth: 800,
+    photoHeight: 604,
+    photoPostUrl:
+      "https://www.linkedin.com/in/haiderzaman-dev/recent-activity/all/",
   },
   {
     period: "2025",
