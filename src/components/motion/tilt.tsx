@@ -14,7 +14,12 @@ import * as React from "react";
  * initializer runs during SSR where `window` is undefined, so it
  * always returned false and the tilt never activated (caught by a
  * live visual check, 26 Nov). Reading matchMedia in the handler
- * is always correct and cheap.
+ * is always correct and cheap. The handler checks reduced motion
+ * only — there is no pointer gate, because a mousemove event only
+ * ever comes from a mouse or trackpad, and gating on
+ * "(pointer: fine)" broke the tilt in the cloud browser check
+ * (26 Nov), where that query does not report "fine" even though
+ * real mousemove events fire.
  *
  * History: a 3D tilt was on the project cards (added 17 Nov 2026),
  * then removed (23 Nov, voice-note feedback: "keep it static").
@@ -34,11 +39,14 @@ export function Tilt({
   const [transform, setTransform] = React.useState<string | undefined>();
 
   function isEnabled(): boolean {
+    // Only reduced motion disables the tilt. There is deliberately
+    // NO pointer check here: a mousemove event only ever comes
+    // from a mouse or trackpad, so gating on "(pointer: fine)"
+    // is redundant — and it broke the tilt in the cloud browser
+    // check (26 Nov), where the pointer media query does not
+    // report "fine" even though real mousemove events fire.
     if (typeof window === "undefined") return false;
-    return (
-      window.matchMedia("(pointer: fine)").matches &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    );
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
   function onMove(e: React.MouseEvent) {

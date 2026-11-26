@@ -81,7 +81,7 @@ export function ProjectCard({ project }: { project: Project }) {
               className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/35"
             />
           ) : null}
-          <div className="relative">
+          <div className="relative rounded-lg bg-navy px-4 py-3 shadow-lg">
             <p className="text-xs font-semibold uppercase tracking-wide text-white/75">
               {project.context}
             </p>
