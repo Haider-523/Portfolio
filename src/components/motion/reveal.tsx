@@ -110,7 +110,7 @@ export function SectionHeading({
   return (
     <Reveal>
       <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
-        <span aria-hidden="true" className="inline-block size-2 bg-accent" />
+        <span aria-hidden="true" className="inline-block size-2 bg-lime" />
         {eyebrow}
       </p>
       <Heading
@@ -125,7 +125,7 @@ export function SectionHeading({
       </Heading>
       <span
         aria-hidden="true"
-        className="mt-5 block h-1 w-16 rounded-full bg-accent"
+        className="mt-5 block h-1 w-16 rounded-full bg-lime"
       />
       {description ? (
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">

@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
 /*
- * Palette — green + cream, single theme only (Haider, 26 Nov 2026).
- * The dual light/dark theme was removed: there is no dark mode, no
- * theme toggle, and no `.dark` styles anywhere. The site is green +
- * cream in every browser, on every device, whatever the OS setting.
- * Cream background #FFF8E7 (set 26 Nov 2026 — Haider did not
- * remember the exact shades; correct it if it is not the intended
- * one); cards/surface white #FFFFFF; text #111827; headings
- * #1F2937; buttons & links emerald #047857.
+ * Palette — the exact combination Haider gave (screenshot, 26 Nov
+ * 2026). Single theme only: no dark mode, no theme toggle, no
+ * `.dark` styles anywhere. The site is this palette in every
+ * browser, on every device, whatever the OS setting.
  *
- * Roles: `--navy` is for headings and key elements; `--accent` is
- * ONLY for buttons, links and interactive hover states. Muted text and
- * borders are neutral greys derived from the body text. `--surface`
- * (#FFFFFF) is the card colour on the cream page, so the visual
- * rhythm survives on cream. `--mint` (#ECFDF5) is the greenish tint
- * for the hero stats box (voice-note feedback, 23 Nov 2026) — a light
- * emerald wash, not a new accent colour.
+ *   Background:       #FAF6EF (Warm Cream)
+ *   Card / Section:   #FFFFFF (Pure White Cream)
+ *   Primary Green:    #0F3D2E (Deep Forest Green)
+ *   Secondary Green:  #DCEAD9 (Sage / Soft Green)
+ *   Accent:           #A3E635 (Lime / Fresh Green)
  *
- * The old token names `--navy` / `--accent` are kept so the existing
- * `text-navy` / `bg-accent` classes keep working — their VALUES are
- * the new palette, not navy/teal.
+ * The 60-30-10 rule (from the same screenshot): 60% cream for the
+ * background and big space; 30% deep green for headings, buttons
+ * and the footer; 10% lime + sage for small highlights, links and
+ * badges.
+ *
+ * Roles: `--navy` and `--accent` are BOTH the deep forest green
+ * (headings and buttons/links are deep green per the rule) — the
+ * old token names are kept so the existing `text-navy` / `bg-accent`
+ * classes keep working. `--mint` is the sage secondary green, used
+ * for the hero stats box and the "Backend & APIs" card. `--lime`
+ * is the lime accent, used only for small highlights: the nav-link
+ * underline, the section-heading rule, the availability dots and
+ * footer link hovers. Lime is never body text on cream — it is too
+ * light to read there; on the deep-green footer it is readable.
+ * Muted text and borders are neutral greys derived from the body
+ * text. `--surface` (#FFFFFF) is the card colour on the cream page.
  */
 @theme inline {
   --color-background: var(--background);
@@ -29,6 +36,7 @@
   --color-border: var(--border);
   --color-surface: var(--surface);
   --color-mint: var(--mint);
+  --color-lime: var(--lime);
   --color-navy: var(--navy);
   --color-navy-hover: var(--navy-hover);
   --color-on-navy: var(--on-navy);
@@ -40,17 +48,18 @@
 }
 
 :root {
-  --background: #fff8e7;
+  --background: #faf6ef;
   --foreground: #111827;
   --muted: #4b5563;
   --border: #e5e7eb;
   --surface: #ffffff;
-  --mint: #ecfdf5;
-  --navy: #1f2937;
-  --navy-hover: #111827;
+  --mint: #dcead9;
+  --lime: #a3e635;
+  --navy: #0f3d2e;
+  --navy-hover: #0a2e22;
   --on-navy: #ffffff;
-  --accent: #047857;
-  --accent-hover: #065f46;
+  --accent: #0f3d2e;
+  --accent-hover: #0a2e22;
   --on-accent: #ffffff;
 }
 
@@ -66,7 +75,7 @@ body {
    * Background: subtle flat 2D dot grid only, painted as the body
    * background so it always sits behind the content. Static, no
    * animation, no parallax, no gradient wash, no glassmorphism.
-   * Light theme: body-text dots at 6% opacity on cream #FFF8E7.
+   * Light theme: body-text dots at 6% opacity on cream #FAF6EF.
    * 24px grid, 1px dots.
    */
   background-image: radial-gradient(
@@ -78,12 +87,12 @@ body {
 }
 
 ::selection {
-  background: #047857;
+  background: #0f3d2e;
   color: #ffffff;
 }
 
 :focus-visible {
-  outline: 2px solid #047857;
+  outline: 2px solid #0f3d2e;
   outline-offset: 2px;
 }
 
@@ -103,8 +112,9 @@ body {
 
 /*
  * Nav links: underline slides in from the left on hover and for the
- * active (current-page) link. The bar is the accent colour; the link
- * text turns accent at the same time (see site-header.tsx).
+ * active (current-page) link. The bar is the lime accent (a small
+ * highlight per the 60-30-10 rule); the link text turns deep green
+ * at the same time (see site-header.tsx).
  */
 .nav-link {
   position: relative;
@@ -117,7 +127,7 @@ body {
   right: 10px;
   bottom: 2px;
   height: 2px;
-  background: var(--accent);
+  background: var(--lime);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.2s ease-out;
@@ -144,30 +154,4 @@ body {
 .reveal-hidden {
   opacity: 0;
   transform: translateY(12px);
-}
-
-/*
- * Route progress bar (see layout/site-header.tsx): thin teal bar
- * that runs while a navigation is in flight, so a click feels
- * instant even before the next page arrives.
- */
-@keyframes route-progress {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 82%;
-  }
-}
-
-.route-progress-loading {
-  animation: route-progress 0.9s ease-out forwards;
-}
-
-.route-progress-done {
-  width: 100%;
-  opacity: 0;
-  transition:
-    width 0.15s ease-out,
-    opacity 0.25s ease-out 0.1s;
 }

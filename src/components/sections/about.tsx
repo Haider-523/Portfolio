@@ -67,9 +67,10 @@ export function About() {
         <figure className="mt-12">
           {/* Fixed dark panel (NOT bg-navy): the code panel must
               stay dark so the white code text is always readable.
-              A fixed #1F2937 keeps the panel dark, so the code is
-              always readable on the cream page. */}
-          <div className="overflow-hidden rounded-xl border border-border bg-[#1f2937]">
+              A fixed #0F3D2E (the deep forest green) keeps the
+              panel dark, so the code is always readable on the
+              cream page. */}
+          <div className="overflow-hidden rounded-xl border border-border bg-[#0f3d2e]">
             <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-3">
               <span className="font-mono text-xs text-white/60">
                 Configurations.cs — ServiceSessionConfig

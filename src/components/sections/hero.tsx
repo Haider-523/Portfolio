@@ -32,12 +32,12 @@ export function Hero() {
           <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm font-medium text-accent">
             <span
               aria-hidden="true"
-              className="inline-block size-2 rounded-full bg-accent"
+              className="inline-block size-2 rounded-full bg-lime"
             />
             {availabilityNote}
           </p>
           <p className="mt-4 flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
-            <span aria-hidden="true" className="inline-block size-2 bg-accent" />
+            <span aria-hidden="true" className="inline-block size-2 bg-lime" />
             {profile.roleLine}
           </p>
           <h1 className="mt-3 text-6xl font-extrabold leading-[1.02] tracking-tight text-navy sm:text-7xl">

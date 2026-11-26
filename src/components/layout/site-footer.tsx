@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GithubIcon, LinkedinIcon } from "@/components/icons";
+import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/icons";
 import {
   availabilityNote,
   lastUpdated,
@@ -10,14 +10,15 @@ import {
 /**
  * Site footer — redesigned (voice-note feedback, 23 Nov 2026: the
  * old footer "has no design at all — change the whole footer").
- * A dark navy band, clearly separate from the page: brand + the
- * availability line, a Navigate column, and a Connect column with
- * labelled links (not bare icons). The bottom bar keeps the
+ * A deep forest green band, clearly separate from the page: brand +
+ * the availability line, a Navigate column, and a Connect column
+ * with labelled links (not bare icons). The bottom bar keeps the
  * copyright and the last-updated date. A server component — it
  * needs no interactivity, so it ships zero client JavaScript.
- * Colours use the navy/on-navy roles (not fixed white) so the
- * band stays a distinct, readable band in both themes. The year
- * is computed once and cached ("use cache") because Next 16
+ * Colours use the navy/on-navy roles (the deep forest green from
+ * the palette), so the band stays a distinct, readable band. The
+ * lime accent marks the availability dot and the link hovers. The
+ * year is computed once and cached ("use cache") because Next 16
  * forbids `new Date()` while prerendering; the site is rebuilt
  * on deploy, so the cached year stays correct.
  */
@@ -39,7 +40,7 @@ export async function SiteFooter() {
           <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background/5 px-3 py-1 text-xs font-medium text-on-navy">
             <span
               aria-hidden="true"
-              className="inline-block size-1.5 rounded-full bg-[#34d399]"
+              className="inline-block size-1.5 rounded-full bg-lime"
             />
             {availabilityNote}
           </p>
@@ -87,7 +88,7 @@ export async function SiteFooter() {
                 href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-on-navy/80 transition-colors hover:text-on-navy"
+                className="inline-flex items-center gap-2 text-sm text-on-navy/80 transition-colors hover:text-lime"
               >
                 <GithubIcon className="size-4" />
                 github.com/Haider-523
@@ -98,7 +99,7 @@ export async function SiteFooter() {
                 href={profile.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-on-navy/80 transition-colors hover:text-on-navy"
+                className="inline-flex items-center gap-2 text-sm text-on-navy/80 transition-colors hover:text-lime"
               >
                 <LinkedinIcon className="size-4" />
                 linkedin.com/in/haiderzaman-dev
@@ -106,8 +107,19 @@ export async function SiteFooter() {
             </li>
             <li>
               <a
+                href={profile.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-on-navy/80 transition-colors hover:text-lime"
+              >
+                <InstagramIcon className="size-4" />
+                instagram.com/haiderzaman5123
+              </a>
+            </li>
+            <li>
+              <a
                 href={`tel:${profile.phone.replace(/-/g, "")}`}
-                className="text-sm text-on-navy/80 transition-colors hover:text-on-navy"
+                className="text-sm text-on-navy/80 transition-colors hover:text-lime"
               >
                 {profile.phone}
               </a>

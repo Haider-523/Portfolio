@@ -19,23 +19,9 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
-  // Route progress: a thin teal bar that runs from the moment a nav
-  // link is clicked until the new page's pathname lands, so a click
-  // feels instant even before the page arrives.
-  const [progress, setProgress] = React.useState<"idle" | "loading" | "done">(
-    "idle",
-  );
-  const firstRender = React.useRef(true);
-
-  React.useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-    setProgress("done");
-    const t = setTimeout(() => setProgress("idle"), 400);
-    return () => clearTimeout(t);
-  }, [pathname]);
+  // No route progress bar (Haider, 26 Nov 2026): pages are static
+  // and open without a loading state, so there is no loading bar to
+  // show — a click goes straight to the next page.
 
   // Close the mobile menu on Escape, and on navigation. While the
   // menu is open the page behind it does not scroll; when it closes,
@@ -63,27 +49,11 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background">
-      {progress !== "idle" ? (
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-0.5 overflow-hidden"
-        >
-          <div
-            className={cn(
-              "h-full bg-accent",
-              progress === "loading"
-                ? "route-progress-loading"
-                : "route-progress-done",
-            )}
-          />
-        </div>
-      ) : null}
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
           onClick={() => {
             setMenuOpen(false);
-            if (pathname !== "/") setProgress("loading");
           }}
           className="group flex shrink-0 items-center gap-2.5 text-lg font-semibold tracking-tight text-foreground transition-colors hover:text-accent"
           aria-label="Haider Zaman — home"
@@ -110,9 +80,6 @@ export function SiteHeader() {
                 key={link.id}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                onClick={() => {
-                  if (!active) setProgress("loading");
-                }}
                 className={cn(
                   "nav-link rounded-md px-3 py-2 font-mono text-[15px] font-medium transition-colors duration-200",
                   active ? "text-accent" : "text-muted hover:text-accent",
@@ -166,7 +133,6 @@ export function SiteHeader() {
                 aria-current={active ? "page" : undefined}
                 onClick={() => {
                   setMenuOpen(false);
-                  if (!active) setProgress("loading");
                 }}
                 className={cn(
                   "rounded-md px-3 py-2.5 font-mono text-base font-medium transition-colors duration-200",

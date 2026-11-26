@@ -24,7 +24,7 @@ export const REFUSAL =
   "I don't have verified information on that. You can ask Haider directly — haiderzaman.dev@gmail.com — or see his LinkedIn at https://www.linkedin.com/in/haiderzaman-dev.";
 
 const STOPWORDS = new Set(
-  "a an the and or of to in on for with is are was were what who whom whose which when where why how do does did can could should would will shall may might i you he she it we they me him her us them my your his its our their this that these those there here about as at by from into over under after before between through during per via tell me please give show list has have had get got make made know".split(
+  "a an the and or of to in on for with is are was were what who whom whose which when where why how do does did can could should would will shall may might i you he she it we they me him her us them my your his its our their this that these those there here about as at by into over under after before between through during per via tell me please give show list has have had get got make made know haider zaman".split(
     " ",
   ),
 );
@@ -114,7 +114,10 @@ function sentences(text: string): string[] {
  * the specific concept asked for, not just a word that happens to be
  * common in the chunk. A second sentence is added only when it is
  * nearly as relevant as the first, so a simple question gets one
- * exact sentence, not a generic extra.
+ * exact sentence, not a generic extra. And when the only picked
+ * sentence is the chunk's first (the name + context line), the
+ * next sentence (the overview) is appended, so "Tell me about X"
+ * gets the description, not just the name.
  */
 function extractAnswer(
   question: string,
@@ -129,8 +132,9 @@ function extractAnswer(
   // from the profile chunk answer a question about the salon (which
   // uses SQLite).
   for (const chunk of chunks) {
-    const scored: Array<{ sentence: string; score: number }> = [];
-    for (const sentence of sentences(chunk.text)) {
+    const chunkSentences = sentences(chunk.text);
+    const scored: Array<{ sentence: string; score: number; index: number }> = [];
+    chunkSentences.forEach((sentence, index) => {
       const sentenceTokens = new Set(tokens(sentence));
       // A match on a synonym-expanded term (e.g. "sqlite" for the
       // question word "database") is worth +1 extra: it marks the
@@ -143,8 +147,8 @@ function extractAnswer(
           if (!originalTokens.has(t)) base += 1;
         }
       }
-      if (base > 0) scored.push({ sentence, score: base });
-    }
+      if (base > 0) scored.push({ sentence, score: base, index });
+    });
     if (scored.length === 0) continue;
     scored.sort((a, b) => b.score - a.score);
     const top = scored[0];
@@ -155,6 +159,28 @@ function extractAnswer(
     if (scored.length > 1 && scored[1].score >= top.score - 1) {
       const second = scored[1].sentence;
       if (!picked[0].includes(second)) picked.push(second);
+    }
+    // "Tell me about X" fix: when the only picked sentence is the
+    // chunk's FIRST sentence (the name + context line, e.g.
+    // "SocialApp — CodeAlpha project · 2026."), it names the thing
+    // but does not describe it — the description is the NEXT
+    // sentence (the overview), which never contains the name so it
+    // scores 0 and is never picked. Append it, but ONLY for a
+    // description question (about / tell / describe / explain /
+    // "what is") — a value question such as "Where is Haider from?"
+    // must not gain an extra sentence (its top sentence is the
+    // chunk's first too, and the next sentence is unrelated).
+    const isDescription = /\b(about|tell|describe|explain|what is|what's|whats)\b/.test(
+      question.toLowerCase(),
+    );
+    if (
+      isDescription &&
+      picked.length === 1 &&
+      top.index === 0 &&
+      chunkSentences.length > 1
+    ) {
+      const overview = chunkSentences[1];
+      if (!picked[0].includes(overview)) picked.push(overview);
     }
     const answer = toThePoint(picked.join(" "));
     if (answer) return answer;
