@@ -53,9 +53,6 @@ export const heroIntro =
 export const availabilityNote =
   "Seeking opportunities — junior .NET backend roles.";
 
-/** Shown in the footer; update on every content push. */
-export const lastUpdated = "26 Nov 2026";
-
 export const stats = [
   {
     value: "300+",

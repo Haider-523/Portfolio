@@ -8,7 +8,6 @@ import {
 } from "@/components/icons";
 import {
   availabilityNote,
-  lastUpdated,
   navLinks,
   profile,
 } from "@/data/portfolio";
@@ -158,7 +157,6 @@ export async function SiteFooter() {
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-4 py-4 text-xs text-on-navy/60 sm:px-6">
           <p>© {year} Haider Zaman. All rights reserved.</p>
-          <p>Last updated {lastUpdated}</p>
         </div>
       </div>
     </footer>
