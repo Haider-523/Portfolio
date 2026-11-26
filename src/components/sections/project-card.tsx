@@ -72,7 +72,13 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.image ? (
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10"
+              // Dark enough for the white overlay text (context +
+              // name) to read on light screenshots too — UniGuide's
+              // light-blue image left the "PRESENTED AT SOFTEC '26"
+              // label unreadable against its own headline (live
+              // visual check, 26 Nov), because the old gradient was
+              // only black/10 at the top.
+              className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/35"
             />
           ) : null}
           <div className="relative">

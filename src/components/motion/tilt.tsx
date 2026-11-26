@@ -8,6 +8,14 @@ import * as React from "react";
  * flat on mouse leave. Desktop only (fine pointers); disabled when
  * the user prefers reduced motion. Nothing here needs a library.
  *
+ * The pointer/reduced-motion check runs inside the mouse handler,
+ * not in state: the first version stored it in state via an effect
+ * (a lint error), the second via a state initializer — but the
+ * initializer runs during SSR where `window` is undefined, so it
+ * always returned false and the tilt never activated (caught by a
+ * live visual check, 26 Nov). Reading matchMedia in the handler
+ * is always correct and cheap.
+ *
  * History: a 3D tilt was on the project cards (added 17 Nov 2026),
  * then removed (23 Nov, voice-note feedback: "keep it static").
  * Haider asked again on 26 Nov for visible 3D/animation across
@@ -23,22 +31,18 @@ export function Tilt({
   className?: string;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
-  // Desktop only (fine pointers), and never when the user prefers
-  // reduced motion. Computed once in the state initializer (not in
-  // an effect — calling setState synchronously in an effect is a
-  // lint error); it only gates whether mouse-move does anything,
-  // it does not change the rendered output, so there is no
-  // hydration mismatch.
-  const [enabled] = React.useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(pointer: fine)").matches &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
   const [transform, setTransform] = React.useState<string | undefined>();
 
+  function isEnabled(): boolean {
+    if (typeof window === "undefined") return false;
+    return (
+      window.matchMedia("(pointer: fine)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
   function onMove(e: React.MouseEvent) {
-    if (!enabled) return;
+    if (!isEnabled()) return;
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
