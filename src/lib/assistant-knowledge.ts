@@ -59,10 +59,10 @@ export const knowledgeBase: KnowledgeChunk[] = [
     "contact",
     "Contact Haider Zaman",
     `Contact Haider Zaman by email at ${profile.email} or by phone at ${profile.phone}. ` +
-      `LinkedIn: ${profile.linkedin}. GitHub: ${profile.github}. Instagram: ${profile.instagram}. ` +
+      `LinkedIn: ${profile.linkedin}. GitHub: ${profile.github}. Instagram: ${profile.instagram}. X: ${profile.x}. Facebook: ${profile.facebook}. ` +
       `There is also a message form on the Contact page — it sends to ${profile.email} via the site's own contact API. ` +
       `His resume can be downloaded from the site as HZ-Resume.pdf.`,
-    "Email: haiderzaman.dev@gmail.com. Phone: +92370-1403149. LinkedIn: linkedin.com/in/haiderzaman-dev. GitHub: github.com/Haider-523. Instagram: instagram.com/haiderzaman5123.",
+    "Email: haiderzaman.dev@gmail.com. Phone: +92370-1403149. LinkedIn: linkedin.com/in/haiderzaman-dev. GitHub: github.com/Haider-523. Instagram: instagram.com/haiderzaman5123. X: x.com/HaiderZama5123. Facebook: facebook.com/profile.php?id=61563041495123.",
   ),
   chunk(
     "availability",

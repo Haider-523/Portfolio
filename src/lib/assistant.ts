@@ -43,7 +43,11 @@ function tokens(text: string): string[] {
   return text
     .toLowerCase()
     .split(/[^a-z0-9+#.]+/)
-    .filter((t) => t.length > 2 && !STOPWORDS.has(t))
+    // Keep tokens longer than 2 chars; "x" is kept too — it is the
+    // name of Haider's X (Twitter) profile, and a single-letter
+    // token is otherwise filtered out, so "What is Haider's X
+    // account?" could not match the "X: https://x.com/..." line.
+    .filter((t) => (t.length > 2 || t === "x") && !STOPWORDS.has(t))
     .map((t) => STEMS[t] ?? t);
 }
 
@@ -75,6 +79,12 @@ const SYNONYMS: Record<string, string[]> = {
   lives: ["multan", "pakistan"],
   from: ["multan", "pakistan"],
   contact: ["email", "phone", "linkedin", "github"],
+  // "Twitter" is Haider's X account — the contact chunk only says
+  // "X: https://x.com/HaiderZama5123.", so "twitter"/"tweet" must
+  // expand to the tokens in that line or the question falls back
+  // to the whole contact list instead of the X link.
+  twitter: ["x", "x.com", "haiderzama5123"],
+  tweet: ["x", "twitter", "x.com"],
   win: ["2nd", "silver", "medal", "winner", "runner"],
   won: ["2nd", "silver", "medal", "winner", "runner"],
 };
@@ -212,7 +222,8 @@ const INTENTS: Array<{ pattern: RegExp; chunkId: string }> = [
   { pattern: /\b(certification|certifications|certificate|award|awards)\b/, chunkId: "certifications" },
   { pattern: /\b(seek|looking|opportunit|availab|roles?)/, chunkId: "availability" },
   { pattern: /\b(experience|intern|internship|work|job|teach|instructor)\b/, chunkId: "experience" },
-  { pattern: /\b(contact|email|phone|call|reach|hire|linkedin)\b/, chunkId: "contact" },
+  { pattern: /\b(contact|email|phone|call|reach|hire|linkedin|instagram|facebook)\b/, chunkId: "contact" },
+  { pattern: /\b(x|twitter|tweet)\b/, chunkId: "contact" },
   { pattern: /\b(github|repo|repository|repositories)\b/, chunkId: "github" },
   { pattern: /\b(education|degree|university|college|study|student|bsc|bscs)\b/, chunkId: "education" },
   { pattern: /\b(competition|competitions|contest|icpc|hackathon)\b/, chunkId: "journey" },

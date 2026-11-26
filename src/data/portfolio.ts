@@ -29,6 +29,8 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/haiderzaman-dev",
   github: "https://github.com/Haider-523",
   instagram: "https://www.instagram.com/haiderzaman5123",
+  x: "https://x.com/HaiderZama5123",
+  facebook: "https://www.facebook.com/profile.php?id=61563041495123",
   /** Coding profiles — from Haider's GitHub profile README
    * (github.com/Haider-523), verified 2026-11-21. The portfolio's
    * "300+ Problems solved" and "9+ Competitions" stats link here,

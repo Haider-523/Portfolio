@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/icons";
+import {
+  FacebookIcon,
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  XIcon,
+} from "@/components/icons";
 import {
   availabilityNote,
   lastUpdated,
@@ -114,6 +120,28 @@ export async function SiteFooter() {
               >
                 <InstagramIcon className="size-4" />
                 instagram.com/haiderzaman5123
+              </a>
+            </li>
+            <li>
+              <a
+                href={profile.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-on-navy/80 transition-colors hover:text-lime"
+              >
+                <XIcon className="size-4" />
+                x.com/HaiderZama5123
+              </a>
+            </li>
+            <li>
+              <a
+                href={profile.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm break-all text-on-navy/80 transition-colors hover:text-lime"
+              >
+                <FacebookIcon className="size-4 shrink-0" />
+                facebook.com/profile.php?id=61563041495123
               </a>
             </li>
             <li>
