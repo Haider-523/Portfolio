@@ -51,7 +51,7 @@ export const availabilityNote =
   "Seeking opportunities — junior .NET backend roles.";
 
 /** Shown in the footer; update on every content push. */
-export const lastUpdated = "23 Nov 2026";
+export const lastUpdated = "26 Nov 2026";
 
 export const stats = [
   {
@@ -273,7 +273,10 @@ export const featuredProjects: Project[] = [
     name: "MBTI Quiz",
     shortDescription:
       "AI-based personality assessment built during a 24-hour AI competition in 2025.",
-    stack: [],
+    // Stack from the project's own repo description
+    // (Haider-523/MBTI-AI-Base-Project): "made for the Pakathon
+    // compitaion 2025 using HTML, CSS and JS" — verified 26 Nov 2026.
+    stack: ["HTML", "CSS", "JavaScript"],
     metrics: ["Built in a 24-hour AI competition"],
     context: "24-hour AI competition · 2025",
     overview:

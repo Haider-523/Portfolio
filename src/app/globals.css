@@ -3,10 +3,14 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Palette — specified exactly by Haider (2026-11-17). This supersedes
- * the earlier navy/teal palette and the bright blue accent before it. Use exactly these colours.
+ * Palette — green + cream, set by Haider (voice note, 2026-11-26).
+ * This supersedes the white background set 2026-11-17. Exact values
+ * used now (Haider did not remember the exact shades — these are
+ * the ones implemented; correct them if they are not the intended
+ * ones):
  *
- *   Background:       #FFFFFF
+ *   Background:       #FFF8E7 (cream)
+ *   Surface / cards:  #FFFFFF (white, so cards stand out on cream)
  *   Text:             #111827
  *   Headings:         #1F2937
  *   Buttons & links:  #047857 (emerald)
@@ -14,11 +18,10 @@
  * Roles: `--navy` is for headings and key elements; `--accent` is
  * ONLY for buttons, links and interactive hover states. Muted text and
  * borders are neutral greys derived from the body text. `--surface`
- * (#F9FAFB) is only the alternating section-band colour on an
- * otherwise white page, so the visual rhythm survives on white.
- * `--mint` (#ECFDF5) is the greenish tint for the hero stats box
- * (voice-note feedback, 23 Nov 2026) — a light emerald wash, not a
- * new accent colour.
+ * (#FFFFFF) is the card colour on the cream page, so the visual
+ * rhythm survives on cream. `--mint` (#ECFDF5) is the greenish tint
+ * for the hero stats box (voice-note feedback, 23 Nov 2026) — a light
+ * emerald wash, not a new accent colour.
  *
  * The old token names `--navy` / `--accent` are kept so the existing
  * `text-navy` / `bg-accent` classes keep working — their VALUES are
@@ -44,11 +47,11 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #fff8e7;
   --foreground: #111827;
   --muted: #4b5563;
   --border: #e5e7eb;
-  --surface: #f9fafb;
+  --surface: #ffffff;
   --mint: #ecfdf5;
   --navy: #1f2937;
   --navy-hover: #111827;
@@ -85,7 +88,7 @@ body {
    * Background: subtle flat 2D dot grid only, painted as the body
    * background so it always sits behind the content. Static, no
    * animation, no parallax, no gradient wash, no glassmorphism.
-   * Light theme: body-text dots at 6% opacity on #FFFFFF; dark theme:
+   * Light theme: body-text dots at 6% opacity on cream #FFF8E7; dark theme:
    * light dots at 7% opacity on #111827. 24px grid, 1px dots.
    */
   background-image: radial-gradient(

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { stats } from "@/data/portfolio";
-import { CountUp } from "@/components/motion/count-up";
 
 /**
  * Proof strip — the same four numbers (300+ problems, 9+
@@ -9,13 +8,12 @@ import { CountUp } from "@/components/motion/count-up";
  * the first page, so it was removed (voice-note feedback, 23 Nov
  * 2026).
  *
- * Each number counts up from 0 to its verified final value when it
- * scrolls into view (same feedback). A screenshot mid-animation can
- * catch an intermediate number — that is why the count-up was
- * removed on 21 Nov — but the reviewer asked for it back, so it is
- * back; the animation is short (1.2s), respects reduced motion, and
- * ends exactly on the verified final value. First paint and no-JS
- * still show the final values.
+ * Numbers are static final values, not animated. A count-up was
+ * added on 23 Nov on a reviewer's ask, but the 25 Nov live QA
+ * confirmed it shows wrong intermediate numbers on first paint
+ * (28+ / 1+ / 0.32 / 6/64) — the exact reason it was removed on
+ * 21 Nov — so it is removed again (26 Nov 2026) and the verified
+ * final values render directly. No animation, no wrong numbers.
  *
  * Every number links to where it can be checked: problems to the
  * About page (which states the combined 300+ across Codeforces,
@@ -38,7 +36,7 @@ function StatItem({
   labelClassName: string;
 }) {
   const isExternal = href?.startsWith("http");
-  const valueNode = <CountUp value={value} />;
+  const valueNode = value;
   return (
     <div className="transition-transform duration-200 hover:-translate-y-0.5">
       <dt className="sr-only">{label}</dt>

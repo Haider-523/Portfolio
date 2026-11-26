@@ -120,11 +120,18 @@ export function Experience() {
                 />
                 {/* Split card, like the project cards: half visual,
                     half description. The photo itself links to the
-                    LinkedIn post; milestones without a photo get a
-                    monogram panel and a profile link. */}
-                <div className="grid overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:border-accent/60 hover:shadow-md md:grid-cols-2">
-                  <div className="relative min-h-48 overflow-hidden bg-navy md:min-h-full">
-                    {item.photo ? (
+                    LinkedIn post. Milestones WITHOUT a photo get NO
+                    visual half at all — a single-column text card —
+                    because the old navy monogram panel duplicated
+                    the title/period and read as a missing image
+                    (live QA, 25 Nov 2026). */}
+                <div
+                  className={`overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:border-accent/60 hover:shadow-md ${
+                    item.photo ? "grid md:grid-cols-2" : ""
+                  }`}
+                >
+                  {item.photo && (
+                    <div className="relative min-h-48 overflow-hidden bg-surface md:min-h-full">
                       <a
                         href={item.photoPostUrl}
                         target="_blank"
@@ -142,20 +149,8 @@ export function Experience() {
                           className="object-contain"
                         />
                       </a>
-                    ) : (
-                      <div className="flex h-full min-h-48 flex-col justify-center gap-1 p-6">
-                        <span className="flex size-11 items-center justify-center rounded-lg bg-background font-mono text-sm font-bold text-navy">
-                          {monogram(item.title)}
-                        </span>
-                        <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-on-navy/70">
-                          {item.period}
-                        </p>
-                        <p className="text-lg font-bold tracking-tight text-on-navy">
-                          {item.title}
-                        </p>
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                   <div className="p-5 sm:p-6">
                     <p className="inline-block rounded-full bg-navy/10 px-3 py-1 text-xs font-semibold tracking-wide text-navy">
                       {item.period}

@@ -43,4 +43,4 @@ export const siteUrl: string =
 /** Last content change, used as a fixed sitemap lastModified so
  * crawlers can tell what actually changed (a fresh `new Date()` on
  * every deploy made the signal useless). Update on content changes. */
-export const LAST_MODIFIED = new Date("2026-11-24");
+export const LAST_MODIFIED = new Date("2026-11-26");
