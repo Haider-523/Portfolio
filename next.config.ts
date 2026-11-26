@@ -16,6 +16,39 @@ const nextConfig: NextConfig = {
   // No "x-powered-by: Next.js" header — standard hygiene.
   poweredByHeader: false,
   /**
+   * Legacy standalone routes (recruiter review 2026-11-26): Skills,
+   * Education and Certifications were consolidated into /about, so
+   * the old paths 404. 308 permanent redirects send them (and any
+   * old link/bookmark) to the matching section anchor. `permanent:
+   * true` is the 308 status (docs: dist/docs/.../redirects.md).
+   */
+  async redirects() {
+    return [
+      { source: "/skills", destination: "/about#skills", permanent: true },
+      {
+        source: "/education",
+        destination: "/about#education",
+        permanent: true,
+      },
+      {
+        source: "/certifications",
+        destination: "/about#certifications",
+        permanent: true,
+      },
+    ];
+  },
+  /**
+   * /resume.pdf root alias (recruiter review 2026-11-26): recruiters
+   * type domain.com/resume.pdf by hand, but the file lives at
+   * /documents/HZ-Resume.pdf. A rewrite (not a redirect) serves the
+   * PDF while the URL stays /resume.pdf.
+   */
+  async rewrites() {
+    return [
+      { source: "/resume.pdf", destination: "/documents/HZ-Resume.pdf" },
+    ];
+  },
+  /**
    * Security headers (audit 2026-11-17: the site shipped none).
    * CSP is deliberately Next-compatible: 'unsafe-inline' for scripts
    * and styles because Next's hydration uses inline scripts; the

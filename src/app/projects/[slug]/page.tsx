@@ -37,10 +37,14 @@ export async function generateMetadata({
       url,
       images: [
         {
-          url: "/images/og-image.jpg",
-          width: 1200,
-          height: 630,
-          alt: `${project.name} — Haider Zaman`,
+          // Per-project preview (recruiter review 2026-11-26): the
+          // project's own image instead of the shared root OG image,
+          // with its real dimensions; falls back to the root image
+          // when a project has none.
+          url: project.image ?? "/images/og-image.jpg",
+          width: project.imageWidth ?? 1200,
+          height: project.imageHeight ?? 630,
+          alt: project.imageAlt ?? `${project.name} — Haider Zaman`,
         },
       ],
     },
@@ -48,7 +52,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${project.name} | Haider Zaman`,
       description: project.shortDescription,
-      images: ["/images/og-image.jpg"],
+      images: [project.image ?? "/images/og-image.jpg"],
     },
   };
 }
