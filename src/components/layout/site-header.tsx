@@ -4,8 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { navLinks } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -17,7 +16,6 @@ import { cn } from "@/lib/utils";
  * initials avatar anywhere on the site.
  */
 export function SiteHeader() {
-  const { resolvedTheme, setTheme } = useTheme();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -127,22 +125,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-1">
-          {/* No availability pill or social icons here (voice-note
-              feedback, 23 Nov 2026): the "Seeking junior .NET roles"
-              line lives in the hero, and GitHub/LinkedIn are in the
-              footer, the hero and the contact page. */}
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Toggle theme"
-            className="hover:text-accent"
-            onClick={() =>
-              setTheme(resolvedTheme === "dark" ? "light" : "dark")
-            }
-          >
-            <Sun className="hidden size-5 dark:block" />
-            <Moon className="size-5 dark:hidden" />
-          </Button>
+          {/* No availability pill, social icons, or theme toggle
+              here (voice-note feedback, 23 Nov 2026; single theme,
+              26 Nov 2026): the "Seeking junior .NET roles" line
+              lives in the hero, GitHub/LinkedIn are in the footer,
+              the hero and the contact page, and the site is green +
+              cream only — there is no dark theme to toggle to. */}
           <Button
             ref={menuButtonRef}
             variant="ghost"

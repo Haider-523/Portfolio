@@ -276,7 +276,7 @@ export default async function ProjectPage({
         </DetailBlock>
       ) : null}
 
-      <div className="mt-12 flex gap-3 rounded-xl border border-border border-l-4 border-l-navy bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-l-accent ">
+      <div className="mt-12 flex gap-3 rounded-xl border border-border border-l-4 border-l-navy bg-surface p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
         <Info aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-navy" />
         <div>
           <h2 className="font-semibold text-navy">Verification note</h2>

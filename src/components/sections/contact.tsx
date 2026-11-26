@@ -73,7 +73,7 @@ export function Contact() {
                     <span className="block text-sm font-medium text-muted">
                       {method.label}
                     </span>
-                    <span className="mt-0.5 block font-medium text-foreground transition-colors duration-200 group-hover:text-accent dark:group-hover:text-accent">
+                    <span className="mt-0.5 block font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
                       {method.value}
                     </span>
                   </span>

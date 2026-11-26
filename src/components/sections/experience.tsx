@@ -204,7 +204,7 @@ export function Experience() {
             {competitions.map((name) => (
               <li
                 key={name}
-                className="rounded-md border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-on-accent dark:hover:border-accent dark:hover:bg-accent dark:hover:text-on-accent"
+                className="rounded-md border border-border bg-background px-3 py-1.5 text-sm font-medium text-foreground transition-colors duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-on-accent"
               >
                 {name}
               </li>

@@ -1,19 +1,14 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 /*
- * Palette — green + cream, set by Haider (voice note, 2026-11-26).
- * This supersedes the white background set 2026-11-17. Exact values
- * used now (Haider did not remember the exact shades — these are
- * the ones implemented; correct them if they are not the intended
- * ones):
- *
- *   Background:       #FFF8E7 (cream)
- *   Surface / cards:  #FFFFFF (white, so cards stand out on cream)
- *   Text:             #111827
- *   Headings:         #1F2937
- *   Buttons & links:  #047857 (emerald)
+ * Palette — green + cream, single theme only (Haider, 26 Nov 2026).
+ * The dual light/dark theme was removed: there is no dark mode, no
+ * theme toggle, and no `.dark` styles anywhere. The site is green +
+ * cream in every browser, on every device, whatever the OS setting.
+ * Cream background #FFF8E7 (set 26 Nov 2026 — Haider did not
+ * remember the exact shades; correct it if it is not the intended
+ * one); cards/surface white #FFFFFF; text #111827; headings
+ * #1F2937; buttons & links emerald #047857.
  *
  * Roles: `--navy` is for headings and key elements; `--accent` is
  * ONLY for buttons, links and interactive hover states. Muted text and
@@ -25,9 +20,7 @@
  *
  * The old token names `--navy` / `--accent` are kept so the existing
  * `text-navy` / `bg-accent` classes keep working — their VALUES are
- * the new palette, not navy/teal. Dark theme adapts the same roles:
- * dark background #111827, light text, headings near-white, and the
- * emerald lightened (#34D399) so links stay readable on dark.
+ * the new palette, not navy/teal.
  */
 @theme inline {
   --color-background: var(--background);
@@ -61,21 +54,6 @@
   --on-accent: #ffffff;
 }
 
-.dark {
-  --background: #111827;
-  --foreground: #f9fafb;
-  --muted: #9ca3af;
-  --border: #374151;
-  --surface: #1f2937;
-  --mint: #052e16;
-  --navy: #f9fafb;
-  --navy-hover: #ffffff;
-  --on-navy: #111827;
-  --accent: #34d399;
-  --accent-hover: #6ee7b7;
-  --on-accent: #052e16;
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -88,8 +66,8 @@ body {
    * Background: subtle flat 2D dot grid only, painted as the body
    * background so it always sits behind the content. Static, no
    * animation, no parallax, no gradient wash, no glassmorphism.
-   * Light theme: body-text dots at 6% opacity on cream #FFF8E7; dark theme:
-   * light dots at 7% opacity on #111827. 24px grid, 1px dots.
+   * Light theme: body-text dots at 6% opacity on cream #FFF8E7.
+   * 24px grid, 1px dots.
    */
   background-image: radial-gradient(
     circle,
@@ -99,31 +77,14 @@ body {
   background-size: 24px 24px;
 }
 
-.dark body {
-  background-image: radial-gradient(
-    circle,
-    rgba(249, 250, 251, 0.07) 1px,
-    transparent 1px
-  );
-}
-
 ::selection {
   background: #047857;
   color: #ffffff;
 }
 
-.dark ::selection {
-  background: #34d399;
-  color: #052e16;
-}
-
 :focus-visible {
   outline: 2px solid #047857;
   outline-offset: 2px;
-}
-
-.dark :focus-visible {
-  outline-color: #34d399;
 }
 
 @media (prefers-reduced-motion: reduce) {

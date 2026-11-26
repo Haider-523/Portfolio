@@ -65,11 +65,10 @@ export function About() {
           system, complete on first paint. */}
       <Reveal delay={0.1}>
         <figure className="mt-12">
-          {/* Fixed dark panel (NOT bg-navy): --navy flips to
-              near-white in dark theme, which made this white-on-dark
-              code invisible in dark mode (reported 26 Nov 2026).
-              A fixed #1F2937 keeps the panel dark in both themes,
-              so the white code text is always readable. */}
+          {/* Fixed dark panel (NOT bg-navy): the code panel must
+              stay dark so the white code text is always readable.
+              A fixed #1F2937 keeps the panel dark, so the code is
+              always readable on the cream page. */}
           <div className="overflow-hidden rounded-xl border border-border bg-[#1f2937]">
             <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-3">
               <span className="font-mono text-xs text-white/60">
