@@ -26,7 +26,7 @@ export function About() {
         level="h1"
         id="about-heading"
       />
-      <div className="mt-8 grid gap-10 md:grid-cols-[1fr_280px]">
+      <div className="mt-8 grid gap-10 md:grid-cols-[1fr_320px]">
         <Reveal delay={0.05}>
           <div className="space-y-4 leading-relaxed text-foreground">
             {aboutParagraphs.map((p) => (
@@ -45,14 +45,16 @@ export function About() {
         </Reveal>
         <Reveal delay={0.1}>
           {/* No card background: the cutout floats on the cream
-              page, lifted by a soft drop-shadow (photo-shadow). */}
+              page, lifted by a soft drop-shadow (photo-shadow).
+              Enlarged 27 Nov 2026 on Haider's word (voice note),
+              matching the hero. */}
           <Image
             src="/images/haider-zaman.png"
             alt="Haider Zaman"
             width={560}
             height={700}
             priority
-            sizes="(max-width: 768px) 100vw, 280px"
+            sizes="(max-width: 768px) 100vw, 320px"
             className="photo-shadow aspect-[4/5] w-full rounded-xl object-cover object-top"
           />
           <p className="mt-3 text-center text-sm text-muted">

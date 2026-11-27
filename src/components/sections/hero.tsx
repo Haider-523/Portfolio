@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
-import { availabilityNote, heroIntro, profile } from "@/data/portfolio";
+import { HoverBrackets } from "@/components/motion/hover-brackets";
+import { heroIntro, profile } from "@/data/portfolio";
 import { StatsGrid } from "@/components/sections/stats";
 import { Button } from "@/components/ui/button";
 
@@ -24,20 +25,12 @@ import { Button } from "@/components/ui/button";
 export function Hero() {
   return (
     <section className="mx-auto max-w-5xl px-4 pb-16 pt-12 sm:px-6 sm:pt-16">
-      <div className="grid items-start gap-10 md:grid-cols-[1fr_280px]">
+      <div className="grid items-start gap-10 md:grid-cols-[1fr_320px]">
         <div>
-          {/* Availability pill — the top 3 Pakistani portfolios all
-              show an availability signal in the hero; this one reuses
-              the exact confirmed availability line, moved up from
-              the location line below so it is seen in the first
-              seconds. */}
-          <p className="hero-enter inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-sm font-medium text-accent">
-            <span
-              aria-hidden="true"
-              className="inline-block size-2 rounded-full bg-lime"
-            />
-            {availabilityNote}
-          </p>
+          {/* The "Seeking opportunities" pill used to sit here; it
+              was removed 27 Nov 2026 on Haider's word (voice note)
+              — the line stays in the footer only, so the hero opens
+              straight on the name and the offer. */}
           <div className="hero-enter" style={{ animationDelay: "0.08s" }}>
             <p className="mt-4 flex items-center gap-2 text-sm font-semibold tracking-wide text-navy uppercase">
               <span aria-hidden="true" className="inline-block size-2 bg-lime" />
@@ -134,12 +127,15 @@ export function Hero() {
               the palette's own two colour blocks — mint for backend,
               navy for desktop — instead of a flat row of chips, so
               the hero has the same visual energy. Same tech, no new
-              claim. */}
+              claim. Hover language added 27 Nov 2026 on Haider's
+              word (voice note) — the cards were static; now they
+              share the site's brackets + tilt + lift. */}
           <div
             className="hero-enter mt-8 grid gap-3 sm:grid-cols-2"
             style={{ animationDelay: "0.4s" }}
           >
-            <div className="rounded-xl border border-accent/30 bg-mint p-5">
+            <div className="group relative rounded-xl border border-accent/30 bg-mint p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)]">
+              <HoverBrackets />
               <p className="text-sm font-bold tracking-wide text-navy uppercase">
                 Backend &amp; APIs
               </p>
@@ -159,7 +155,8 @@ export function Hero() {
                 )}
               </ul>
             </div>
-            <div className="rounded-xl bg-navy p-5">
+            <div className="group relative rounded-xl bg-navy p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)]">
+              <HoverBrackets light />
               <p className="text-sm font-bold tracking-wide text-on-navy uppercase">
                 Desktop &amp; Data
               </p>
@@ -181,12 +178,14 @@ export function Hero() {
         </div>
 
         <div
-          className="hero-enter mx-auto w-full max-w-[280px]"
+          className="hero-enter mx-auto w-full max-w-[320px]"
           style={{ animationDelay: "0.16s" }}
         >
           {/* No card frame: the photo is a background-free cutout
               that floats on the cream page, lifted by a soft
-              drop-shadow (photo-shadow) — no border, no box. */}
+              drop-shadow (photo-shadow) — no border, no box.
+              Enlarged 27 Nov 2026 on Haider's word (voice note):
+              at 280px it read as too small. */}
           <Image
             src="/images/haider-zaman.png"
             alt="Haider Zaman — .NET Backend Developer, Multan, Pakistan"
@@ -194,7 +193,7 @@ export function Hero() {
             height={700}
             priority
             quality={70}
-            sizes="(max-width: 768px) 280px, 280px"
+            sizes="(max-width: 768px) 320px, 320px"
             className="photo-shadow aspect-[4/5] w-full object-cover object-top transition-transform duration-300 hover:scale-[1.02]"
           />
           <p className="mt-3 text-center text-sm font-medium text-navy">

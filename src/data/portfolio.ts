@@ -47,7 +47,7 @@ export const profile = {
  * About page keeps the personal story (degree, teaching, contests).
  */
 export const heroIntro =
-  "I build tested backend systems for real clients. My salon management system passes 64/64 tests — and I am looking for junior .NET backend roles where I can ship production code.";
+  "I build tested backend systems for real clients — my salon management system passes 64/64 tests, and SocialApp and UniGuide both run on ASP.NET Core with SQL Server. I am a BSCS student at MNSUAM who also teaches programming to 20+ students and competes in ICPC, where my team took Silver and 5th in Pakistan. I am looking for junior .NET backend roles where I can ship production code.";
 
 /** Availability line — confirmed by Haider on 2026-11-17: keep as-is. */
 export const availabilityNote =
@@ -64,7 +64,7 @@ export const stats = [
     label: "Competitions",
     href: "https://codeforces.com/profile/Haider5123",
   },
-  { value: "3.44", label: "CGPA / 4.00", href: "/about" },
+  { value: "3.44", label: "CGPA / 4.00", href: "/about#education" },
   {
     value: "64/64",
     label: "Tests passing — Salon system",
@@ -693,6 +693,10 @@ export const experience = [
     org: "Maktab e Qulaab",
     period: "Sep 2024 – Present",
     location: "Multan, Pakistan",
+    /** AI-generated flat illustration (27 Nov 2026, Haider's voice
+        note) — decorative, in the site palette; it is not a photo
+        of the workplace. */
+    image: "/images/experience/experience-maktab-instructor.webp",
     detail:
       "Instructed over 20 students in programming fundamentals, OOP and data structures through online and in-person sessions; structured lesson plans in C, C++ and Python with introductory machine learning; mentorship in competitive programming, GitHub portfolio building and real-world project development.",
   },
@@ -701,6 +705,7 @@ export const experience = [
     org: "CodeAlpha (Internship)",
     period: "Aug – Sep 2026",
     location: "Remote · Multan, Pakistan",
+    image: "/images/experience/experience-codealpha-developer.webp",
     detail:
       "Built a social media platform with ASP.NET Core MVC and C# — user authentication, posts and image uploads; database management and responsive web design.",
   },
@@ -709,6 +714,7 @@ export const experience = [
     org: "Hussain Dental Surgery (Part-time)",
     period: "Jun 2024 – Feb 2025",
     location: "Multan, Pakistan",
+    image: "/images/experience/experience-dental-assistant.webp",
     detail:
       "Managed day-to-day clinic operations: patient data handling and scheduling, digital patient records in Excel and a local database, appointments and patient flow.",
   },
