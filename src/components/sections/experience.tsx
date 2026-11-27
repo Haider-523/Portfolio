@@ -6,23 +6,6 @@ import { LinkedinIcon } from "@/components/icons";
 import { competitions, experience, journey, profile } from "@/data/portfolio";
 
 /**
- * Monogram for the visual half of a card with no photo — first
- * letters of the first two words, ignoring parentheticals and
- * one-letter words ("Maktab e Qulaab" → "MQ", "CodeAlpha
- * (Internship)" → "CO", "Game Day Hackathon 2026" → "GD").
- */
-function monogram(text: string): string {
-  const words = text
-    .replace(/\([^)]*\)/g, "")
-    .split(/[\s&—–-]+/)
-    .filter((w) => w.length > 1);
-  if (words.length >= 2) {
-    return (words[0][0] + words[1][0]).toUpperCase();
-  }
-  return text.replace(/[^A-Za-z0-9]/g, "").slice(0, 2).toUpperCase();
-}
-
-/**
  * Experience page — exactly LinkedIn's 3 entries (re-audited
  * 2026-11-17): instructor (2024–Present), CodeAlpha .NET Developer
  * internship (Aug–Sep 2026), and Hussain Dental Surgery assistant
@@ -56,27 +39,32 @@ export function Experience() {
                   className="absolute -left-[41px] top-6 size-3.5 rounded-full border-2 border-navy bg-background transition-transform duration-200 hover:scale-125"
                 />
                 {/* Split card, like the project cards: half visual,
-                    half description. Roles have no photos, so the
-                    visual half is a navy monogram panel. */}
+                    half description. The visual half is an
+                    AI-generated flat illustration in the site palette
+                    (27 Nov 2026, Haider's voice note — the navy
+                    monogram panel read as an empty placeholder);
+                    it is decorative, not a photo of the workplace,
+                    and the caption below says so. */}
                 <div className="group relative grid overflow-hidden rounded-xl border border-border bg-surface shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-md hover:[transform:perspective(1000px)_rotateX(2deg)_rotateY(-2deg)] md:grid-cols-2">
                   <HoverBrackets />
-                  <div className="relative flex min-h-44 flex-col justify-center gap-1 bg-navy p-6">
-                    <span className="flex size-11 items-center justify-center rounded-lg bg-background font-mono text-sm font-bold text-navy">
-                      {monogram(item.org)}
-                    </span>
-                    <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-on-navy/70">
-                      {item.org}
-                    </p>
-                    <p className="text-sm font-medium text-on-navy/80">
-                      {item.period}
-                    </p>
+                  <div className="relative min-h-48 overflow-hidden bg-surface md:min-h-full">
+                    <Image
+                      src={item.image}
+                      alt={`Illustration for ${item.role} at ${item.org}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
                   </div>
                   <div className="p-5 sm:p-6">
-                    <h3 className="text-lg font-semibold tracking-tight text-navy">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+                      {item.org}
+                    </p>
+                    <h3 className="mt-1 text-lg font-semibold tracking-tight text-navy">
                       {item.role}
                     </h3>
                     <p className="mt-0.5 text-sm text-muted">
-                      {item.location}
+                      {item.period} · {item.location}
                     </p>
                     <p className="mt-2 leading-relaxed text-muted">
                       {item.detail}
@@ -90,6 +78,9 @@ export function Experience() {
                       <LinkedinIcon className="size-4" />
                       View on LinkedIn
                     </a>
+                    <p className="mt-3 text-xs leading-relaxed text-muted">
+                      Illustration — AI-generated, not a workplace photo.
+                    </p>
                   </div>
                 </div>
               </Reveal>
